@@ -1,8 +1,8 @@
-//import { event.css } from "events.css"
+import './event.css';
 
 export default function Event(props) {
     return (
-        <button
+        <button className='event'
             style={{ backgroundImage: `url(${props.picture})` }}
 
         >hello</button>
