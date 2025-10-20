@@ -1,0 +1,42 @@
+
+
+.nav-all {
+    padding: 15px;
+    display: flex;
+    justify-content: space-between;
+
+}
+
+.nav-left, 
+.nav-middle, 
+.nav-right {
+    align-items: center;
+}
+
+
+
+.nav-left {
+    font-weight: 600;
+    color: var(--color-primaryNormal);
+}
+
+.nav-middle {
+    display: flex;
+    align-items: center;
+    gap: 40px; 
+    color: white;    
+
+}
+
+.nav-right{
+    border: 1px;
+    border-style: solid;
+    padding: 5px 10px;
+    border-radius: 5px;
+
+    
+}
+
+.nav-left:hover, .nav-middle:hover, .nav-right:hover {
+    background-color: pink;
+}
