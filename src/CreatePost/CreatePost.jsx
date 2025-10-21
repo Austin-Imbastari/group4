@@ -1,5 +1,5 @@
 import React from "react";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import {
   Wrapper,
   TitleText,
@@ -38,10 +38,6 @@ const CreatePost = () => {
     e.preventDefault();
     // this form will handle sending the data to the database
   };
-
-  useEffect(() => {
-    console.log(formData);
-  }, [formData]);
 
   return (
     <Wrapper>
