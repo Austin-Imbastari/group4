@@ -4,7 +4,7 @@ import NavBar from "./components/NavBar";
 import { theme } from "./theme/theme";
 import { ThemeProvider } from "styled-components";
 import { GlobalStyle } from "./theme/GlobalStyle";
-import CreatePost from "./components/CreatePost";
+import CreatePost from "./CreatePost/CreatePost";
 
 function App() {
   return (

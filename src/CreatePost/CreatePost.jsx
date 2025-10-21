@@ -1,6 +1,20 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import styled from "styled-components";
+import {
+  Wrapper,
+  TitleText,
+  FormGrid,
+  InputContainer,
+  TitleField,
+  PriceField,
+  LocationField,
+  TypeField,
+  DateField,
+  TimeField,
+  DescriptionField,
+  ImageField,
+  SubmitButton,
+} from "./SC";
 import { Handshake, HandCoins, MapPin, SwatchBook, CalendarDays, Clock6, PencilLine, Image } from "lucide-react";
 
 const CreatePost = () => {
@@ -22,7 +36,7 @@ const CreatePost = () => {
 
   const handleOnSubmit = (e) => {
     e.preventDefault();
-    /// this form will handle sending the data to the database
+    // this form will handle sending the data to the database
   };
 
   useEffect(() => {
@@ -111,155 +125,5 @@ const CreatePost = () => {
     </Wrapper>
   );
 };
-
-const Wrapper = styled.div`
-  min-height: 100vh;
-  max-width: 900px;
-  margin: auto;
-
-  label {
-    margin-bottom: 0.5rem;
-    line-height: 1.25;
-    font-weight: 500;
-    color: #000;
-  }
-
-  textarea {
-    min-height: 10rem;
-    resize: vertical;
-    padding-left: 2.5rem;
-    padding-top: 1rem;
-  }
-
-  input,
-  textarea {
-    padding: 0.75rem 1rem;
-    line-height: 1.4;
-    border: 1px solid ${({ theme }) => theme.colors.accentDark};
-    border-radius: 12px;
-    background-color: #f3f3f5;
-    appearance: none;
-    -webkit-appearance: none;
-    box-shadow: none;
-    width: 100%;
-    box-sizing: border-box;
-    padding-left: 2.5rem;
-
-    &:focus {
-      outline: none;
-      box-shadow: none;
-    }
-  }
-`;
-
-const TitleText = styled.div`
-  p {
-    margin-top: 1rem;
-    color: ${({ theme }) => theme.colors.accentDark};
-  }
-
-  h1 {
-    /* text-align: center; */
-    font-family: ${({ theme }) => theme.fonts.alt};
-  }
-`;
-
-const FormGrid = styled.form`
-  /* outline: 1px solid red; */
-  display: grid;
-  margin-top: 2rem;
-  grid-template-columns: 1fr 1fr;
-  gap: 1rem;
-  grid-template-areas:
-    "title     price"
-    "location  type"
-    "date      time"
-    "description description"
-    "upload    upload"
-    "submit    submit";
-  align-items: start;
-`;
-
-const InputContainer = styled.div`
-  position: relative;
-
-  .icon {
-    color: ${({ theme }) => theme.colors.accentDark};
-    position: absolute;
-    left: 12px;
-    top: 10px;
-    transform: none;
-    pointer-events: none;
-  }
-`;
-
-const TitleField = styled.div`
-  /* outline: 1px solid red; */
-  grid-area: title;
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-`;
-
-const PriceField = styled.div`
-  grid-area: price;
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-`;
-
-const LocationField = styled.div`
-  grid-area: location;
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-`;
-
-const TypeField = styled.div`
-  grid-area: type;
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-`;
-
-const DateField = styled.div`
-  grid-area: date;
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-`;
-
-const TimeField = styled.div`
-  grid-area: time;
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-`;
-
-const DescriptionField = styled.div`
-  grid-area: description;
-`;
-
-const ImageField = styled.div`
-  grid-area: upload;
-`;
-
-const SubmitButton = styled.div`
-  grid-area: submit;
-  button {
-    width: 100%;
-    padding: 0.8rem;
-    background: ${({ theme }) => theme.colors.primaryNormal};
-    cursor: pointer;
-    border: none;
-    border-radius: 6px;
-    color: white;
-    transition: all 0.2s ease-in-out;
-
-    &:hover {
-      background: ${({ theme }) => theme.colors.primaryNormalHover};
-    }
-  }
-`;
 
 export default CreatePost;
