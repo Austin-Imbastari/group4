@@ -5,25 +5,13 @@ export default function Event(props) {
         <button className='event'
             style={{ backgroundImage: `url(${props.picture})` }}
 
-        >hello</button>
+
+        >hello
+            {props.category}
+            {props.title}
+            {props.host}
+            {props.data}
+            {props.attendents}
+            {props.saved}    </button>
     )
 }
-
-/**
- title={}
- host={}
- date={}
- attendents={}
- saved={}
-
-
-
-*    id: 1,
-category: "outdoor",
-picture: "./../../public/hidethepain.jpg",
-title: "Walk in the park",
-host: "Niklas",
-data: "03/12-2025",
-attendents: 40,
-saved: false,
-*/
