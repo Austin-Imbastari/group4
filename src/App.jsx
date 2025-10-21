@@ -4,6 +4,7 @@ import NavBar from "./components/NavBar";
 import { theme } from "./theme/theme";
 import { ThemeProvider } from "styled-components";
 import { GlobalStyle } from "./theme/GlobalStyle";
+import EventDetails from "./pages/EventDetails";
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
       <Routes>
         <Route path="/" element={<SplashScreen />} />
       </Routes>
+      <EventDetails/>
     </ThemeProvider>
   );
 }

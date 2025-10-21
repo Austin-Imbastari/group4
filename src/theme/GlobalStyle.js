@@ -8,4 +8,5 @@ export const GlobalStyle = createGlobalStyle`
         font-size: ${(props) => props.theme.fontSizes.medium};
         background-color: ${(props) => props.theme.colors.primaryLight};
         color: ${(props) => props.theme.colors.secondaryNormal};
+    }
 `;
