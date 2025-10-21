@@ -1,30 +1,39 @@
 import eventData from "./../mockData/events"
 import React from "react"
-import Event from "./Event"
+import { NavLink } from "react-router-dom";
+import { ParentContainer, EventContainer, EventTopContainer, EventCenterContainer, EventBottomContainer } from "./AllEventSC";
+
 
 
 export default function AllEvents() {
 
     const [event, setEvent] = React.useState(eventData)
 
-    const eventsGrid = event.map((event) => (
-        <Event
-            key={event.id}
-            picture={event.picture}
-            category={event.category}
-            title={event.title}
-            host={event.host}
-            date={event.data}
-            attendents={event.attendents}
-            saved={event.saved}
-        />
-    ))
-
     return (
-        <main>
-            <div className="event-container">
-                {eventsGrid}
-            </div>
-        </main>
+        <ParentContainer>
+            {event.map((e) => {
+                return (
+                    <NavLink to="/">
+                        <EventContainer>
+                            <EventTopContainer $bg={e.picture}>
+                                <span>{e.category}</span>
+                                <span>{e.saved ? ":)" : ":("}</span>
+                            </EventTopContainer>
+                            <EventCenterContainer>
+                                <span>{e.title}</span>
+                            </EventCenterContainer>
+                            <EventBottomContainer>
+                                <span>{e.host} </span>
+                                <span> {e.date} </span>
+                                <span> {e.attendents}</span>
+                            </EventBottomContainer>
+                        </EventContainer>
+                    </NavLink>
+
+
+                )
+            })}
+
+        </ParentContainer>
     )
 }
