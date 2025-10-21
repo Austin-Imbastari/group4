@@ -160,11 +160,10 @@ const CreatePost = () => {
             />
           </InputContainer>
         </ImageField>
-
-        <Button onClick={handleOnSubmit} type="submit">
-          Submit
-        </Button>
       </FormGrid>
+      <Button onClick={handleOnSubmit} type="submit">
+        Submit
+      </Button>
     </Wrapper>
   );
 };
