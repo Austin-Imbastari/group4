@@ -18,7 +18,8 @@ export const EventContainer = styled.div`
 export const EventTopContainer = styled.div`
   display: flex;
   justify-content: space-between;
-  background-image: url(${p => p.$bg});
+  padding: 10px;
+  background-image: url(${(p) => p.$bg});
 `;
 
 export const EventCenterContainer = styled.div`
