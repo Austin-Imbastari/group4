@@ -11,7 +11,7 @@ export default function SignUp() {
         <br />
         <label>
           Email:
-          <input type="text" name="username" />
+          <input type="text" name="email" />
         </label>
         <br />
         <label>

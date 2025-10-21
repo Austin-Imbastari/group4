@@ -1,11 +1,12 @@
 import { AuthContainer, AuthPageWrapper } from "./AuthPageSC";
-import SignIn from "./SignIn";
+import SignUp from "./SignUp";
 
 export default function AuthPage() {
   return (
     <AuthPageWrapper>
       <AuthContainer>
-        <SignIn />
+        {/* TODO: Render SignIn, SignOut, or SignUp based on auth state */}
+        <SignUp />
       </AuthContainer>
     </AuthPageWrapper>
   );
