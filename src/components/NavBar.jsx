@@ -18,7 +18,7 @@ const NavBar = () => {
         </NavLink>
       </NavBarCenterContainer>
       <NavBarSignIn>
-        <NavLink to="/signIn" >
+        <NavLink to="/auth" >
           <span>Sign in</span>
         </NavLink>
       </NavBarSignIn>
