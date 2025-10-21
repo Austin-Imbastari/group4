@@ -5,16 +5,17 @@ import NavBar from "./components/NavBar";
 import { theme } from "./theme/theme";
 import { ThemeProvider } from "styled-components";
 import { GlobalStyle } from "./theme/GlobalStyle";
-import CreatePost from "./CreatePost/CreatePost";
+import EventDetails from "./pages/EventDetails";
 
 function App() {
   return (
     <ThemeProvider theme={theme}>
       <GlobalStyle />
       <NavBar />
-
-      <CreatePost />
-      <Routes>{/* <Route path="/" element={<SplashScreen />} /> */}</Routes>
+      <Routes>
+        <Route path="/" element={<SplashScreen />} />
+      </Routes>
+      <EventDetails/>
     </ThemeProvider>
   );
 }
