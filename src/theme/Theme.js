@@ -8,7 +8,6 @@ export const theme = {
     secondaryNormalHover: "#a12032",
     secondaryNormalActive: "#8f1c2d",
     secondaryLight: "#f7e9eb",
-    accentDark: "#959793",
   },
   fonts: {
     main: "'Poppins', sans-serif",
