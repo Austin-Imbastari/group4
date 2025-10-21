@@ -1,29 +1,28 @@
-import React from "react";
 import { NavLink } from "react-router-dom";
-import './NavBar.css';
+import { NavBarContainer, Title, NavBarCenterContainer, NavBarSignIn } from "./NavBarSC";
 
 const NavBar = () => {
   return (
-    <div className="nav-all">
-      <nav className="nav-left">
-        <NavLink to="/" style={{ textDecoration: 'none' }} className={({ isActive }) => (isActive ? "text-blue-500" : "")}>
-          Ember
+    <NavBarContainer>
+      <NavLink to="/">
+        <Title>
+          <span>Ember</span>
+        </Title>
+      </NavLink>
+      <NavBarCenterContainer>
+        <NavLink to="/about" >
+          <span>About Us</span>
         </NavLink>
-      </nav>
-      <nav className="nav-middle">
-        <NavLink to="/" style={{ textDecoration: 'none' }} className={({ isActive }) => (isActive ? "text-blue-500" : "")}>
-          About Us
+        <NavLink to="/events" >
+          <span>Events</span>
         </NavLink>
-        <NavLink to="/" style={{ textDecoration: 'none' }} className={({ isActive }) => (isActive ? "text-blue-500" : "")}>
-          Events
+      </NavBarCenterContainer>
+      <NavBarSignIn>
+        <NavLink to="/signIn" >
+          <span>Sign in</span>
         </NavLink>
-      </nav>
-      <nav className="nav-right">
-        <NavLink to="/" style={{ textDecoration: 'none' }} className={({ isActive }) => (isActive ? "text-blue-500" : "")}>
-          Sign in
-        </NavLink>
-      </nav>
-    </div>
+      </NavBarSignIn>
+    </NavBarContainer>
   );
 };
 
