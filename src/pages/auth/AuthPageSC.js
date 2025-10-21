@@ -1,13 +1,13 @@
 import styled from "styled-components";
 
-export const LoginPageWrapper = styled.div`
+export const AuthPageWrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
 `;
 
-export const LoginContainer = styled.div`
+export const AuthContainer = styled.div`
   max-width: 400px;
   max-height: 400px;
   background-color: white;

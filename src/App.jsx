@@ -1,6 +1,6 @@
 import { Route, Routes } from "react-router-dom";
 import SplashScreen from "./components/SplashScreen";
-import Login from "./pages/login/Login";
+import AuthPage from "./pages/auth/AuthPage";
 import NavBar from "./components/NavBar";
 import { theme } from "./theme/theme";
 import { ThemeProvider } from "styled-components";
@@ -13,7 +13,7 @@ function App() {
       <NavBar />
       <Routes>
         <Route path="/" element={<SplashScreen />} />
-        <Route path="/login" element={<Login />} />
+        <Route path="/auth" element={<AuthPage />} />
       </Routes>
     </ThemeProvider>
   );
