@@ -13,9 +13,18 @@ import {
   TimeField,
   DescriptionField,
   ImageField,
-  SubmitButton,
-} from "./SC";
-import { Handshake, HandCoins, MapPin, SwatchBook, CalendarDays, Clock6, PencilLine, Image } from "lucide-react";
+} from "./CreatePostSC";
+import Button from "../components/button/Button";
+import {
+  Handshake,
+  HandCoins,
+  MapPin,
+  SwatchBook,
+  CalendarDays,
+  Clock6,
+  PencilLine,
+  Image,
+} from "lucide-react";
 
 const CreatePost = () => {
   const [formData, setFormData] = useState({
@@ -51,7 +60,12 @@ const CreatePost = () => {
           <label htmlFor="title">What event would you like to host?</label>
           <InputContainer>
             <Handshake className="icon" />
-            <input onChange={handleOnChange} id="title" type="text" placeholder="Coffee meetup" />
+            <input
+              onChange={handleOnChange}
+              id="title"
+              type="text"
+              placeholder="Coffee meetup"
+            />
           </InputContainer>
         </TitleField>
 
@@ -59,7 +73,12 @@ const CreatePost = () => {
           <label htmlFor="price">Expected price</label>
           <InputContainer>
             <HandCoins className="icon" />
-            <input onChange={handleOnChange} id="price" type="text" placeholder="20DKK" />
+            <input
+              onChange={handleOnChange}
+              id="price"
+              type="text"
+              placeholder="20DKK"
+            />
           </InputContainer>
         </PriceField>
 
@@ -67,7 +86,12 @@ const CreatePost = () => {
           <label htmlFor="location">Where will the event take place?</label>
           <InputContainer>
             <MapPin className="icon" />
-            <input onChange={handleOnChange} id="location" type="text" placeholder="Nørrebro" />
+            <input
+              onChange={handleOnChange}
+              id="location"
+              type="text"
+              placeholder="Nørrebro"
+            />
           </InputContainer>
         </LocationField>
 
@@ -75,7 +99,12 @@ const CreatePost = () => {
           <label htmlFor="type">What type of event?</label>
           <InputContainer>
             <SwatchBook className="icon" />
-            <input onChange={handleOnChange} id="type" type="text" placeholder="Coffee" />
+            <input
+              onChange={handleOnChange}
+              id="type"
+              type="text"
+              placeholder="Coffee"
+            />
           </InputContainer>
         </TypeField>
 
@@ -83,7 +112,12 @@ const CreatePost = () => {
           <label htmlFor="date">Date</label>
           <InputContainer>
             <CalendarDays className="icon" />
-            <input onChange={handleOnChange} id="date" type="text" placeholder="December 20, 2025" />
+            <input
+              onChange={handleOnChange}
+              id="date"
+              type="text"
+              placeholder="December 20, 2025"
+            />
           </InputContainer>
         </DateField>
 
@@ -91,7 +125,12 @@ const CreatePost = () => {
           <label htmlFor="time">Time</label>
           <InputContainer>
             <Clock6 className="icon" />
-            <input onChange={handleOnChange} id="time" type="text" placeholder="16:00" />
+            <input
+              onChange={handleOnChange}
+              id="time"
+              type="text"
+              placeholder="16:00"
+            />
           </InputContainer>
         </TimeField>
 
@@ -99,7 +138,12 @@ const CreatePost = () => {
           <label htmlFor="description">Description</label>
           <InputContainer>
             <PencilLine className="icon" aria-hidden="true" />
-            <textarea onChange={handleOnChange} id="description" placeholder="Tell your story..." rows={6} />{" "}
+            <textarea
+              onChange={handleOnChange}
+              id="description"
+              placeholder="Tell your story..."
+              rows={6}
+            />{" "}
           </InputContainer>
         </DescriptionField>
 
@@ -107,17 +151,19 @@ const CreatePost = () => {
           <label htmlFor="upload">Upload Image</label>
           <InputContainer>
             <Image className="icon" />
-            <input onChange={handleOnChange} id="image" type="file" className="input-file" accept=".png, .jpg, .jpeg" />
+            <input
+              onChange={handleOnChange}
+              id="image"
+              type="file"
+              className="input-file"
+              accept=".png, .jpg, .jpeg"
+            />
           </InputContainer>
         </ImageField>
-
-        <SubmitButton>
-          <label htmlFor="submit">Submit</label>
-          <InputContainer>
-            <button>Post Event</button>
-          </InputContainer>
-        </SubmitButton>
       </FormGrid>
+      <Button onClick={handleOnSubmit} type="submit">
+        Submit
+      </Button>
     </Wrapper>
   );
 };
