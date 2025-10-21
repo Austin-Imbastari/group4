@@ -3,8 +3,8 @@ import { LoginContainer } from "./LoginSC";
 export default function Login() {
   return (
     <LoginContainer>
-      <h2>Login</h2>
-      <h3>Please enter your credentials</h3>
+      <h2>WELCOME BACK</h2>
+      <text>Please enter your credentials</text>
       <form>
         <label>
           Username:
