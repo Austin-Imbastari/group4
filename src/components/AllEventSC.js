@@ -61,3 +61,23 @@ export const ParentContainer = styled.div`
   gap: 28px;
   padding: 16px 0;
 `;
+
+export const EventNewEventContainer = styled.div``;
+
+export const GrandParentContainer = styled.div`
+  .navBar {
+    display: flex;
+    gap: 5px;
+    padding: 10px 5px;
+    margin: 10px;
+  }
+
+  #eventDay {
+    padding: 5px 10px;
+    border-radius: 5px;
+  }
+  #eventDistance {
+    border-radius: 5px;
+    padding: 5px 10px;
+  }
+`;
