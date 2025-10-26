@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const EventContainer = styled.div`
   border-radius: 16px;
   overflow: hidden;
-  max-width: 300px;
+  max-width: 400px;
   max-height: 300px;
   display: block;
   flex-direction: row;
