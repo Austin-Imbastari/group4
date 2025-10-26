@@ -13,7 +13,7 @@ export default function AllEvents() {
         <ParentContainer>
             {event.map((e) => {
                 return (
-                    <NavLink to="/">
+                    <NavLink to="/" style={{ textDecoration: "none" }}>
                         <EventContainer>
                             <EventTopContainer $bg={e.picture}>
                                 <span>{e.category}</span>
@@ -23,9 +23,8 @@ export default function AllEvents() {
                                 <span>{e.title}</span>
                             </EventCenterContainer>
                             <EventBottomContainer>
-                                <span>{e.host} </span>
-                                <span> {e.date} </span>
-                                <span> {e.attendents}</span>
+                                <span>[ . ] By: {e.host} </span>
+                                <span className="span2"> {e.date} * {e.attendents} Attendents</span>
                             </EventBottomContainer>
                         </EventContainer>
                     </NavLink>

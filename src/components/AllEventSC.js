@@ -1,39 +1,63 @@
 import styled from "styled-components";
 
 export const EventContainer = styled.div`
-  margin: 20px 10px;
-  padding: 90px 80px;
+  border-radius: 16px;
+  overflow: hidden;
   max-width: 300px;
   max-height: 300px;
   display: block;
   flex-direction: row;
+  text-decoration: none;
+  color: black;
   &:hover {
-    border: 2px;
-    border-style: solid;
-    border-color: pink;
-    box-shadow: -2px 2px 0px 0px;
+    transform: translateY(-1px);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+    background-color: orange;
+    padding: calc(var(--pad, 0px) + 5px);
+    margin: calc(var(--margin, 0px) - 5px);
   }
 `;
 
 export const EventTopContainer = styled.div`
+  padding-bottom: 150px;
+  border-radius: 16px;
   display: flex;
   justify-content: space-between;
-  padding: 10px;
   background-image: url(${(p) => p.$bg});
+  span {
+    margin: 15px;
+    border: 1px, solid, black;
+    border-radius: 5px;
+    padding: 5px 15px;
+    color: white;
+
+    background: rgba(128, 128, 128, 0.5);
+  }
+  span:hover {
+    background-color: orange;
+  }
 `;
 
 export const EventCenterContainer = styled.div`
   display: flex;
   justify-content: left;
+  padding: 10px 0px 30px 0px;
+  font-size: larger;
 `;
 
 export const EventBottomContainer = styled.div`
   display: flex;
   justify-content: space-between;
+  font-size: small;
+  margin: 0px 8px 10px 8px;
+  .span2 {
+    color: grey;
+  }
 `;
 
 export const ParentContainer = styled.div`
-  outline: 1px solid red;
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 28px;
+  padding: 16px 0;
 `;
