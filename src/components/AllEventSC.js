@@ -4,7 +4,7 @@ export const EventContainer = styled.div`
   border-radius: 16px;
   overflow: hidden;
   max-width: 400px;
-  max-height: 300px;
+  //max-height: 300px;
   display: block;
   flex-direction: row;
   text-decoration: none;
@@ -12,7 +12,7 @@ export const EventContainer = styled.div`
   &:hover {
     transform: translateY(-1px);
     box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
-    background-color: orange;
+    background-color: ${({ theme }) => theme.colors.primaryNormalHover};
     padding: calc(var(--pad, 0px) + 5px);
     margin: calc(var(--margin, 0px) - 5px);
   }
@@ -37,7 +37,7 @@ export const EventTopContainer = styled.div`
     background: rgba(128, 128, 128, 0.5);
   }
   span:hover {
-    background-color: orange;
+    background-color: ${({ theme }) => theme.colors.primaryNormalHover};
   }
 `;
 
@@ -58,16 +58,31 @@ export const EventBottomContainer = styled.div`
   }
 `;
 
-export const ParentContainer = styled.div`
+export const EventCards = styled.div`
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   gap: 28px;
   padding: 16px 0;
 `;
 
-export const EventNewEventContainer = styled.div``;
+export const NewEventContainer = styled.div`
+  
+  .icon-circle {
+    width: 320px;
+    margin: 5px 5px;
+    height: 210px;
+    font-size: larger;
+    color: grey;
+    outline: 1px dotted grey;
+    border-radius: 10px;
+  }
+  span {
+    font-size: larger;
+    color: grey;
+  }
+`;
 
-export const GrandParentContainer = styled.div`
+export const AllEventsPageContainer = styled.div`
   .navBar {
     display: flex;
     gap: 5px;
@@ -84,3 +99,5 @@ export const GrandParentContainer = styled.div`
     padding: 5px 10px;
   }
 `;
+
+export const CirclePlus = styled.div``;

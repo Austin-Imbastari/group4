@@ -5,6 +5,7 @@ import {
   NavBarCenterContainer,
   NavBarSignIn,
 } from "./NavBarSC";
+import AllEvents from "../AllEvents"
 
 const NavBar = () => {
   return (
