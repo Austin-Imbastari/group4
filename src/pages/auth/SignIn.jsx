@@ -1,3 +1,5 @@
+import Button from "../../components/button/Button";
+
 export default function SignIn() {
   return (
     <>
@@ -14,7 +16,7 @@ export default function SignIn() {
           <input type="password" name="password" />
         </label>
         <br />
-        <button type="submit">Login</button>
+        <Button type="submit">Login</Button>
       </form>
     </>
   );

@@ -1,3 +1,5 @@
+import Button from "../../components/button/Button";
+
 export default function SignUp() {
   return (
     <>
@@ -5,21 +7,21 @@ export default function SignUp() {
       <text>Please fill in your credentials to create an account</text>
       <form>
         <label>
-          Full Name:
+          Full Name
           <input type="text" name="username" />
         </label>
         <br />
         <label>
-          Email:
+          Email
           <input type="text" name="email" />
         </label>
         <br />
         <label>
-          Password:
+          Password
           <input type="password" name="password" />
         </label>
         <br />
-        <button type="submit">Sign Up</button>
+        <Button type="submit">Sign Up</Button>
       </form>
     </>
   );
