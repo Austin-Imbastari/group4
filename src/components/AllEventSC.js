@@ -24,6 +24,9 @@ export const EventTopContainer = styled.div`
   display: flex;
   justify-content: space-between;
   background-image: url(${(p) => p.$bg});
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
   span {
     margin: 15px;
     border: 1px, solid, black;

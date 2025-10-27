@@ -45,8 +45,7 @@ export default function AllEvents() {
             <ParentContainer>
                 <EventContainer>
                     <EventNewEventContainer>
-                        <EventTopContainer>
-                            <div>(+)</div>
+                        <EventTopContainer $bg="/createnewevent.jpg">
                         </EventTopContainer>
                         <span>Create new event</span>
                     </EventNewEventContainer>
@@ -74,6 +73,6 @@ export default function AllEvents() {
                 })}
 
             </ParentContainer>
-        </GrandParentContainer>
+        </GrandParentContainer >
     )
 }
