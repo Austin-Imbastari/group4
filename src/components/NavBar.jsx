@@ -10,15 +10,15 @@ const NavBar = () => {
         </Title>
       </NavLink>
       <NavBarCenterContainer>
-        <NavLink to="/about" >
+        <NavLink to="/about">
           <span>About Us</span>
         </NavLink>
-        <NavLink to="/events" >
+        <NavLink to="/events">
           <span>Events</span>
         </NavLink>
       </NavBarCenterContainer>
       <NavBarSignIn>
-        <NavLink to="/auth" >
+        <NavLink to="/auth">
           <span>Sign in</span>
         </NavLink>
       </NavBarSignIn>
