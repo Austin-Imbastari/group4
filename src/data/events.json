@@ -1,0 +1,50 @@
+[
+  {
+    "id": 1,
+    "title": "Join for a hiking trip",
+    "cover_image": {
+      "src": "public/images/117598840_1560691610759660_1454419422771699712_o-e1684271666301.jpg",
+      "alt": "hikingPhoto"
+    },
+    "organizer": "Mason Eduard",
+    "date": "2021-01-01",
+    "attendees_count": 44,
+    "attendees_preview": [
+      "avatar1.jpg",
+      "avatar2.jpg",
+      "avatar3.jpg",
+      "avatar4.jpg",
+      "avatar5.jpg"
+    ],
+    "description":
+      "Tag med på en hyggelig vandretur gennem skov og natur! Vi mødes i Lumsås ved Nykøbing Sjælland og går en rute på ca. fire timer med gode pauser undervejs. Turen er gratis og åben for alle, der har lyst til frisk luft, motion og godt selskab. Husk at tage behagelige sko på og medbring vand, solcreme og lidt snacks til turen."
+    ,
+    "actions": {
+      "attend_button": {
+        "label": "Attend"
+      },
+      "readUp_button": {
+        "label": "Read Up",
+        "icon": "book-open"
+      }
+    },
+    "details": {
+      "location": "Lumsas, Nykøbing Sjælland",
+      "duration": "4 hours",
+      "price": "Free"
+    },
+    "checklist": {
+      "items": [
+        "Comfortable hiking shoes",
+        "Water bottle",
+        "Sunscreen",
+        "Light snacks"
+      ]
+    },
+    "map": {
+      "image": "map-preview.png",
+      "label": "Suginami",
+      "coordinates": null
+    }
+  }
+]

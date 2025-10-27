@@ -1,15 +1,28 @@
-import React from "react";
 import { NavLink } from "react-router-dom";
+import { NavBarContainer, Title, NavBarCenterContainer, NavBarSignIn } from "./NavBarSC";
 
 const NavBar = () => {
   return (
-    <nav>
-      <NavLink to="/" className={({ isActive }) => (isActive ? "text-blue-500" : "")}>
-        Home
+    <NavBarContainer>
+      <NavLink to="/">
+        <Title>
+          <span>Ember</span>
+        </Title>
       </NavLink>
-
-      <p>Navbar</p>
-    </nav>
+      <NavBarCenterContainer>
+        <NavLink to="/about" >
+          <span>About Us</span>
+        </NavLink>
+        <NavLink to="/events" >
+          <span>Events</span>
+        </NavLink>
+      </NavBarCenterContainer>
+      <NavBarSignIn>
+        <NavLink to="/auth" >
+          <span>Sign in</span>
+        </NavLink>
+      </NavBarSignIn>
+    </NavBarContainer>
   );
 };
 
