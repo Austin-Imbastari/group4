@@ -1,12 +1,12 @@
 import { Route, Routes } from "react-router-dom";
-import CreatePost from "./CreatePost/CreatePost"
+import CreatePost from "./pages/create_post/CreatePost";
 import AuthPage from "./pages/auth/AuthPage";
-import NavBar from "./components/NavBar";
+import NavBar from "./components/navbar/NavBar";
 import AllEvents from "./components/AllEvents";
 import { theme } from "./theme/theme";
 import { ThemeProvider } from "styled-components";
 import { GlobalStyle } from "./theme/GlobalStyle";
-import EventDetails from "./pages/EventDetails";
+import EventDetails from "./pages/event_details/EventDetails";
 
 function App() {
   return (
@@ -18,7 +18,7 @@ function App() {
         {<Route path="/auth" element={<AuthPage />} />}
       </Routes>
       <AllEvents />
-      <EventDetails/>
+      <EventDetails />
     </ThemeProvider>
   );
 }
