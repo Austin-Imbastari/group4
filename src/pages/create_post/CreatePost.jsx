@@ -1,4 +1,3 @@
-import React from "react";
 import { useState } from "react";
 import {
   Wrapper,
@@ -14,7 +13,7 @@ import {
   DescriptionField,
   ImageField,
 } from "./CreatePostSC";
-import Button from "../components/button/Button";
+import Button from "../../components/button/Button";
 import {
   Handshake,
   HandCoins,
