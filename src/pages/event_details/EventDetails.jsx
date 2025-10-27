@@ -1,5 +1,5 @@
 import React from "react";
-import data from "../data/events.json";
+import data from "../../data/events.json";
 import { ParentContainer, ImageContainer } from "./EventsDetailsSC.js";
 
 export default function EventDetails() {
@@ -28,7 +28,6 @@ export default function EventDetails() {
           ))}
         </ul>
         <b></b>
-
       </ParentContainer>
     );
   });
