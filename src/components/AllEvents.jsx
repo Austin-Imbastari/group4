@@ -20,12 +20,14 @@ export default function AllEvents() {
         <AllEventsPageContainer>
             <Filter />
             <EventCards>
-                <EventContainer>
-                    <NewEventContainer>
-                        <CirclePlus className="icon-circle" />
-                        <span>Create an Event</span>
-                    </NewEventContainer>
-                </EventContainer>
+                <NavLink to="/createevent">
+                    <EventContainer>
+                        <NewEventContainer>
+                            <CirclePlus className="icon-circle" />
+                            <span>Create an Event</span>
+                        </NewEventContainer>
+                    </EventContainer>
+                </NavLink>
                 {event.map((e) => {
                     return (
                         <NavLink to={"/events/" + e.id} style={{ textDecoration: "none" }}>
