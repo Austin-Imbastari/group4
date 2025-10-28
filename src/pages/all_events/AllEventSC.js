@@ -66,7 +66,6 @@ export const EventCards = styled.div`
 `;
 
 export const NewEventContainer = styled.div`
-  
   .icon-circle {
     width: 320px;
     margin: 5px 5px;
