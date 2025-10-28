@@ -3,7 +3,7 @@ import CreatePost from "./pages/create_post/CreatePost";
 
 import AuthPage from "./pages/auth/AuthPage";
 import NavBar from "./components/navbar/NavBar";
-import AllEvents from "./components/AllEvents";
+import AllEvents from "./pages/all_events/AllEvents";
 import { theme } from "./theme/theme";
 import { ThemeProvider } from "styled-components";
 import { GlobalStyle } from "./theme/GlobalStyle";
