@@ -2,7 +2,7 @@ export default [
   {
     id: 1,
     category: "food",
-    picture: "/images/hidethepain.jpg",
+    picture: "/images/Frame1.png",
     title: "Taco Truck Meetup",
     host: "Ava Nguyen",
     date: "14/02-2025",
@@ -12,7 +12,7 @@ export default [
   {
     id: 2,
     category: "music",
-    picture: "/images/hidethepain.jpg",
+    picture: "/images/Frame2.png",
     title: "Riverside Jazz Night",
     host: "Liam Carter",
     date: "28/03-2025",
@@ -22,7 +22,7 @@ export default [
   {
     id: 3,
     category: "tech",
-    picture: "/images/hidethepain.jpg",
+    picture: "/images/Frame3.png",
     title: "Hack Night: Build & Pizza",
     host: "Priya Shah",
     date: "09/04-2025",
@@ -32,7 +32,7 @@ export default [
   {
     id: 4,
     category: "sports",
-    picture: "/images/hidethepain.jpg",
+    picture: "/images/Frame4.png",
     title: "Community 5K Fun Run",
     host: "Marcus Lee",
     date: "21/05-2025",
@@ -42,7 +42,7 @@ export default [
   {
     id: 5,
     category: "arts",
-    picture: "/images/hidethepain.jpg",
+    picture: "/images/Frame1.png",
     title: "Paint & Sip Evening",
     host: "Elena Rossi",
     date: "12/06-2025",
@@ -52,7 +52,7 @@ export default [
   {
     id: 6,
     category: "outdoor",
-    picture: "/images/hidethepain.jpg",
+    picture: "/images/Frame2.png",
     title: "Sunset Hike at Ridge Trail",
     host: "Jonas Müller",
     date: "03/07-2025",
@@ -62,7 +62,7 @@ export default [
   {
     id: 7,
     category: "indoor",
-    picture: "/images/hidethepain.jpg",
+    picture: "/images/Frame3.png",
     title: "Board Game Night",
     host: "Sara Kim",
     date: "25/08-2025",
@@ -72,7 +72,7 @@ export default [
   {
     id: 8,
     category: "community",
-    picture: "/images/hidethepain.jpg",
+    picture: "/images/Frame4.png",
     title: "Park Cleanup & Coffee",
     host: "Diego Alvarez",
     date: "07/09-2025",
