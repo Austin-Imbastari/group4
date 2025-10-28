@@ -9,7 +9,6 @@ export const AuthPageWrapper = styled.div`
 
 export const AuthContainer = styled.div`
   max-width: 400px;
-  max-height: 400px;
   background-color: white;
   border: 1px solid ${(props) => props.theme.colors.primary};
   border-radius: 8px;
