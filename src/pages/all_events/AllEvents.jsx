@@ -1,4 +1,4 @@
-import eventData from "./../mockData/events"
+import eventData from "../../mockData/events"
 import React from "react"
 import Filter from "./Filter"
 import { NavLink } from "react-router-dom";
