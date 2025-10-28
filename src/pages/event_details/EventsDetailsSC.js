@@ -42,16 +42,14 @@ export const ParentContainer = styled.div`
   .eventDetails {
     display: flex;
     justify-content: space-between;
-
   }
-  .locationContainer{
+  .locationContainer {
     display: flex;
     flex-direction: column;
   }
   .Detail {
     color: ${(props) => props.theme.colors.accentDark};
   }
-
 
   h2 {
     margin-top: 2rem;
@@ -107,22 +105,4 @@ export const ImageContainer = styled.div`
     border-radius: 12px;
     object-fit: cover;
   }
-`;
-
-/* 
-export const ParentContainer = styled.div`
-outline: 10px ${({theme}) => theme.colors.primartNormal};
-ul{list-style: inside}
-`;
-
-export const ImageContainer = styled.div`
-width: 50%;
-max-width: 20px;
-`;
-
-export const StyledImage = styled.img`
-  width: 100%;
-  height: auto;
-  display: block;
-  object-fit: cover;
 `;
