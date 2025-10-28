@@ -1,9 +1,9 @@
 import styled from "styled-components";
 
 export const Wrapper = styled.div`
-  min-height: 100vh;
   max-width: 900px;
   margin: auto;
+  padding-top: 10rem;
 
   label {
     margin-bottom: 0.5rem;
@@ -41,12 +41,13 @@ export const Wrapper = styled.div`
 
 export const TitleText = styled.div`
   p {
+    text-align: center;
     margin-top: 1rem;
     color: ${({ theme }) => theme.colors.accentDark};
   }
 
   h1 {
-    /* text-align: center; */
+    text-align: center;
     font-family: ${({ theme }) => theme.fonts.alt};
   }
 `;
