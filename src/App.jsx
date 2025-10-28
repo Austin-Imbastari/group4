@@ -20,6 +20,7 @@ function App() {
         {<Route path="/create-post" element={<CreatePost />} />}
         {<Route path="/auth" element={<AuthPage />} />}
         {<Route path="/events/:id" element={<EventDetails />} />}
+        {<Route path="/events" element={<AllEvents />} />}
         <Route path="/createevent" element={<CreatePost />} />
         <Route path="/auth" element={<AuthPage />} />
         <Route path="/about" element={<AboutUs />} />

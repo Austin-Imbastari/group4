@@ -23,11 +23,11 @@ const NavBar = () => {
           <span>Events</span>
         </NavLink>
       </NavBarCenterContainer>
-      <NavBarSignIn>
-        <NavLink to="/auth">
+      <NavLink to="/auth">
+        <NavBarSignIn>
           <span>Sign in</span>
-        </NavLink>
-      </NavBarSignIn>
+        </NavBarSignIn>
+      </NavLink>
     </NavBarContainer>
   );
 };

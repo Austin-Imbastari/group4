@@ -28,7 +28,7 @@ export default function AllEvents() {
                 </EventContainer>
                 {event.map((e) => {
                     return (
-                        <NavLink to="/" style={{ textDecoration: "none" }}>
+                        <NavLink to={"/events/" + e.id} style={{ textDecoration: "none" }}>
                             <EventContainer>
                                 <EventTopContainer $bg={e.picture}>
                                     <span>{e.category}</span>
