@@ -16,8 +16,7 @@ function App() {
       <Routes>
         {<Route path="/create-post" element={<CreatePost />} />}
         {<Route path="/auth" element={<AuthPage />} />}
-        {<Route path="/events" element={<AllEvents />} />}
-
+        {<Route path="/events/:id" element={<EventDetails />} />}
       </Routes>
     </ThemeProvider>
   );
