@@ -16,4 +16,12 @@ export const AuthContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  gap: 1.5rem;
+
+  form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
 `;
