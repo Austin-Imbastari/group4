@@ -1,6 +1,6 @@
 import { Route, Routes } from "react-router-dom";
 import CreatePost from "./pages/create_post/CreatePost";
-import SplashScreen from "./components/SplashScreen/SplashScreen";
+import SplashScreen from "./pages/SplashScreen/SplashScreen";
 
 import AuthPage from "./pages/auth/AuthPage";
 import NavBar from "./components/navbar/NavBar";
