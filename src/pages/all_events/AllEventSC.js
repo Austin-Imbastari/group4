@@ -10,6 +10,7 @@ export const EventContainer = styled.div`
   text-decoration: none;
   color: black;
   &:hover {
+    transition: 300ms ease-in-out;
     transform: translateY(-1px);
     box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
     background-color: ${({ theme }) => theme.colors.primaryNormalHover};
