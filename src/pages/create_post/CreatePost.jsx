@@ -14,16 +14,8 @@ import {
   ImageField,
 } from "./CreatePostSC";
 import Button from "../../components/button/Button";
-import {
-  Handshake,
-  HandCoins,
-  MapPin,
-  SwatchBook,
-  CalendarDays,
-  Clock6,
-  PencilLine,
-  Image,
-} from "lucide-react";
+import InputField from "../../components/input_field/InputField";
+import { Handshake, HandCoins, MapPin, SwatchBook, CalendarDays, Clock6, PencilLine, Image } from "lucide-react";
 
 const CreatePost = () => {
   const [formData, setFormData] = useState({
@@ -42,9 +34,15 @@ const CreatePost = () => {
     setFormData((prev) => ({ ...prev, [id]: value }));
   };
 
-  const handleOnSubmit = (e) => {
-    e.preventDefault();
+  const handleOnSubmit = async (e) => {
     // this form will handle sending the data to the database
+    e.preventDefault();
+    try {
+      // let response = await fetch("backend url", {})
+      console.log(formData);
+    } catch (error) {
+      console.log(`Error ${error}`);
+    }
   };
 
   return (
@@ -58,60 +56,36 @@ const CreatePost = () => {
         <TitleField>
           <label htmlFor="title">What event would you like to host?</label>
           <InputContainer>
-            <Handshake className="icon" />
-            <input
-              onChange={handleOnChange}
-              id="title"
-              type="text"
-              placeholder="Coffee meetup"
-            />
+            <InputField icon={Handshake} onChange={handleOnChange} id="title" type="text" placeholder="Coffee meetup" />
           </InputContainer>
         </TitleField>
 
         <PriceField>
           <label htmlFor="price">Expected price</label>
           <InputContainer>
-            <HandCoins className="icon" />
-            <input
-              onChange={handleOnChange}
-              id="price"
-              type="text"
-              placeholder="20DKK"
-            />
+            <InputField icon={HandCoins} onChange={handleOnChange} id="price" type="text" placeholder="20DKK" />
           </InputContainer>
         </PriceField>
 
         <LocationField>
           <label htmlFor="location">Where will the event take place?</label>
           <InputContainer>
-            <MapPin className="icon" />
-            <input
-              onChange={handleOnChange}
-              id="location"
-              type="text"
-              placeholder="Nørrebro"
-            />
+            <InputField icon={MapPin} onChange={handleOnChange} id="location" type="text" placeholder="Nørrebro" />
           </InputContainer>
         </LocationField>
 
         <TypeField>
           <label htmlFor="type">What type of event?</label>
           <InputContainer>
-            <SwatchBook className="icon" />
-            <input
-              onChange={handleOnChange}
-              id="type"
-              type="text"
-              placeholder="Coffee"
-            />
+            <InputField icon={SwatchBook} onChange={handleOnChange} id="type" type="text" placeholder="Coffee" />
           </InputContainer>
         </TypeField>
 
         <DateField>
           <label htmlFor="date">Date</label>
           <InputContainer>
-            <CalendarDays className="icon" />
-            <input
+            <InputField
+              icon={CalendarDays}
               onChange={handleOnChange}
               id="date"
               type="text"
@@ -123,13 +97,7 @@ const CreatePost = () => {
         <TimeField>
           <label htmlFor="time">Time</label>
           <InputContainer>
-            <Clock6 className="icon" />
-            <input
-              onChange={handleOnChange}
-              id="time"
-              type="text"
-              placeholder="16:00"
-            />
+            <InputField icon={CalendarDays} onChange={handleOnChange} id="time" type="text" placeholder="16:00" />
           </InputContainer>
         </TimeField>
 
@@ -137,20 +105,15 @@ const CreatePost = () => {
           <label htmlFor="description">Description</label>
           <InputContainer>
             <PencilLine className="icon" aria-hidden="true" />
-            <textarea
-              onChange={handleOnChange}
-              id="description"
-              placeholder="Tell your story..."
-              rows={6}
-            />{" "}
+            <textarea onChange={handleOnChange} id="description" placeholder="Tell your story..." rows={6} />{" "}
           </InputContainer>
         </DescriptionField>
 
         <ImageField>
           <label htmlFor="upload">Upload Image</label>
           <InputContainer>
-            <Image className="icon" />
-            <input
+            <InputField
+              icon={Image}
               onChange={handleOnChange}
               id="image"
               type="file"

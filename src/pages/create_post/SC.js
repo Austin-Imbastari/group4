@@ -1,9 +1,9 @@
 import styled from "styled-components";
 
 export const Wrapper = styled.div`
+  min-height: 100vh;
   max-width: 900px;
   margin: auto;
-  padding-top: 10rem;
 
   label {
     margin-bottom: 0.5rem;
@@ -41,13 +41,12 @@ export const Wrapper = styled.div`
 
 export const TitleText = styled.div`
   p {
-    text-align: center;
     margin-top: 1rem;
     color: ${({ theme }) => theme.colors.accentDark};
   }
 
   h1 {
-    text-align: center;
+    /* text-align: center; */
     font-family: ${({ theme }) => theme.fonts.alt};
   }
 `;
@@ -130,4 +129,22 @@ export const DescriptionField = styled.div`
 
 export const ImageField = styled.div`
   grid-area: upload;
+`;
+
+export const SubmitButton = styled.div`
+  grid-area: submit;
+  button {
+    width: 100%;
+    padding: 0.8rem;
+    background: ${({ theme }) => theme.colors.primaryNormal};
+    cursor: pointer;
+    border: none;
+    border-radius: 6px;
+    color: white;
+    transition: all 0.2s ease-in-out;
+
+    &:hover {
+      background: ${({ theme }) => theme.colors.primaryNormalHover};
+    }
+  }
 `;
