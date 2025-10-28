@@ -1,0 +1,59 @@
+[
+  {
+    "id": 1,
+    "title": "Join for a hiking trip",
+    "host": "Mason Eduard",
+    "date": "Jan 1, 2021",
+    "attendees": 44,
+    "attendeeImages": [
+      "/images/attendee1.jpg",
+      "/images/attendee2.jpg",
+      "/images/attendee3.jpg",
+      "/images/attendee4.jpg",
+      "/images/attendee5.jpg"
+    ],
+    "coverImage": "/images/hiking.jpg",
+    "category": "Outdoor",
+    "description": [
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas id sit eu tellus sed cursus eleifend id porta.",
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas id sit eu tellus sed cursus eleifend id porta. Lorem adipiscing mus vestibulum consequat porta eu ultrices feugiat. Et, faucibus ut amet turpis. Facilisis faucibus semper cras purus.",
+      "Fermentum et eget libero lectus. Amet, tellus aliquam, dignissim enim placerat purus nunc, ac ipsum. Ac pretium."
+    ],
+    "eventDetails": {
+      "location": "Lumsas, Nykøbing Sjælland",
+      "duration": "4 hours",
+      "expectedPrice": "Free"
+    },
+    "whatToBring": ["Comfortable hiking shoes", "Water bottle", "Sunscreen", "Light snacks"],
+    "mapLocation": {
+      "latitude": 35.6895,
+      "longitude": 139.6897,
+      "mapImage": "/images/map.png"
+    }
+  },
+  {
+    "id": 2,
+    "title": "Join for a swimming event",
+    "host": "Sarah Nilsson",
+    "date": "Feb 10, 2021",
+    "attendees": 28,
+    "attendeeImages": ["/images/attendee1.jpg", "/images/attendee2.jpg", "/images/attendee3.jpg"],
+    "coverImage": "/images/swimming.jpg",
+    "category": "Fitness",
+    "description": [
+      "Join us for a relaxing swim session in the local pool.",
+      "Bring your energy and good vibes — all levels are welcome!"
+    ],
+    "eventDetails": {
+      "location": "Nykøbing Sjælland Swimming Hall",
+      "duration": "2 hours",
+      "expectedPrice": "40 DKK"
+    },
+    "whatToBring": ["Swimsuit", "Towel", "Water bottle"],
+    "mapLocation": {
+      "latitude": 55.913,
+      "longitude": 11.669,
+      "mapImage": "/images/map-pool.png"
+    }
+  }
+]
