@@ -1,9 +1,6 @@
 import styled from "styled-components";
 
 export const InputFieldWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 0.4rem;
   position: relative;
 
   .icon {
@@ -16,9 +13,6 @@ export const InputFieldWrapper = styled.div`
 `;
 
 export const Label = styled.label`
-  margin-bottom: 0.5rem;
-  line-height: 1.25;
-  font-weight: 500;
   color: #000;
 `;
 
@@ -37,5 +31,8 @@ export const Input = styled.input`
   &:focus {
     outline: none;
     box-shadow: none;
+  }
+  &:hover {
+    border-color: ${({ theme }) => theme.colors.primaryNormalHover};
   }
 `;
