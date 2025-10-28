@@ -60,6 +60,8 @@ export const EventBottomContainer = styled.div`
 `;
 
 export const EventCards = styled.div`
+  max-width: 2000px;
+  margin: 0 auto;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   gap: 28px;
@@ -83,6 +85,9 @@ export const NewEventContainer = styled.div`
 `;
 
 export const AllEventsPageContainer = styled.div`
+  min-height: 100vh;
+
+  background: linear-gradient(135deg, #fcfcfc 0%, #fff5f293 100%);
   .navBar {
     display: flex;
     gap: 5px;
