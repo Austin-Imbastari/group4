@@ -138,10 +138,10 @@ const AboutUs = () => {
           </CTAText>
 
           <Buttons>
-            <NavLink to="/events">
+            <NavLink style={{ textDecoration: "none" }} to="/events">
               <PrimaryButton>Browse Events</PrimaryButton>
             </NavLink>
-            <NavLink to="/createevent">
+            <NavLink style={{ textDecoration: "none" }} to="/createevent">
               <GhostButton>Create an Event</GhostButton>
             </NavLink>
           </Buttons>

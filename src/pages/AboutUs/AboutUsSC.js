@@ -273,6 +273,8 @@ export const Buttons = styled.div`
   justify-content: center;
   margin-top: 8px;
   flex-wrap: wrap;
+
+  outline: none;
 `;
 
 export const BaseButton = styled.div`
@@ -281,6 +283,7 @@ export const BaseButton = styled.div`
   border-radius: 10px;
   padding: 12px 18px;
   font-weight: 600;
+
   cursor: pointer;
   transition: transform 0.15s ease, box-shadow 0.2s ease, background 0.2s ease, color 0.2s ease;
   box-shadow: 0 6px 16px rgba(0, 0, 0, 0.06);
