@@ -5,7 +5,7 @@ export default function SignOut() {
     <>
       {/* TODO: Render the name of the signed in user */}
       <h2>Hi *name*!</h2>
-      <text>Do you want to sign out?</text>
+      <p className="description">Do you want to sign out?</p>
       <Button type="submit">Sign Out</Button>
     </>
   );

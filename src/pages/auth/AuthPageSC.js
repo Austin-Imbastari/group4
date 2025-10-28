@@ -24,4 +24,8 @@ export const AuthContainer = styled.div`
     flex-direction: column;
     gap: 1rem;
   }
+
+  .description {
+    text-align: center;
+  }
 `;

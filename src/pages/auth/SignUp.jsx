@@ -6,7 +6,9 @@ export default function SignUp() {
   return (
     <>
       <h2>GET STARTED</h2>
-      <text>Please fill in your credentials to create an account</text>
+      <p className="description">
+        Please fill in your credentials to create an account
+      </p>
       <form>
         <InputField
           label="Full Name"

@@ -6,7 +6,7 @@ export default function SignIn() {
   return (
     <>
       <h2>WELCOME BACK</h2>
-      <text>Please enter your credentials</text>
+      <p className="description">Please enter your credentials</p>
       <form>
         <InputField
           label="Username"
