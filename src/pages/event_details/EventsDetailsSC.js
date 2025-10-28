@@ -98,7 +98,7 @@ export const ImageContainer = styled.div`
   border-radius: 12px;
   overflow: hidden;
   margin-bottom: 1.5rem;
-
+  
   img {
     width: 100%;
     display: block;
