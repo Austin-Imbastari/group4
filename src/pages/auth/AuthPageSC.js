@@ -27,5 +27,6 @@ export const AuthContainer = styled.div`
 
   .description {
     text-align: center;
+    text-size: ${(props) => props.theme.fontSizes.small};
   }
 `;

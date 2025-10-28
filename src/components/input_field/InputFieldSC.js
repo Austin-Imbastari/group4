@@ -1,19 +1,27 @@
 import styled from "styled-components";
 
 export const InputFieldWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+`;
+
+export const Label = styled.label`
+  color: #000;
+`;
+
+export const InputWrapper = styled.div`
   position: relative;
+  width: 100%;
 
   .icon {
     color: ${({ theme }) => theme.colors.accentDark};
     position: absolute;
     left: 12px;
     top: 50%;
+    transform: translateY(-50%);
     pointer-events: none;
   }
-`;
-
-export const Label = styled.label`
-  color: #000;
 `;
 
 export const Input = styled.input`

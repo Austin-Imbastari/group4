@@ -1,4 +1,4 @@
-import { InputFieldWrapper, Label, Input } from "./InputFieldSC";
+import { InputFieldWrapper, Label, InputWrapper, Input } from "./InputFieldSC";
 
 export default function InputField({
   label,
@@ -10,8 +10,10 @@ export default function InputField({
   return (
     <InputFieldWrapper>
       {label && <Label htmlFor={name}>{label}</Label>}
-      {Icon && <Icon className="icon" />}
-      <Input id={name} name={name} type={type} {...props} />
+      <InputWrapper>
+        {Icon && <Icon className="icon" />}
+        <Input id={name} name={name} type={type} {...props} />
+      </InputWrapper>
     </InputFieldWrapper>
   );
 }
