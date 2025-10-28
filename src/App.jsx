@@ -1,5 +1,6 @@
 import { Route, Routes } from "react-router-dom";
 import CreatePost from "./pages/create_post/CreatePost";
+import SplashScreen from "./components/SplashScreen/SplashScreen";
 
 import AuthPage from "./pages/auth/AuthPage";
 import NavBar from "./components/navbar/NavBar";
@@ -16,7 +17,9 @@ function App() {
     <ThemeProvider theme={theme}>
       <GlobalStyle />
       <NavBar />
+
       <Routes>
+        {<Route path="/" element={<SplashScreen />} />}
         {<Route path="/create-post" element={<CreatePost />} />}
         {<Route path="/auth" element={<AuthPage />} />}
         {<Route path="/events/:id" element={<EventDetails />} />}
