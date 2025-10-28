@@ -1,14 +1,14 @@
 [
   {
     "id": 1,
-    "title": "Join for a hiking trip",
+    "title": "Taco Truck Meetup",
     "cover_image": {
-      "src": "/images/HikingPicture.jpg",
-      "alt": "hikingPhoto"
+      "src": "/images/Frame1.png",
+      "alt": "Taco Truck Meetup"
     },
-    "organizer": "Mason Eduard",
-    "date": "2021-01-01",
-    "attendees_count": 44,
+    "organizer": "Ava Nguyen",
+    "date": "2025-02-14",
+    "attendees_count": 22,
     "attendees_preview": [
       "avatar1.jpg",
       "avatar2.jpg",
@@ -16,47 +16,35 @@
       "avatar4.jpg",
       "avatar5.jpg"
     ],
-    "description":
-      "Tag med på en hyggelig vandretur gennem skov og natur! Vi mødes i Lumsås ved Nykøbing Sjælland og går en rute på ca. fire timer med gode pauser undervejs. Turen er gratis og åben for alle, der har lyst til frisk luft, motion og godt selskab. Husk at tage behagelige sko på og medbring vand, solcreme og lidt snacks til turen."
-    ,
+    "description": "Join fellow foodies for an evening of tacos, tunes, and community vibes! Explore the city’s best taco trucks, try new flavors, and meet great people along the way. Bring your appetite and your friends!",
     "actions": {
-      "attend_button": {
-        "label": "Attend"
-      },
-      "readUp_button": {
-        "label": "Read Up",
-        "icon": "book-open"
-      }
+      "attend_button": { "label": "Attend" },
+      "readUp_button": { "label": "Read Up", "icon": "book-open" }
     },
     "details": {
-      "location": "Lumsas, Nykøbing Sjælland",
-      "duration": "4 hours",
-      "price": "Free"
+      "location": "City Center Plaza, Copenhagen",
+      "duration": "3 hours",
+      "price": "DKK 50 entry"
     },
     "checklist": {
-      "items": [
-        "Comfortable hiking shoes",
-        "Water bottle",
-        "Sunscreen",
-        "Light snacks"
-      ]
+      "items": ["Cash or card", "Reusable napkins", "Appetite", "Friends"]
     },
     "map": {
-      "image": "map-preview.png",
-      "label": "Suginami",
+      "image": "map-taco.png",
+      "label": "Copenhagen Plaza",
       "coordinates": null
     }
   },
   {
     "id": 2,
-    "title": "Join for a hiking trip again malaka",
+    "title": "Riverside Jazz Night",
     "cover_image": {
-      "src": "/images/HikingPicture.jpg",
-      "alt": "hikingPhoto"
+      "src": "/images/Frame2.png",
+      "alt": "Riverside Jazz Night"
     },
-    "organizer": "Mason Eduard",
-    "date": "2021-01-01",
-    "attendees_count": 44,
+    "organizer": "Liam Carter",
+    "date": "2025-03-28",
+    "attendees_count": 75,
     "attendees_preview": [
       "avatar1.jpg",
       "avatar2.jpg",
@@ -64,34 +52,238 @@
       "avatar4.jpg",
       "avatar5.jpg"
     ],
-    "description":
-      "Tag med på en hyggelig vandretur gennem skov og natur! Vi mødes i Lumsås ved Nykøbing Sjælland og går en rute på ca. fire timer med gode pauser undervejs. Turen er gratis og åben for alle, der har lyst til frisk luft, motion og godt selskab. Husk at tage behagelige sko på og medbring vand, solcreme og lidt snacks til turen."
-    ,
+    "description": "Relax by the riverside and enjoy live jazz performances from local musicians. Grab a drink, soak up the evening breeze, and unwind with smooth tunes and good company.",
     "actions": {
-      "attend_button": {
-        "label": "Attend"
-      },
-      "readUp_button": {
-        "label": "Read Up",
-        "icon": "book-open"
-      }
+      "attend_button": { "label": "Attend" },
+      "readUp_button": { "label": "Read Up", "icon": "book-open" }
     },
     "details": {
-      "location": "Lumsas, Nykøbing Sjælland",
+      "location": "Riverside Park, Aarhus",
       "duration": "4 hours",
       "price": "Free"
     },
     "checklist": {
-      "items": [
-        "Comfortable hiking shoes",
-        "Water bottle",
-        "Sunscreen",
-        "Light snacks"
-      ]
+      "items": ["Blanket", "Snacks", "Reusable cup", "Warm jacket"]
     },
     "map": {
-      "image": "map-preview.png",
-      "label": "Suginami",
+      "image": "map-jazz.png",
+      "label": "Riverside Park",
+      "coordinates": null
+    }
+  },
+  {
+    "id": 3,
+    "title": "Hack Night: Build & Pizza",
+    "cover_image": {
+      "src": "/images/Frame3.png",
+      "alt": "Hack Night: Build & Pizza"
+    },
+    "organizer": "Priya Shah",
+    "date": "2025-04-09",
+    "attendees_count": 48,
+    "attendees_preview": [
+      "avatar1.jpg",
+      "avatar2.jpg",
+      "avatar3.jpg",
+      "avatar4.jpg",
+      "avatar5.jpg"
+    ],
+    "description": "A casual coding night for developers, designers, and tinkerers. Work on your side project, meet collaborators, and enjoy free pizza and soda while you build something cool.",
+    "actions": {
+      "attend_button": { "label": "Attend" },
+      "readUp_button": { "label": "Read Up", "icon": "book-open" }
+    },
+    "details": {
+      "location": "IT University of Copenhagen, Room 3A08",
+      "duration": "5 hours",
+      "price": "Free"
+    },
+    "checklist": {
+      "items": ["Laptop", "Chargers", "Headphones", "Project idea"]
+    },
+    "map": {
+      "image": "map-hacknight.png",
+      "label": "ITU",
+      "coordinates": null
+    }
+  },
+  {
+    "id": 4,
+    "title": "Community 5K Fun Run",
+    "cover_image": {
+      "src": "/images/Frame4.png",
+      "alt": "Community 5K Fun Run"
+    },
+    "organizer": "Marcus Lee",
+    "date": "2025-05-21",
+    "attendees_count": 130,
+    "attendees_preview": [
+      "avatar1.jpg",
+      "avatar2.jpg",
+      "avatar3.jpg",
+      "avatar4.jpg",
+      "avatar5.jpg"
+    ],
+    "description": "Lace up your shoes and join our annual 5K fun run through the local park! Open to all ages and fitness levels — run, jog, or walk and enjoy the community spirit.",
+    "actions": {
+      "attend_button": { "label": "Attend" },
+      "readUp_button": { "label": "Read Up", "icon": "book-open" }
+    },
+    "details": {
+      "location": "Frederiksberg Park, Copenhagen",
+      "duration": "2 hours",
+      "price": "Donation-based"
+    },
+    "checklist": {
+      "items": ["Running shoes", "Water bottle", "Comfortable clothes", "Good energy"]
+    },
+    "map": {
+      "image": "map-funrun.png",
+      "label": "Frederiksberg Park",
+      "coordinates": null
+    }
+  },
+  {
+    "id": 5,
+    "title": "Paint & Sip Evening",
+    "cover_image": {
+      "src": "/images/Frame1.png",
+      "alt": "Paint & Sip Evening"
+    },
+    "organizer": "Elena Rossi",
+    "date": "2025-06-12",
+    "attendees_count": 32,
+    "attendees_preview": [
+      "avatar1.jpg",
+      "avatar2.jpg",
+      "avatar3.jpg",
+      "avatar4.jpg",
+      "avatar5.jpg"
+    ],
+    "description": "Unwind with a glass of wine and a canvas! Join this relaxed art night for all skill levels. We’ll provide paints, brushes, and inspiration — you just bring your creativity.",
+    "actions": {
+      "attend_button": { "label": "Attend" },
+      "readUp_button": { "label": "Read Up", "icon": "book-open" }
+    },
+    "details": {
+      "location": "Art Café Studio, Copenhagen",
+      "duration": "3 hours",
+      "price": "DKK 120 incl. materials"
+    },
+    "checklist": {
+      "items": ["Apron or old shirt", "Positive vibes", "Your favorite wine"]
+    },
+    "map": {
+      "image": "map-paint.png",
+      "label": "Art Café Studio",
+      "coordinates": null
+    }
+  },
+  {
+    "id": 6,
+    "title": "Sunset Hike at Ridge Trail",
+    "cover_image": {
+      "src": "/images/Frame2.png",
+      "alt": "Sunset Hike at Ridge Trail"
+    },
+    "organizer": "Jonas Müller",
+    "date": "2025-07-03",
+    "attendees_count": 18,
+    "attendees_preview": [
+      "avatar1.jpg",
+      "avatar2.jpg",
+      "avatar3.jpg",
+      "avatar4.jpg",
+      "avatar5.jpg"
+    ],
+    "description": "Experience breathtaking views and a peaceful sunset at Ridge Trail. This easy group hike is perfect for those who love nature and photography. End the evening with snacks at the summit.",
+    "actions": {
+      "attend_button": { "label": "Attend" },
+      "readUp_button": { "label": "Read Up", "icon": "book-open" }
+    },
+    "details": {
+      "location": "Ridge Trail, North Zealand",
+      "duration": "3 hours",
+      "price": "Free"
+    },
+    "checklist": {
+      "items": ["Hiking shoes", "Water bottle", "Camera", "Snack"]
+    },
+    "map": {
+      "image": "map-hike.png",
+      "label": "Ridge Trail",
+      "coordinates": null
+    }
+  },
+  {
+    "id": 7,
+    "title": "Board Game Night",
+    "cover_image": {
+      "src": "/images/Frame3.png",
+      "alt": "Board Game Night"
+    },
+    "organizer": "Sara Kim",
+    "date": "2025-08-25",
+    "attendees_count": 26,
+    "attendees_preview": [
+      "avatar1.jpg",
+      "avatar2.jpg",
+      "avatar3.jpg",
+      "avatar4.jpg",
+      "avatar5.jpg"
+    ],
+    "description": "Bring your favorite games or try new ones! From Catan to Uno, it’s all about good company and a little friendly competition. Snacks and drinks will be available.",
+    "actions": {
+      "attend_button": { "label": "Attend" },
+      "readUp_button": { "label": "Read Up", "icon": "book-open" }
+    },
+    "details": {
+      "location": "Community Center Hall, Frederiksberg",
+      "duration": "4 hours",
+      "price": "Free"
+    },
+    "checklist": {
+      "items": ["Favorite board game", "Drinks or snacks", "Good mood"]
+    },
+    "map": {
+      "image": "map-boardgame.png",
+      "label": "Community Center",
+      "coordinates": null
+    }
+  },
+  {
+    "id": 8,
+    "title": "Park Cleanup & Coffee",
+    "cover_image": {
+      "src": "/images/Frame4.png",
+      "alt": "Park Cleanup & Coffee"
+    },
+    "organizer": "Diego Alvarez",
+    "date": "2025-09-07",
+    "attendees_count": 54,
+    "attendees_preview": [
+      "avatar1.jpg",
+      "avatar2.jpg",
+      "avatar3.jpg",
+      "avatar4.jpg",
+      "avatar5.jpg"
+    ],
+    "description": "Help keep our local park beautiful! Join our volunteer cleanup day and enjoy free coffee and pastries afterward as a thank-you for your effort.",
+    "actions": {
+      "attend_button": { "label": "Attend" },
+      "readUp_button": { "label": "Read Up", "icon": "book-open" }
+    },
+    "details": {
+      "location": "Østre Anlæg, Copenhagen",
+      "duration": "2 hours",
+      "price": "Free"
+    },
+    "checklist": {
+      "items": ["Gloves", "Reusable water bottle", "Comfortable shoes", "Smile"]
+    },
+    "map": {
+      "image": "map-cleanup.png",
+      "label": "Østre Anlæg",
       "coordinates": null
     }
   }
