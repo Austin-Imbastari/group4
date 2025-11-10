@@ -3,6 +3,7 @@ import Button from "../../components/button/Button";
 import InputField from "../../components/input_field/InputField";
 import { User, Mail, Lock } from "lucide-react";
 import { getParse } from "../../lib/parseClient";
+import { AuthHeader } from "./AuthPageSC";
 
 export default function SignUp() {
   const [form, setForm] = useState({
@@ -44,12 +45,12 @@ export default function SignUp() {
 
   return (
     <>
-      <div>
-        <h2 style={{ textAlign: "center" }}>GET STARTED</h2>
-        <p style={{ color: "#000" }} className="description">
+      <AuthHeader>
+        <h2 className="title">GET STARTED</h2>
+        <p className="description">
           Please fill in your credentials to create an account
         </p>
-      </div>
+      </AuthHeader>
 
       <form onSubmit={handleSubmit}>
         <InputField
