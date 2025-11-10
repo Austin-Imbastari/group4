@@ -12,12 +12,12 @@ import {
   TimeField,
   DescriptionField,
   ImageField,
-} from "./CreatePostSC";
+} from "./CreateEventSC";
 import Button from "../../components/button/Button";
 import InputField from "../../components/input_field/InputField";
 import { Handshake, HandCoins, MapPin, SwatchBook, CalendarDays, Clock6, PencilLine, Image } from "lucide-react";
 
-const CreatePost = () => {
+const CreateEvent = () => {
   const [formData, setFormData] = useState({
     title: "",
     price: "",
@@ -130,4 +130,4 @@ const CreatePost = () => {
   );
 };
 
-export default CreatePost;
+export default CreateEvent;

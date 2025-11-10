@@ -1,5 +1,5 @@
 import { Route, Routes } from "react-router-dom";
-import CreatePost from "./pages/create_post/CreatePost";
+import CreateEvent from "./pages/create_event/CreateEvent";
 import SplashScreen from "./pages/SplashScreen/SplashScreen";
 import AboutUs from "./pages/AboutUs/AboutUs";
 
@@ -18,7 +18,7 @@ function App() {
       <NavBar />
       <Routes>
         {<Route path="/" element={<SplashScreen />} />}
-        {<Route path="/create-post" element={<CreatePost />} />}
+        {<Route path="/create-event" element={<CreateEvent />} />}
         {<Route path="/auth" element={<AuthPage />} />}
         {<Route path="/events/:id" element={<EventDetails />} />}
         {<Route path="/events" element={<AllEvents />} />}
