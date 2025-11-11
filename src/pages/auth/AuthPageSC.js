@@ -39,3 +39,12 @@ export const AuthContainer = styled.div`
     gap: 1rem;
   }
 `;
+
+export const Message = styled.p`
+  margin-top: 1rem;
+  text-align: center;
+  color: ${(props) =>
+    props.type === "error"
+      ? props.theme.colors.error
+      : props.theme.colors.success};
+`;

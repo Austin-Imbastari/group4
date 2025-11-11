@@ -11,19 +11,16 @@ export default function SignUp() {
     email: "",
     password: "",
   });
+  const [message, setMessage] = useState({ text: "", type: "" });
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
+  const handleChange = ({ target: { name, value } }) =>
     setForm((prev) => ({ ...prev, [name]: value }));
-  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const { username, email, password } = form;
-
-    if (!username || !email || !password) {
-      console.error("Please fill out all fields.");
+    if (!form.username || !form.email || !form.password) {
+      setMessage({ text: "Please fill out all fields.", type: "error" });
       return;
     }
 
@@ -31,9 +28,12 @@ export default function SignUp() {
       const user = await createUser({ username, email, password });
 
       setForm({ username: "", email: "", password: "" });
-      console.log(" User created with userId:", user);
+      setMessage({ text: `Welcome, ${form.username}!`, type: "success" });
     } catch (err) {
-      console.error("Sign up failed:", err?.message || err);
+      setMessage({
+        text: "Sign up failed: " + (err?.message || err),
+        type: "error",
+      });
     }
   };
 
@@ -74,6 +74,7 @@ export default function SignUp() {
         />
         <Button type="submit">Sign Up</Button>
       </form>
+      {message && <Message type={message.type}>{message.text}</Message>}
     </>
   );
 }
