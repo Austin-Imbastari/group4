@@ -48,8 +48,8 @@ export default function SignIn() {
           placeholder="Enter your password"
           icon={Lock}
         />
+        <Button type="submit">Sign In</Button>
       </form>
-      <Button type="submit">Sign In</Button>
     </>
   );
 }
