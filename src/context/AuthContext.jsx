@@ -1,4 +1,4 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useState } from "react";
 import { signUpUser, signInUser, signOutUser } from "../lib/parseService.js";
 
 const AuthContext = createContext();
@@ -34,4 +34,4 @@ export function AuthProvider({ children }) {
   );
 }
 
-export const useAuth = () => useContext(AuthContext);
+export default AuthContext;
