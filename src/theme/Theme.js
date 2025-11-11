@@ -11,6 +11,8 @@ export const theme = {
     accentDark: "#959793",
     white: "#ffffff",
     black: "#000000",
+    success: "#00a746ff",
+    error: "#e74c3c",
   },
   fonts: {
     main: "'Poppins', sans-serif",
