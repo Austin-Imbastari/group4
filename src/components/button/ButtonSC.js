@@ -14,3 +14,17 @@ export const ButtonSC = styled.button`
     background: ${({ theme }) => theme.colors.primaryNormalHover};
   }
 `;
+
+
+export const BackButtonSC = styled.button`
+  width: wrap;
+  padding: 0.8rem;
+  background: ${({ theme }) => theme.colors.accentDark};
+  cursor: pointer;
+  border: none;
+  border-radius: 6px;
+  transition: all 0.2s ease-in-out;
+  &:hover{
+    background: ${({ theme }) => theme.colors.backButtonHover};
+  }
+  `;

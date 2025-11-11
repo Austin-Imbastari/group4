@@ -50,48 +50,27 @@ export const ParentContainer = styled.div`
   .Detail {
     color: ${(props) => props.theme.colors.accentDark};
   }
-
+  
   h2 {
     margin-top: 2rem;
     margin-bottom: 0.75rem;
     color: ${(props) => props.theme.colors.secondaryNormal};
     font-size: ${(props) => props.theme.fontSizes.large};
   }
-
+  
   ul {
     list-style: disc;
     padding-left: 1.5rem;
     margin-bottom: 1rem;
     color: ${(props) => props.theme.colors.secondaryNormal};
   }
-
+  
   li {
     margin-bottom: 0.25rem;
     color: ${(props) => props.theme.colors.accentDark};
   }
+  `;
 
-  .Attend-btn {
-    display: block;
-    width: 100%;
-    background-color: ${(props) => props.theme.colors.primaryNormal};
-    color: white;
-    border: none;
-    border-radius: 8px;
-    padding: 0.75rem;
-    font-size: ${(props) => props.theme.fontSizes.medium};
-    cursor: pointer;
-    margin-top: 1.5rem;
-    transition: background-color 0.2s ease;
-
-    &:hover {
-      background-color: ${(props) => props.theme.colors.primaryNormalHover};
-    }
-
-    &:active {
-      background-color: ${(props) => props.theme.colors.primaryNormalActive};
-    }
-  }
-`;
 
 export const ImageContainer = styled.div`
   width: 100%;
@@ -105,4 +84,23 @@ export const ImageContainer = styled.div`
     border-radius: 12px;
     object-fit: cover;
   }
+`;
+
+export const ModalContainer = styled.div`
+button {
+  display: block;
+  margin: auto;
+  width: 10rem;
+  height: 2rem;
+}
+
+:modal {
+  background-color: beige;
+  border: 2px solid burlywood;
+  border-radius: 5px;
+}
+
+p {
+  color: black;
+}
 `;

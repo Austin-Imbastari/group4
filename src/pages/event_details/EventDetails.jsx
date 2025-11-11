@@ -1,16 +1,23 @@
 import React from "react";
 import data from "../../data/events.json";
 import { ParentContainer, ImageContainer } from "./EventsDetailsSC.js";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
+import Button from "../../components/button/Button.jsx";
+import { useState } from "react";
 
 export default function EventDetails() {
+  const [openModal, setOpenModal] = useState(false)
   const { id } = useParams();
+  const navigate = useNavigate();
   const event = data.find((e) => String(e.id) === String(id));
 
   if (!event) return <p>Event not found.</p>;
 
   return (
     <ParentContainer>
+      <Button variant="back" type="button" onClick={() => navigate(-1)}>
+        Back
+      </Button>
       <ImageContainer>
         <img src={event.cover_image.src} alt={event.cover_image.alt} />
       </ImageContainer>
@@ -22,7 +29,10 @@ export default function EventDetails() {
 
       <p>{event.description}</p>
 
-      <button className="Attend-btn">{event.actions?.attend_button?.label ?? "Attend"}</button>
+      <Button type="button" onClick={() => setOpenModal(true)}>
+        {console.log(openModal)}
+        Attend
+      </Button>
 
       <h2>Event Details:</h2>
       <div className="eventDetails">
@@ -48,4 +58,7 @@ export default function EventDetails() {
       </ul>
     </ParentContainer>
   );
+
+
+
 }
