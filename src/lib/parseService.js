@@ -8,3 +8,11 @@ export async function createUser({ username, email, password }) {
   user.set("password", password);
   return user.signUp();
 }
+
+export async function getAllEvents() {
+  const Parse = getParse();
+  const Event = Parse.Object.extend("Event");
+  const query = new Parse.Query(Event);
+  const results = await query.find();
+  return results.map(event => event.toJSON());
+};
