@@ -3,7 +3,7 @@ import Button from "../../components/button/Button";
 import InputField from "../../components/input_field/InputField";
 import { User, Mail, Lock } from "lucide-react";
 import { getParse } from "../../lib/parseClient";
-import { AuthHeader } from "./AuthPageSC";
+import { AuthHeader, Message } from "./AuthPageSC";
 
 export default function SignUp() {
   const [form, setForm] = useState({
@@ -11,7 +11,7 @@ export default function SignUp() {
     email: "",
     password: "",
   });
-  const [message, setMessage] = useState("");
+  const [message, setMessage] = useState({ text: "", type: "" });
 
   const handleChange = ({ target: { name, value } }) =>
     setForm((prev) => ({ ...prev, [name]: value }));
@@ -20,7 +20,7 @@ export default function SignUp() {
     e.preventDefault();
 
     if (!form.username || !form.email || !form.password) {
-      setMessage("Please fill out all fields.");
+      setMessage({ text: "Please fill out all fields.", type: "error" });
       return;
     }
 
@@ -34,9 +34,12 @@ export default function SignUp() {
 
       await user.signUp();
       setForm({ username: "", email: "", password: "" });
-      setMessage(`Welcome, ${form.username}!`);
+      setMessage({ text: `Welcome, ${form.username}!`, type: "success" });
     } catch (err) {
-      setMessage("Sign up failed: " + (err?.message || err));
+      setMessage({
+        text: "Sign up failed: " + (err?.message || err),
+        type: "error",
+      });
     }
   };
 
@@ -77,6 +80,7 @@ export default function SignUp() {
         />
         <Button type="submit">Sign Up</Button>
       </form>
+      {message && <Message type={message.type}>{message.text}</Message>}
     </>
   );
 }
