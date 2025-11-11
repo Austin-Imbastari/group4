@@ -2,7 +2,7 @@ import { useState } from "react";
 import Button from "../../components/button/Button";
 import InputField from "../../components/input_field/InputField";
 import { User, Mail, Lock } from "lucide-react";
-import { getParse } from "../../lib/parseClient";
+import { createUser } from "../../lib/parseService";
 import { AuthHeader } from "./AuthPageSC";
 
 export default function SignUp() {
@@ -28,14 +28,8 @@ export default function SignUp() {
     }
 
     try {
-      const Parse = await getParse();
+      const user = await createUser({ username, email, password });
 
-      const user = new Parse.User();
-      user.set("username", username);
-      user.set("email", email);
-      user.set("password", password);
-
-      await user.signUp();
       setForm({ username: "", email: "", password: "" });
       console.log(" User created with userId:", user);
     } catch (err) {
