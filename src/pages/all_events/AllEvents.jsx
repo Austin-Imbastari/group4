@@ -1,11 +1,17 @@
-import eventData from "../../mockData/events"
-import React from "react"
-import Filter from "./Filter"
+import eventData from "../../mockData/events";
+import React from "react";
+import Filter from "./Filter";
 import { NavLink } from "react-router-dom";
-import { AllEventsPageContainer, EventCards, EventContainer, EventTopContainer, EventCenterContainer, EventBottomContainer, NewEventContainer } from "./AllEventSC";
-import { CirclePlus } from 'lucide-react';
-
-
+import {
+  AllEventsPageContainer,
+  EventCards,
+  EventContainer,
+  EventTopContainer,
+  EventCenterContainer,
+  EventBottomContainer,
+  NewEventContainer,
+} from "./AllEventSC";
+import { CirclePlus } from "lucide-react";
 
 export default function AllEvents() {
 

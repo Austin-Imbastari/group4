@@ -22,11 +22,9 @@ export default function EventDetails() {
 
       <p>{event.description}</p>
 
-      <button className="Attend-btn">
-        {event.actions?.attend_button?.label ?? "Attend"}
-      </button>
+      <button className="Attend-btn">{event.actions?.attend_button?.label ?? "Attend"}</button>
 
-        <h2>Event Details:</h2>
+      <h2>Event Details:</h2>
       <div className="eventDetails">
         <div className="locationContainer">
           <p className="Detail">Location: </p>
@@ -36,7 +34,7 @@ export default function EventDetails() {
           <p className="Detail">Duration: </p>
           <p> {event.details.duration}</p>
         </div>
-         <div className="priceContainer">
+        <div className="priceContainer">
           <p className="Detail">Expected Price:</p>
           <p> {event.details.price}</p>
         </div>

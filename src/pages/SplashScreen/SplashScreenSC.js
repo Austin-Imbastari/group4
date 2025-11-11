@@ -56,14 +56,14 @@ export const H1 = styled.h1`
   }
 
   .bottom {
-    background: linear-gradient(90deg, #9b2c2c, #e36f3d);
+    background: linear-gradient(90deg, secondaryNormal, primaryNormal);
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
   }
 `;
 
-export const CTA = styled.button`
+export const CTA = styled.div`
   width: fit-content;
   display: inline-flex;
   align-items: center;
@@ -74,7 +74,7 @@ export const CTA = styled.button`
   cursor: pointer;
   font-weight: 700;
   color: #fff;
-  background: linear-gradient(90deg, #e36f3d, #d85f2c);
+  background: linear-gradient(90deg, primaryNormal, primaryNormalHover);
   box-shadow: 0 10px 18px rgba(227, 111, 61, 0.25);
   transition: transform 0.15s ease, box-shadow 0.2s ease;
 
