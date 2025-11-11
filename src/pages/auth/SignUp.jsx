@@ -3,7 +3,7 @@ import Button from "../../components/button/Button";
 import InputField from "../../components/input_field/InputField";
 import { User, Mail, Lock } from "lucide-react";
 import { createUser } from "../../lib/parseService";
-import { AuthHeader } from "./AuthPageSC";
+import { AuthHeader, Message } from "./AuthPageSC";
 
 export default function SignUp() {
   const [form, setForm] = useState({
@@ -11,7 +11,7 @@ export default function SignUp() {
     email: "",
     password: "",
   });
-  const [message, setMessage] = useState({ text: "", type: "" });
+  const [message, setMessage] = useState(null);
 
   const handleChange = ({ target: { name, value } }) =>
     setForm((prev) => ({ ...prev, [name]: value }));
@@ -25,7 +25,11 @@ export default function SignUp() {
     }
 
     try {
-      const user = await createUser({ username, email, password });
+      await createUser({
+        username: form.username,
+        email: form.email,
+        password: form.password,
+      });
 
       setForm({ username: "", email: "", password: "" });
       setMessage({ text: `Welcome, ${form.username}!`, type: "success" });
