@@ -3,6 +3,7 @@ import InputField from "../../components/input_field/InputField";
 import { User, Lock } from "lucide-react";
 import { useAuth } from "../../hooks/useAuth";
 import { useState } from "react";
+import { AuthHeader } from "./AuthPageSC";
 
 export default function SignIn() {
   const { signIn, setAuthStep } = useAuth();

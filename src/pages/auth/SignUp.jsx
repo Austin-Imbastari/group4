@@ -2,7 +2,7 @@ import { useState } from "react";
 import Button from "../../components/button/Button";
 import InputField from "../../components/input_field/InputField";
 import { User, Mail, Lock } from "lucide-react";
-import { useAuth } from "../../context/AuthContext";
+import { useAuth } from "../../hooks/useAuth";
 import { AuthHeader, Message } from "./AuthPageSC";
 
 export default function SignUp() {
