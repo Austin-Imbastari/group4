@@ -34,7 +34,7 @@ export default function SignUp() {
 
       setForm({ username: "", email: "", password: "" });
       setMessage({ text: `Welcome, ${form.username}!`, type: "success" });
-      setAuthStep("signin");
+      setAuthStep("unauthenticated");
     } catch (err) {
       setMessage({
         text: "Sign up failed: " + (err?.message || err),

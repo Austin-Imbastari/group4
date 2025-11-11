@@ -5,11 +5,11 @@ const AuthContext = createContext();
 
 export function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
-  const [authStep, setAuthStep] = useState("signin");
+  const [authStep, setAuthStep] = useState("unauthenticated");
 
   const signUp = async ({ username, email, password }) => {
     const newUser = await signUpUser({ username, email, password });
-    setAuthStep("signin");
+    setAuthStep("unauthenticated");
     return newUser;
   };
 
@@ -22,7 +22,7 @@ export function AuthProvider({ children }) {
   const signOut = async () => {
     await signOutUser();
     setUser(null);
-    setAuthStep("signin");
+    setAuthStep("unauthenticated");
   };
 
   return (

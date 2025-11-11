@@ -11,8 +11,8 @@ export default function AuthPage() {
     <AuthPageWrapper>
       <AuthContainer>
         {/* TODO: Render SignIn, SignOut, or SignUp based on auth state */}
-        {authStep === "signin" && <SignIn />}
-        {authStep === "signout" && <SignOut />}
+        {authStep === "unauthenticated" && <SignIn />}
+        {authStep === "authenticated" && <SignOut />}
         {authStep === "signup" && <SignUp />}
       </AuthContainer>
     </AuthPageWrapper>
