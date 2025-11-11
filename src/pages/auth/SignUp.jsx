@@ -2,8 +2,8 @@ import { useState } from "react";
 import Button from "../../components/button/Button";
 import InputField from "../../components/input_field/InputField";
 import { User, Mail, Lock } from "lucide-react";
-import { getParse } from "../../lib/parseClient";
-import { AuthHeader, Message } from "./AuthPageSC";
+import { createUser } from "../../lib/parseService";
+import { AuthHeader } from "./AuthPageSC";
 
 export default function SignUp() {
   const [form, setForm] = useState({
@@ -25,14 +25,8 @@ export default function SignUp() {
     }
 
     try {
-      const Parse = await getParse();
+      const user = await createUser({ username, email, password });
 
-      const user = new Parse.User();
-      user.set("username", form.username);
-      user.set("email", form.email);
-      user.set("password", form.password);
-
-      await user.signUp();
       setForm({ username: "", email: "", password: "" });
       setMessage({ text: `Welcome, ${form.username}!`, type: "success" });
     } catch (err) {
