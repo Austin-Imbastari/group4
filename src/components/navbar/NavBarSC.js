@@ -1,10 +1,17 @@
 import styled from "styled-components";
 
 export const NavBarContainer = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
   display: flex;
   padding: 15px;
   justify-content: space-between;
   align-items: center;
+  background: ${(props) => props.theme.colors.primaryLight};
+
   a {
     text-decoration: none;
   }

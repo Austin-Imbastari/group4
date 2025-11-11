@@ -4,7 +4,6 @@ export const EventContainer = styled.div`
   border-radius: 16px;
   overflow: hidden;
   max-width: 400px;
-  //max-height: 300px;
   display: block;
   flex-direction: row;
   text-decoration: none;
@@ -60,12 +59,11 @@ export const EventBottomContainer = styled.div`
 `;
 
 export const EventCards = styled.div`
-  max-width: 2000px;
   margin: 0 auto;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   gap: 28px;
-  padding: 16px 0;
+  padding: 16px 36px;
 `;
 
 export const NewEventContainer = styled.div`

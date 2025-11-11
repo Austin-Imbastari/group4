@@ -7,7 +7,7 @@ export const InputFieldWrapper = styled.div`
 `;
 
 export const Label = styled.label`
-  color: #000;
+  color: ${({ theme }) => theme.colors.black};
 `;
 
 export const InputWrapper = styled.div`
@@ -29,7 +29,7 @@ export const Input = styled.input`
   line-height: 1.4;
   border: 1px solid ${({ theme }) => theme.colors.accentDark};
   border-radius: 12px;
-  background-color: #f3f3f5;
+  background-color: ${({ theme }) => theme.colors.secondaryLight};
   appearance: none;
   -webkit-appearance: none;
   box-shadow: none;
