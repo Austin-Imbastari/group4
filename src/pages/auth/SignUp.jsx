@@ -2,10 +2,11 @@ import { useState } from "react";
 import Button from "../../components/button/Button";
 import InputField from "../../components/input_field/InputField";
 import { User, Mail, Lock } from "lucide-react";
-import { signUpUser } from "../../lib/parseService";
+import { useAuth } from "../../context/AuthContext";
 import { AuthHeader, Message } from "./AuthPageSC";
 
 export default function SignUp() {
+  const { signUp, setAuthStep } = useAuth();
   const [form, setForm] = useState({
     username: "",
     email: "",
@@ -25,7 +26,7 @@ export default function SignUp() {
     }
 
     try {
-      await signUpUser({
+      await signUp({
         username: form.username,
         email: form.email,
         password: form.password,
@@ -33,6 +34,7 @@ export default function SignUp() {
 
       setForm({ username: "", email: "", password: "" });
       setMessage({ text: `Welcome, ${form.username}!`, type: "success" });
+      setAuthStep("signin");
     } catch (err) {
       setMessage({
         text: "Sign up failed: " + (err?.message || err),
