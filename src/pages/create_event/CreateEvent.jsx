@@ -15,7 +15,7 @@ import {
 } from "./CreateEventSC";
 import Button from "../../components/button/Button";
 import InputField from "../../components/input_field/InputField";
-import { Handshake, HandCoins, MapPin, SwatchBook, CalendarDays, Clock6, PencilLine, Image } from "lucide-react";
+import { Handshake, HandCoins, MapPin, SwatchBook, CalendarDays, PencilLine, Image } from "lucide-react";
 
 const CreateEvent = () => {
   const [formData, setFormData] = useState({
