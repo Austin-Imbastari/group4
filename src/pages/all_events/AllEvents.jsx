@@ -1,11 +1,17 @@
-import eventData from "../../mockData/events"
-import React from "react"
-import Filter from "./Filter"
+import eventData from "../../mockData/events";
+import React from "react";
+import Filter from "./Filter";
 import { NavLink } from "react-router-dom";
-import { AllEventsPageContainer, EventCards, EventContainer, EventTopContainer, EventCenterContainer, EventBottomContainer, NewEventContainer } from "./AllEventSC";
-import { CirclePlus } from 'lucide-react';
-
-
+import {
+  AllEventsPageContainer,
+  EventCards,
+  EventContainer,
+  EventTopContainer,
+  EventCenterContainer,
+  EventBottomContainer,
+  NewEventContainer,
+} from "./AllEventSC";
+import { CirclePlus } from "lucide-react";
 
 export default function AllEvents() {
 
@@ -29,8 +35,9 @@ export default function AllEvents() {
                     </EventContainer>
                 </NavLink>
                 {event.map((e) => {
+
                     return (
-                        <NavLink to={"/events/" + e.id} style={{ textDecoration: "none" }}>
+                        <NavLink key={e.id} to={"/events/" + e.id} style={{ textDecoration: "none" }}>
                             <EventContainer>
                                 <EventTopContainer $bg={e.picture}>
                                     <span>{e.category}</span>
@@ -45,11 +52,8 @@ export default function AllEvents() {
                                 </EventBottomContainer>
                             </EventContainer>
                         </NavLink>
-
-
                     )
                 })}
-
             </EventCards>
         </AllEventsPageContainer >
     )
