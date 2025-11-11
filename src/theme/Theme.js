@@ -9,6 +9,8 @@ export const theme = {
     secondaryNormalActive: "#8f1c2d",
     secondaryLight: "#f7e9eb",
     accentDark: "#959793",
+    white: "#ffffff",
+    black: "#000000",
   },
   fonts: {
     main: "'Poppins', sans-serif",
