@@ -85,3 +85,22 @@ export const ImageContainer = styled.div`
     object-fit: cover;
   }
 `;
+
+export const ModalContainer = styled.div`
+button {
+  display: block;
+  margin: auto;
+  width: 10rem;
+  height: 2rem;
+}
+
+:modal {
+  background-color: beige;
+  border: 2px solid burlywood;
+  border-radius: 5px;
+}
+
+p {
+  color: black;
+}
+`;
