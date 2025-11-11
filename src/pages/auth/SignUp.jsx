@@ -2,7 +2,7 @@ import { useState } from "react";
 import Button from "../../components/button/Button";
 import InputField from "../../components/input_field/InputField";
 import { User, Mail, Lock } from "lucide-react";
-import { createUser } from "../../lib/parseService";
+import { signUpUser } from "../../lib/parseService";
 import { AuthHeader, Message } from "./AuthPageSC";
 
 export default function SignUp() {
@@ -25,7 +25,7 @@ export default function SignUp() {
     }
 
     try {
-      await createUser({
+      await signUpUser({
         username: form.username,
         email: form.email,
         password: form.password,
