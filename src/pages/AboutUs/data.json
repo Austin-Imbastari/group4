@@ -1,0 +1,19 @@
+{
+  "values": [
+    {
+      "icon": "heart",
+      "title": "Authentic Connections",
+      "description": "We believe in building real friendships based on shared interests and genuine connections."
+    },
+    {
+      "icon": "shield",
+      "title": "Safe & Inclusive",
+      "description": "A welcoming space where everyone feels comfortable being themselves without judgment."
+    },
+    {
+      "icon": "sparkles",
+      "title": "Diverse Activities",
+      "description": "From coffee chats to hiking trips, we offer experiences that match every interest."
+    }
+  ]
+}
