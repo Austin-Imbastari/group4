@@ -11,6 +11,7 @@ export default function SignUp() {
     email: "",
     password: "",
   });
+  const [message, setMessage] = useState("");
 
   const handleChange = ({ target: { name, value } }) =>
     setForm((prev) => ({ ...prev, [name]: value }));
@@ -18,10 +19,8 @@ export default function SignUp() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const { username, email, password } = form;
-
-    if (!username || !email || !password) {
-      console.error("Please fill out all fields.");
+    if (!form.username || !form.email || !form.password) {
+      setMessage("Please fill out all fields.");
       return;
     }
 
@@ -29,15 +28,15 @@ export default function SignUp() {
       const Parse = await getParse();
 
       const user = new Parse.User();
-      user.set("username", username);
-      user.set("email", email);
-      user.set("password", password);
+      user.set("username", form.username);
+      user.set("email", form.email);
+      user.set("password", form.password);
 
       await user.signUp();
       setForm({ username: "", email: "", password: "" });
-      console.log(" User created with userId:", user);
+      setMessage(`Welcome, ${form.username}!`);
     } catch (err) {
-      console.error("Sign up failed:", err?.message || err);
+      setMessage("Sign up failed: " + (err?.message || err));
     }
   };
 
