@@ -32,7 +32,7 @@ export default function SignIn() {
       </AuthHeader>
       <form onSubmit={handleSubmit}>
         <InputField
-          label="Username"
+          label="Email"
           name="username"
           value={form.username}
           onChange={handleChange}
