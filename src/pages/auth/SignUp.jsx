@@ -6,7 +6,7 @@ import { useAuth } from "../../hooks/useAuth";
 import { AuthHeader, Message } from "./AuthPageSC";
 
 export default function SignUp() {
-  const { signUp, setAuthStep } = useAuth();
+  const { signUp } = useAuth();
   const [form, setForm] = useState({
     username: "",
     email: "",
@@ -34,7 +34,6 @@ export default function SignUp() {
 
       setForm({ username: "", email: "", password: "" });
       setMessage({ text: `Welcome, ${form.username}!`, type: "success" });
-      setAuthStep("unauthenticated");
     } catch (err) {
       setMessage({
         text: "Sign up failed: " + (err?.message || err),
