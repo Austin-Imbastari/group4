@@ -1,7 +1,8 @@
 import { getParse } from "./parseClient.js";
 
-export async function createUser({ username, email, password }) {
-  const Parse = getParse();
+// Authentication - sign up new user
+export async function signUpUser({ username, email, password }) {
+  const Parse = await getParse();
   const user = new Parse.User();
   user.set("username", username);
   user.set("email", email);
@@ -31,4 +32,20 @@ export async function getAllEvents() {
       picture: file ? file.url() : "",
     };
   });
+// Authentication - log in existing user
+export async function signInUser({ username, password }) {
+  const Parse = getParse();
+  return Parse.User.logIn(username, password);
+}
+
+// Authentication - log out the current user
+export async function signOutUser() {
+  const Parse = getParse();
+  return Parse.User.logOut();
+}
+
+// Authentication - get current logged-in user
+export function getCurrentUser() {
+  const Parse = getParse();
+  return Parse.User.current();
 }
