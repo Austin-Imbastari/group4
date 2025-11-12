@@ -10,9 +10,25 @@ export async function createUser({ username, email, password }) {
 }
 
 export async function getAllEvents() {
-  const Parse = getParse();
-  const Event = Parse.Object.extend("Event");
-  const query = new Parse.Query(Event);
-  const results = await query.find();
-  return results.map(event => event.toJSON());
-};
+  const Parse = await getParse();
+  const results = await new Parse.Query("Event").find();
+
+  return results.map((obj) => {
+    const d = obj.toJSON();
+    const file = obj.get("image");
+    return {
+      id: obj.id,
+      title: d.title,
+      category: d.type,
+      host: "Unknown",
+      date: d.date,
+      time: d.time,
+      attendents: 0,
+      saved: false,
+      price: d.price,
+      location: d.location,
+      description: d.description,
+      picture: file ? file.url() : "",
+    };
+  });
+}
