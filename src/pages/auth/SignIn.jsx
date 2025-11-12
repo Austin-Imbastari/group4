@@ -1,5 +1,6 @@
 import Button from "../../components/button/Button";
 import InputField from "../../components/input_field/InputField";
+import { useNavigate } from "react-router-dom";
 import { User, Lock } from "lucide-react";
 import { useAuth } from "../../hooks/useAuth";
 import { useState } from "react";
@@ -12,7 +13,7 @@ export default function SignIn() {
     password: "",
   });
   const [message, setMessage] = useState(null);
-
+  const navigate = useNavigate();
   const handleChange = ({ target: { name, value } }) =>
     setForm((prev) => ({ ...prev, [name]: value }));
 
@@ -20,9 +21,10 @@ export default function SignIn() {
     e.preventDefault();
     try {
       await signIn({
-        email: form.email,
+        username: form.username,
         password: form.password,
       });
+      navigate("/events");
     } catch (err) {
       setMessage({
         text: "Sign in failed: " + (err?.message || err),
@@ -39,11 +41,11 @@ export default function SignIn() {
       </AuthHeader>
       <form onSubmit={handleSubmit}>
         <InputField
-          label="Email"
-          name="email"
-          value={form.email}
+          label="Username"
+          name="username"
+          value={form.username}
           onChange={handleChange}
-          placeholder="Enter your email"
+          placeholder="Enter your username"
           icon={User}
         />
         <InputField
