@@ -1,11 +1,26 @@
-import { createContext, useState } from "react";
-import { signUpUser, signInUser, signOutUser } from "../lib/parseService.js";
+import { createContext, useState, useEffect } from "react";
+import {
+  signUpUser,
+  signInUser,
+  signOutUser,
+  getCurrentUser,
+} from "../lib/parseService.js";
 
 const AuthContext = createContext();
 
 export function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
   const [authStep, setAuthStep] = useState("unauthenticated");
+
+  useEffect(() => {
+    const currentUser = getCurrentUser();
+    if (currentUser) {
+      setUser(currentUser);
+      setAuthStep("authenticated");
+    } else {
+      setAuthStep("unauthenticated");
+    }
+  }, []);
 
   const signUp = async ({ username, email, password }) => {
     const newUser = await signUpUser({ username, email, password });
