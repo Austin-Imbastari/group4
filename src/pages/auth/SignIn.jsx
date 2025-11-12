@@ -3,7 +3,7 @@ import InputField from "../../components/input_field/InputField";
 import { User, Lock } from "lucide-react";
 import { useAuth } from "../../hooks/useAuth";
 import { useState } from "react";
-import { AuthHeader } from "./AuthPageSC";
+import { AuthHeader, Message } from "./AuthPageSC";
 
 export default function SignIn() {
   const { signIn } = useAuth();
@@ -11,16 +11,24 @@ export default function SignIn() {
     username: "",
     password: "",
   });
+  const [message, setMessage] = useState(null);
 
   const handleChange = ({ target: { name, value } }) =>
     setForm((prev) => ({ ...prev, [name]: value }));
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await signIn({
-      email: form.email,
-      password: form.password,
-    });
+    try {
+      await signIn({
+        email: form.email,
+        password: form.password,
+      });
+    } catch (err) {
+      setMessage({
+        text: "Sign in failed: " + (err?.message || err),
+        type: "error",
+      });
+    }
   };
 
   return (
@@ -49,6 +57,7 @@ export default function SignIn() {
         />
         <Button type="submit">Sign In</Button>
       </form>
+      {message && <Message type={message.type}>{message.text}</Message>}
     </>
   );
 }
