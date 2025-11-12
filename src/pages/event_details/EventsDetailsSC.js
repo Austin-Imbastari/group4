@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import Button from "../../components/button/Button";
 
 export const ParentContainer = styled.div`
   max-width: 1000px;
@@ -50,34 +51,33 @@ export const ParentContainer = styled.div`
   .Detail {
     color: ${(props) => props.theme.colors.accentDark};
   }
-  
+
   h2 {
     margin-top: 2rem;
     margin-bottom: 0.75rem;
     color: ${(props) => props.theme.colors.secondaryNormal};
     font-size: ${(props) => props.theme.fontSizes.large};
   }
-  
+
   ul {
     list-style: disc;
     padding-left: 1.5rem;
     margin-bottom: 1rem;
     color: ${(props) => props.theme.colors.secondaryNormal};
   }
-  
+
   li {
     margin-bottom: 0.25rem;
     color: ${(props) => props.theme.colors.accentDark};
   }
-  `;
-
+`;
 
 export const ImageContainer = styled.div`
   width: 100%;
   border-radius: 12px;
   overflow: hidden;
   margin-bottom: 1.5rem;
-  
+
   img {
     width: 100%;
     display: block;
@@ -87,20 +87,40 @@ export const ImageContainer = styled.div`
 `;
 
 export const ModalContainer = styled.div`
-button {
-  display: block;
-  margin: auto;
-  width: 10rem;
-  height: 2rem;
+body.active-modal {
+    overflow-y: hidden;
 }
 
-:modal {
-  background-color: beige;
-  border: 2px solid burlywood;
-  border-radius: 5px;
+.modal, .overlay {
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    position: fixed;
 }
 
-p {
-  color: black;
+.overlay {
+    background: rgba(49,49,49,0.8);
+}
+.modal-content {
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    line-height: 1.4;
+    background: #f1f1f1;
+    padding: 14px 28px;
+    border-radius: 3px;
+    max-width: 600px;
+    min-width: 300px;
+}
+
+.close-modal {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    padding: 5px 7px;
 }
 `;
