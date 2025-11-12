@@ -16,6 +16,7 @@ export function AuthProvider({ children }) {
   const signIn = async ({ username, password }) => {
     const loggedInUser = await signInUser({ username, password });
     setUser(loggedInUser);
+    setAuthStep("authenticated");
     return loggedInUser;
   };
 

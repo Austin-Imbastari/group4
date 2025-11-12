@@ -6,7 +6,7 @@ import { useState } from "react";
 import { AuthHeader } from "./AuthPageSC";
 
 export default function SignIn() {
-  const { signIn, setAuthStep } = useAuth();
+  const { signIn } = useAuth();
   const [form, setForm] = useState({
     username: "",
     password: "",
@@ -18,10 +18,9 @@ export default function SignIn() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     await signIn({
-      username: form.username,
+      email: form.email,
       password: form.password,
     });
-    setAuthStep("signedin");
   };
 
   return (
@@ -33,10 +32,10 @@ export default function SignIn() {
       <form onSubmit={handleSubmit}>
         <InputField
           label="Email"
-          name="username"
-          value={form.username}
+          name="email"
+          value={form.email}
           onChange={handleChange}
-          placeholder="Enter your username"
+          placeholder="Enter your email"
           icon={User}
         />
         <InputField
