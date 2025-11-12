@@ -23,7 +23,6 @@ function App() {
           <Route path="/auth" element={<AuthPage />} />
           <Route path="/events/:id" element={<EventDetails />} />
           <Route path="/events" element={<AllEvents />} />
-          <Route path="/auth" element={<AuthPage />} />
           <Route path="/about" element={<AboutUs />} />
         </Routes>
       </ThemeProvider>

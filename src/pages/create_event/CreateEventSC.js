@@ -131,3 +131,12 @@ export const DescriptionField = styled.div`
 export const ImageField = styled.div`
   grid-area: upload;
 `;
+
+export const SuccessMessage = styled.div`
+  background-color: #e6ffed;
+  color: #036635;
+  padding: 10px 16px;
+  border-radius: 8px;
+  margin-bottom: 16px;
+  font-weight: 500;
+`;
