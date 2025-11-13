@@ -32,6 +32,7 @@ export async function getAllEvents() {
       picture: file ? file.url() : "",
     };
   });
+}
 // Authentication - log in existing user
 export async function signInUser({ username, password }) {
   const Parse = await getParse();
