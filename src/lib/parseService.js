@@ -45,6 +45,12 @@ export async function signOutUser() {
   return Parse.User.logOut();
 }
 
+// Authentication - get current logged-in user
+export async function getCurrentUser() {
+  const Parse = await getParse();
+  return Parse.User.current();
+}
+
 export async function createEvent(data) {
   const Parse = await getParse();
   const Event = Parse.Object.extend("Event");
