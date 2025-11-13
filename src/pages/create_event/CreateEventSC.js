@@ -133,8 +133,8 @@ export const ImageField = styled.div`
 `;
 
 export const SuccessMessage = styled.div`
-  background-color: #e6ffed;
-  color: #036635;
+  background-color: ${({ theme }) => theme.colors.successBg};
+  color: ${({ theme }) => theme.colors.successColor};
   padding: 10px 16px;
   border-radius: 8px;
   margin-bottom: 16px;
