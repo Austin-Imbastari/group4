@@ -2,14 +2,17 @@ import Button from "../../components/button/Button";
 import { AuthHeader, Message } from "./AuthPageSC";
 import { useAuth } from "../../hooks/useAuth";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function SignOutForm() {
   const { user, signOut } = useAuth();
   const [message, setMessage] = useState(null);
+  const navigate = useNavigate();
 
   const handleSignOut = async () => {
     try {
       await signOut();
+      navigate("/events");
     } catch (err) {
       setMessage({
         text: "Sign out failed: " + (err?.message || err),
