@@ -1,42 +1,34 @@
-import { useState } from "react";
 import Button from "../../components/button/Button";
 import InputField from "../../components/input_field/InputField";
-import { User, Mail, Lock } from "lucide-react";
+import { useNavigate } from "react-router-dom";
+import { User, Lock } from "lucide-react";
 import { useAuth } from "../../hooks/useAuth";
+import { useState } from "react";
 import { AuthHeader, Message } from "./AuthPageSC";
 
-export default function SignUp() {
-  const { signUp } = useAuth();
+export default function SignInForm() {
+  const { signIn } = useAuth();
   const [form, setForm] = useState({
     username: "",
-    email: "",
     password: "",
   });
   const [message, setMessage] = useState(null);
+  const navigate = useNavigate();
 
   const handleChange = ({ target: { name, value } }) =>
     setForm((prev) => ({ ...prev, [name]: value }));
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    if (!form.username || !form.email || !form.password) {
-      setMessage({ text: "Please fill out all fields.", type: "error" });
-      return;
-    }
-
     try {
-      await signUp({
+      await signIn({
         username: form.username,
-        email: form.email,
         password: form.password,
       });
-
-      setForm({ username: "", email: "", password: "" });
-      setMessage({ text: `Welcome, ${form.username}!`, type: "success" });
+      navigate("/events");
     } catch (err) {
       setMessage({
-        text: "Sign up failed: " + (err?.message || err),
+        text: "Sign in failed: " + (err?.message || err),
         type: "error",
       });
     }
@@ -45,28 +37,17 @@ export default function SignUp() {
   return (
     <>
       <AuthHeader>
-        <h2 className="title">GET STARTED</h2>
-        <p className="description">
-          Please fill in your credentials to create an account
-        </p>
+        <h2 className="title">WELCOME BACK</h2>
+        <p className="description">Please enter your credentials</p>
       </AuthHeader>
-
       <form onSubmit={handleSubmit}>
         <InputField
-          label="Full Name"
+          label="Username"
           name="username"
           value={form.username}
           onChange={handleChange}
-          placeholder="Enter your full name"
+          placeholder="Enter your username"
           icon={User}
-        />
-        <InputField
-          label="Email"
-          name="email"
-          value={form.email}
-          onChange={handleChange}
-          placeholder="Enter your email"
-          icon={Mail}
         />
         <InputField
           label="Password"
@@ -77,7 +58,7 @@ export default function SignUp() {
           placeholder="Enter your password"
           icon={Lock}
         />
-        <Button type="submit">Sign Up</Button>
+        <Button type="submit">Sign In</Button>
       </form>
       {message && <Message type={message.type}>{message.text}</Message>}
     </>

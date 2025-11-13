@@ -1,20 +1,14 @@
 import { AuthContainer, AuthPageWrapper } from "./AuthPageSC";
-import SignUp from "./SignUp";
-import SignIn from "./SignIn";
-import SignOut from "./SignOut";
+import SignInForm from "./SignInForm";
+import SignOutForm from "./SignOutForm";
 import { useAuth } from "../../hooks/useAuth";
 
 export default function AuthPage() {
-  const { authStep } = useAuth();
+  const { user } = useAuth();
 
   return (
     <AuthPageWrapper>
-      <AuthContainer>
-        {/* TODO: Render SignIn, SignOut, or SignUp based on auth state */}
-        {authStep === "unauthenticated" && <SignIn />}
-        {authStep === "authenticated" && <SignOut />}
-        {authStep === "signup" && <SignUp />}
-      </AuthContainer>
+      <AuthContainer>{user ? <SignOutForm /> : <SignInForm />}</AuthContainer>
     </AuthPageWrapper>
   );
 }
