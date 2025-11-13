@@ -12,14 +12,14 @@ export function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
 
   useEffect(() => {
-    const currentUser = getCurrentUser();
-    if (currentUser) {
-      setUser({
-        id: currentUser.id,
-        username: currentUser.get("username"),
-        email: currentUser.get("email"),
-      });
-    }
+    getCurrentUser().then((user) => {
+      if (user)
+        setUser({
+          id: user.id,
+          username: user.get("username"),
+          email: user.get("email"),
+        });
+    });
   }, []);
 
   const signUp = async ({ username, email, password }) => {
