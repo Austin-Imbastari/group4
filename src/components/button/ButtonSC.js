@@ -17,14 +17,17 @@ export const ButtonSC = styled.button`
 
 
 export const BackButtonSC = styled.button`
-  width: wrap;
+  width: fit-content;
   padding: 0.8rem;
+  margin: 10px;
   background: ${({ theme }) => theme.colors.accentDark};
+  color: white;
   cursor: pointer;
   border: none;
   border-radius: 6px;
   transition: all 0.2s ease-in-out;
-  &:hover{
+
+  &:hover {
     background: ${({ theme }) => theme.colors.backButtonHover};
   }
-  `;
+`;

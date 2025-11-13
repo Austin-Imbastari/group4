@@ -2,10 +2,13 @@ import { useState } from "react";
 import Button from "../../components/button/Button";
 import InputField from "../../components/input_field/InputField";
 import { User, Mail, Lock } from "lucide-react";
-import { signUpUser } from "../../lib/parseService";
+import { useAuth } from "../../hooks/useAuth";
 import { AuthHeader, Message } from "./AuthPageSC";
+import { useNavigate } from "react-router-dom";
 
-export default function SignUp() {
+export default function SignUpForm() {
+  const { signUp } = useAuth();
+  const navigate = useNavigate();
   const [form, setForm] = useState({
     username: "",
     email: "",
@@ -25,7 +28,7 @@ export default function SignUp() {
     }
 
     try {
-      await signUpUser({
+      await signUp({
         username: form.username,
         email: form.email,
         password: form.password,
@@ -78,6 +81,9 @@ export default function SignUp() {
         />
         <Button type="submit">Sign Up</Button>
       </form>
+      <Button type="button" onClick={() => navigate("/auth/signin")}>
+        Already have an account? Sign In
+      </Button>
       {message && <Message type={message.type}>{message.text}</Message>}
     </>
   );

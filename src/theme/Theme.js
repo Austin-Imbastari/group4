@@ -12,6 +12,8 @@ export const theme = {
     backButton: "#333333",
     successBg: "#e6ffed",
     successColor: "#036635",
+    backButtonHover: "#333333"
+
   },
   fonts: {
     main: "'Poppins', sans-serif",
