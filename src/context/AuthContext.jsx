@@ -24,12 +24,20 @@ export function AuthProvider({ children }) {
 
   const signUp = async ({ username, email, password }) => {
     const newUser = await signUpUser({ username, email, password });
+    setUser({
+      id: newUser.id,
+      username: newUser.get("username"),
+      email: newUser.get("email"),
+    });
     return newUser;
   };
-
   const signIn = async ({ username, password }) => {
     const loggedInUser = await signInUser({ username, password });
-    setUser(loggedInUser);
+    setUser({
+      id: loggedInUser.id,
+      username: loggedInUser.get("username"),
+      email: loggedInUser.get("email"),
+    });
     return loggedInUser;
   };
 
