@@ -31,6 +31,7 @@ export function AuthProvider({ children }) {
     });
     return newUser;
   };
+
   const signIn = async ({ username, password }) => {
     const loggedInUser = await signInUser({ username, password });
     setUser({
