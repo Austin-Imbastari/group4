@@ -24,10 +24,10 @@ function App() {
           <Route path="/create-event" element={<CreateEvent />} />
           <Route path="/events/:id" element={<EventDetails />} />
           <Route path="/events" element={<AllEvents />} />
-          <Route path="/auth/*" element={<AuthPage />}>
-            <Route index element={<SignInForm />} />
-            <Route path="signin" element={<SignInForm />} />
-            <Route path="signup" element={<SignUpForm />} />
+          <Route path="/auth/*" element={<AuthPage />} />
+          <Route index element={<SignInForm />} />
+          <Route path="signin" element={<SignInForm />} />
+          <Route path="signup" element={<SignUpForm />} />
           <Route path="/about" element={<AboutUs />} />
         </Routes>
       </ThemeProvider>
