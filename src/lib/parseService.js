@@ -34,18 +34,18 @@ export async function getAllEvents() {
   });
 // Authentication - log in existing user
 export async function signInUser({ username, password }) {
-  const Parse = getParse();
+  const Parse = await getParse();
   return Parse.User.logIn(username, password);
 }
 
 // Authentication - log out the current user
 export async function signOutUser() {
-  const Parse = getParse();
+  const Parse = await getParse();
   return Parse.User.logOut();
 }
 
 // Authentication - get current logged-in user
-export function getCurrentUser() {
-  const Parse = getParse();
+export async function getCurrentUser() {
+  const Parse = await getParse();
   return Parse.User.current();
 }

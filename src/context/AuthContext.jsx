@@ -1,37 +1,57 @@
-import { createContext, useContext, useState } from "react";
-import { signUpUser, signInUser, signOutUser } from "../lib/parseService.js";
+import { createContext, useState, useEffect } from "react";
+import {
+  signUpUser,
+  signInUser,
+  signOutUser,
+  getCurrentUser,
+} from "../lib/parseService.js";
 
 const AuthContext = createContext();
 
 export function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
-  const [authStep, setAuthStep] = useState("signin");
+
+  useEffect(() => {
+    getCurrentUser().then((user) => {
+      if (user)
+        setUser({
+          id: user.id,
+          username: user.get("username"),
+          email: user.get("email"),
+        });
+    });
+  }, []);
 
   const signUp = async ({ username, email, password }) => {
     const newUser = await signUpUser({ username, email, password });
-    setAuthStep("signin");
+    setUser({
+      id: newUser.id,
+      username: newUser.get("username"),
+      email: newUser.get("email"),
+    });
     return newUser;
   };
 
   const signIn = async ({ username, password }) => {
     const loggedInUser = await signInUser({ username, password });
-    setUser(loggedInUser);
+    setUser({
+      id: loggedInUser.id,
+      username: loggedInUser.get("username"),
+      email: loggedInUser.get("email"),
+    });
     return loggedInUser;
   };
 
   const signOut = async () => {
     await signOutUser();
     setUser(null);
-    setAuthStep("signin");
   };
 
   return (
-    <AuthContext.Provider
-      value={{ user, authStep, setAuthStep, signUp, signIn, signOut }}
-    >
+    <AuthContext.Provider value={{ user, signUp, signIn, signOut }}>
       {children}
     </AuthContext.Provider>
   );
 }
 
-export const useAuth = () => useContext(AuthContext);
+export default AuthContext;
