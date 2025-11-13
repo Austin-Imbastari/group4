@@ -28,7 +28,6 @@ function App() {
             <Route index element={<SignInForm />} />
             <Route path="signin" element={<SignInForm />} />
             <Route path="signup" element={<SignUpForm />} />
-          </Route>
           <Route path="/about" element={<AboutUs />} />
         </Routes>
       </ThemeProvider>

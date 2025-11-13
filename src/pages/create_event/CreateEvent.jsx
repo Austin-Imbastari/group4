@@ -12,36 +12,49 @@ import {
   TimeField,
   DescriptionField,
   ImageField,
+  SuccessMessage,
 } from "./CreateEventSC";
 import Button from "../../components/button/Button";
 import InputField from "../../components/input_field/InputField";
 import { Handshake, HandCoins, MapPin, SwatchBook, CalendarDays, PencilLine, Image } from "lucide-react";
 
+import { createEvent } from "../../lib/parseService";
+
+const initialForm = {
+  title: "",
+  price: "",
+  location: "",
+  type: "",
+  date: "",
+  time: "",
+  description: "",
+  image: null,
+};
+
 const CreateEvent = () => {
-  const [formData, setFormData] = useState({
-    title: "",
-    price: "",
-    location: "",
-    type: "",
-    date: "",
-    time: "",
-    description: "",
-    image: null,
-  });
+  const [formData, setFormData] = useState(initialForm);
+  const [successMessage, setSuccessMessage] = useState("");
 
   const handleOnChange = (e) => {
-    const { id, value } = e.target;
-    setFormData((prev) => ({ ...prev, [id]: value }));
+    const { id, value, type, files } = e.target;
+    setFormData((prev) => ({
+      ...prev,
+      [id]: type === "file" ? files?.[0] ?? null : value,
+    }));
   };
 
   const handleOnSubmit = async (e) => {
-    // this form will handle sending the data to the database
     e.preventDefault();
     try {
-      // let response = await fetch("backend url", {})
-      console.log(formData);
-    } catch (error) {
-      console.log(`Error ${error}`);
+      const newEvent = await createEvent(formData);
+      console.log(newEvent);
+      setFormData(initialForm);
+      setSuccessMessage("Your event has been created successfully!");
+      setTimeout(() => {
+        setSuccessMessage("");
+      }, 3000);
+    } catch {
+      setSuccessMessage(" Something went wrong. Please try again.");
     }
   };
 
@@ -51,33 +64,61 @@ const CreateEvent = () => {
         <h1>Create Event</h1>
         <p>Please fill in the details about your event</p>
       </TitleText>
-
+      {successMessage && <SuccessMessage>{successMessage}</SuccessMessage>}
       <FormGrid onSubmit={handleOnSubmit}>
         <TitleField>
           <label htmlFor="title">What event would you like to host?</label>
           <InputContainer>
-            <InputField icon={Handshake} onChange={handleOnChange} id="title" type="text" placeholder="Coffee meetup" />
+            <InputField
+              icon={Handshake}
+              id="title"
+              type="text"
+              placeholder="Coffee meetup"
+              onChange={handleOnChange}
+              value={formData.title}
+            />
           </InputContainer>
         </TitleField>
 
         <PriceField>
           <label htmlFor="price">Expected price</label>
           <InputContainer>
-            <InputField icon={HandCoins} onChange={handleOnChange} id="price" type="text" placeholder="20DKK" />
+            <InputField
+              icon={HandCoins}
+              id="price"
+              type="text"
+              placeholder="20DKK"
+              onChange={handleOnChange}
+              value={formData.price}
+            />
           </InputContainer>
         </PriceField>
 
         <LocationField>
           <label htmlFor="location">Where will the event take place?</label>
           <InputContainer>
-            <InputField icon={MapPin} onChange={handleOnChange} id="location" type="text" placeholder="Nørrebro" />
+            <InputField
+              icon={MapPin}
+              id="location"
+              type="text"
+              placeholder="Nørrebro"
+              onChange={handleOnChange}
+              value={formData.location}
+            />
           </InputContainer>
         </LocationField>
 
         <TypeField>
           <label htmlFor="type">What type of event?</label>
           <InputContainer>
-            <InputField icon={SwatchBook} onChange={handleOnChange} id="type" type="text" placeholder="Coffee" />
+            <InputField
+              icon={SwatchBook}
+              id="type"
+              type="text"
+              placeholder="Coffee"
+              onChange={handleOnChange}
+              value={formData.type}
+            />
           </InputContainer>
         </TypeField>
 
@@ -86,10 +127,11 @@ const CreateEvent = () => {
           <InputContainer>
             <InputField
               icon={CalendarDays}
-              onChange={handleOnChange}
               id="date"
               type="text"
               placeholder="December 20, 2025"
+              onChange={handleOnChange}
+              value={formData.date}
             />
           </InputContainer>
         </DateField>
@@ -97,7 +139,14 @@ const CreateEvent = () => {
         <TimeField>
           <label htmlFor="time">Time</label>
           <InputContainer>
-            <InputField icon={CalendarDays} onChange={handleOnChange} id="time" type="text" placeholder="16:00" />
+            <InputField
+              icon={CalendarDays}
+              id="time"
+              type="text"
+              placeholder="16:00"
+              onChange={handleOnChange}
+              value={formData.time}
+            />
           </InputContainer>
         </TimeField>
 
@@ -105,7 +154,13 @@ const CreateEvent = () => {
           <label htmlFor="description">Description</label>
           <InputContainer>
             <PencilLine className="icon" aria-hidden="true" />
-            <textarea onChange={handleOnChange} id="description" placeholder="Tell your story..." rows={6} />{" "}
+            <textarea
+              id="description"
+              rows={6}
+              placeholder="Tell your story..."
+              onChange={handleOnChange}
+              value={formData.description}
+            />
           </InputContainer>
         </DescriptionField>
 
@@ -114,11 +169,11 @@ const CreateEvent = () => {
           <InputContainer>
             <InputField
               icon={Image}
-              onChange={handleOnChange}
               id="image"
               type="file"
               className="input-file"
               accept=".png, .jpg, .jpeg"
+              onChange={handleOnChange}
             />
           </InputContainer>
         </ImageField>
