@@ -14,7 +14,11 @@ export function AuthProvider({ children }) {
   useEffect(() => {
     const currentUser = getCurrentUser();
     if (currentUser) {
-      setUser(currentUser);
+      setUser({
+        id: currentUser.id,
+        username: currentUser.get("username"),
+        email: currentUser.get("email"),
+      });
     }
   }, []);
 

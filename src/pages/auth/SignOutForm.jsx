@@ -21,7 +21,7 @@ export default function SignOutForm() {
   return (
     <>
       <AuthHeader>
-        <h2 className="title">Hi {user?.get("username")}!</h2>
+        <h2 className="title">Hi {user.username}!</h2>
         <p className="description">Do you want to sign out?</p>
       </AuthHeader>
       <Button onClick={handleSignOut}>Sign Out</Button>
