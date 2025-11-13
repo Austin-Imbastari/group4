@@ -1,4 +1,6 @@
 import React from "react";
+import ClipLoader from "react-spinners/ClipLoader";
+import { useState, useEffect, CSSProperties } from "react";
 import { NavLink } from "react-router-dom";
 import Filter from "./Filter";
 import {
@@ -9,35 +11,42 @@ import {
     EventCenterContainer,
     EventBottomContainer,
     NewEventContainer,
+    LoadingEvents,
 } from "./AllEventSC";
 import { CirclePlus } from "lucide-react";
 import { getAllEvents } from "../../lib/parseService";
 
 export default function AllEvents() {
 
-    const [events, setEvents] = React.useState([]);
-    const [loading, setLoading] = React.useState(true);
-    const [error, setError] = React.useState(null);
+    const [state, setState] = useState({
+        events: [],
+        loading: true,
+        error: null,
+    });
 
-    React.useEffect(() => {
+    useEffect(() => {
         let alive = true;
         (async () => {
             try {
                 const data = await getAllEvents();
-                if (alive) setEvents(data);
+                if (alive) setState(prev => ({ ...prev, events: data }));
             } catch (e) {
-                if (alive) setError(e?.message || "Failed to load events");
+                if (alive) setState(prev => ({ ...prev, error: "Failed to load events" }));
             } finally {
-                if (alive) setLoading(false);
+                if (alive) setState(prev => ({ ...prev, loading: false }));
             }
         })();
         return () => { alive = false; };
     }, []);
 
-    if (loading) return <div>Loading…</div>;
-    if (error) return <div>Error: {error}</div>;
+    if (state.loading) return (
+        <LoadingEvents>
+            <ClipLoader />
+            <p>Loading…</p>
+        </LoadingEvents>);
+    if (state.error) return <div>Error: {state.error}</div>;
 
-    function filter(FilterData) {
+    function filter(formData) {
         const dayFilter = formData.get("eventDay")
         const distanceFilter = formData.get("eventDistance")
         // TODO: setEvents(prev => apply filters)
@@ -56,7 +65,7 @@ export default function AllEvents() {
                         </NewEventContainer>
                     </EventContainer>
                 </NavLink>
-                {events.map((e) => {
+                {state.events.map((e) => {
 
                     return (
                         <NavLink key={e.id} to={`/events/${e.id}`} style={{ textDecoration: "none" }}>

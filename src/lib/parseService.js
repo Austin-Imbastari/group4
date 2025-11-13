@@ -15,20 +15,20 @@ export async function getAllEvents() {
   const results = await new Parse.Query("Event").find();
 
   return results.map((obj) => {
-    const d = obj.toJSON();
+    const data = obj.toJSON();
     const file = obj.get("image");
     return {
       id: obj.id,
-      title: d.title,
-      category: d.type,
+      title: data.title,
+      category: data.type,
       host: "Unknown",
-      date: d.date,
-      time: d.time,
+      date: data.date,
+      time: data.time,
       attendents: 0,
       saved: false,
-      price: d.price,
-      location: d.location,
-      description: d.description,
+      price: data.price,
+      location: data.location,
+      description: data.description,
       picture: file ? file.url() : "",
     };
   });
