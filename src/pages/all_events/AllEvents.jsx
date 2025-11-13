@@ -1,26 +1,57 @@
-import eventData from "../../mockData/events";
 import React from "react";
-import Filter from "./Filter";
+import ClipLoader from "react-spinners/ClipLoader";
+import { useState, useEffect, CSSProperties } from "react";
 import { NavLink } from "react-router-dom";
+import Filter from "./Filter";
 import {
-  AllEventsPageContainer,
-  EventCards,
-  EventContainer,
-  EventTopContainer,
-  EventCenterContainer,
-  EventBottomContainer,
-  NewEventContainer,
+    AllEventsPageContainer,
+    EventCards,
+    EventContainer,
+    EventTopContainer,
+    EventCenterContainer,
+    EventBottomContainer,
+    NewEventContainer,
+    LoadingEvents,
 } from "./AllEventSC";
 import { CirclePlus } from "lucide-react";
+import { getAllEvents } from "../../lib/parseService";
 
 export default function AllEvents() {
 
-    const [event, setEvent] = React.useState(eventData)
+    const [state, setState] = useState({
+        events: [],
+        loading: true,
+        error: null,
+    });
 
-    function filter(FilterData) {
+    useEffect(() => {
+        let alive = true;
+        (async () => {
+            try {
+                const data = await getAllEvents();
+                if (alive) setState(prev => ({ ...prev, events: data }));
+            } catch (e) {
+                if (alive) setState(prev => ({ ...prev, error: "Failed to load events" }));
+            } finally {
+                if (alive) setState(prev => ({ ...prev, loading: false }));
+            }
+        })();
+        return () => { alive = false; };
+    }, []);
+
+    if (state.loading) return (
+        <LoadingEvents>
+            <ClipLoader />
+            <p>Loading…</p>
+        </LoadingEvents>);
+    if (state.error) return <div>Error: {state.error}</div>;
+
+    function filter(formData) {
         const dayFilter = formData.get("eventDay")
         const distanceFilter = formData.get("eventDistance")
+        // TODO: setEvents(prev => apply filters)
     }
+
 
     return (
         <AllEventsPageContainer>
@@ -34,10 +65,10 @@ export default function AllEvents() {
                         </NewEventContainer>
                     </EventContainer>
                 </NavLink>
-                {event.map((e) => {
+                {state.events.map((e) => {
 
                     return (
-                        <NavLink key={e.id} to={"/events/" + e.id} style={{ textDecoration: "none" }}>
+                        <NavLink key={e.id} to={`/events/${e.id}`} style={{ textDecoration: "none" }}>
                             <EventContainer>
                                 <EventTopContainer $bg={e.picture}>
                                     <span>{e.category}</span>
@@ -48,7 +79,9 @@ export default function AllEvents() {
                                 </EventCenterContainer>
                                 <EventBottomContainer>
                                     <span>[ . ] By: {e.host} </span>
-                                    <span className="span2"> {e.date} * {e.attendents} Attendents</span>
+                                    <span className="span2">
+                                        {e.date} {e.time ? `@ ${e.time}` : ""} * {e.attendents} Attendants
+                                    </span>
                                 </EventBottomContainer>
                             </EventContainer>
                         </NavLink>
