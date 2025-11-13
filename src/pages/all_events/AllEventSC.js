@@ -83,6 +83,7 @@ export const NewEventContainer = styled.div`
 `;
 
 export const AllEventsPageContainer = styled.div`
+  margin-top: 70px;
   min-height: 100vh;
 
   background: linear-gradient(135deg, #fcfcfc 0%, #fff5f293 100%);
@@ -103,4 +104,12 @@ export const AllEventsPageContainer = styled.div`
   }
 `;
 
-export const CirclePlus = styled.div``;
+export const LoadingEvents = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: auto;
+  font-size: x-large;
+`;

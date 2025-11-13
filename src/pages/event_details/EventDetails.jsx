@@ -1,12 +1,21 @@
 import React from "react";
 import data from "../../data/events.json";
-import { ParentContainer, ImageContainer } from "./EventsDetailsSC.js";
+import {
+  ParentContainer,
+  ImageContainer,
+  ModalContainer,
+} from "./EventsDetailsSC.js";
 import { useParams, useNavigate } from "react-router-dom";
 import Button from "../../components/button/Button.jsx";
 import { useState } from "react";
 
 export default function EventDetails() {
-  const [openModal, setOpenModal] = useState(false)
+  const [modal, setModal] = useState(false);
+  const toggleModal = () => {
+    console.log("pressed");
+    setModal(!modal);
+  };
+
   const { id } = useParams();
   const navigate = useNavigate();
   const event = data.find((e) => String(e.id) === String(id));
@@ -29,10 +38,28 @@ export default function EventDetails() {
 
       <p>{event.description}</p>
 
-      <Button type="button" onClick={() => setOpenModal(true)}>
-        {console.log(openModal)}
+      <Button type="button" onClick={toggleModal}>
         Attend
       </Button>
+
+      {/* MODAL */}
+      {modal && (
+        <ModalContainer>
+          <div className="overlay" onClick={toggleModal}></div>
+          <div className="modal">
+            <div className="modal-content">
+              <button className="close-modal" onClick={toggleModal}>
+                ×
+              </button>
+              <h1>Would you like a reminder on mail?</h1>
+              <input />
+              <Button type="button" onClick={toggleModal}>
+                Get reminder
+              </Button>
+            </div>
+          </div>
+        </ModalContainer>
+      )}
 
       <h2>Event Details:</h2>
       <div className="eventDetails">
@@ -58,7 +85,4 @@ export default function EventDetails() {
       </ul>
     </ParentContainer>
   );
-
-
-
 }
