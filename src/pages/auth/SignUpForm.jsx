@@ -4,9 +4,11 @@ import InputField from "../../components/input_field/InputField";
 import { User, Mail, Lock } from "lucide-react";
 import { useAuth } from "../../hooks/useAuth";
 import { AuthHeader, Message } from "./AuthPageSC";
+import { useNavigate } from "react-router-dom";
 
 export default function SignUpForm() {
   const { signUp } = useAuth();
+  const navigate = useNavigate();
   const [form, setForm] = useState({
     username: "",
     email: "",
@@ -79,6 +81,9 @@ export default function SignUpForm() {
         />
         <Button type="submit">Sign Up</Button>
       </form>
+      <Button type="button" onClick={() => navigate("/auth/signin")}>
+        Already have an account? Sign In
+      </Button>
       {message && <Message type={message.type}>{message.text}</Message>}
     </>
   );

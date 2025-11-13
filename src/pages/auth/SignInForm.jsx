@@ -14,7 +14,6 @@ export default function SignInForm() {
   });
   const [message, setMessage] = useState(null);
   const navigate = useNavigate();
-
   const handleChange = ({ target: { name, value } }) =>
     setForm((prev) => ({ ...prev, [name]: value }));
 
@@ -59,6 +58,9 @@ export default function SignInForm() {
           icon={Lock}
         />
         <Button type="submit">Sign In</Button>
+        <Button type="button" onClick={() => navigate("/auth/signup")}>
+          Create an account
+        </Button>
       </form>
       {message && <Message type={message.type}>{message.text}</Message>}
     </>

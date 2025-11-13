@@ -10,6 +10,8 @@ import { ThemeProvider } from "styled-components";
 import { GlobalStyle } from "./theme/GlobalStyle";
 import EventDetails from "./pages/event_details/EventDetails";
 import { AuthProvider } from "./context/AuthContext";
+import SignInForm from "./pages/auth/SignInForm";
+import SignUpForm from "./pages/auth/SignUpForm";
 
 function App() {
   return (
@@ -20,10 +22,13 @@ function App() {
         <Routes>
           <Route path="/" element={<SplashScreen />} />
           <Route path="/create-event" element={<CreateEvent />} />
-          <Route path="/auth" element={<AuthPage />} />
           <Route path="/events/:id" element={<EventDetails />} />
           <Route path="/events" element={<AllEvents />} />
-          <Route path="/auth" element={<AuthPage />} />
+          <Route path="/auth/*" element={<AuthPage />}>
+            <Route index element={<SignInForm />} />
+            <Route path="signin" element={<SignInForm />} />
+            <Route path="signup" element={<SignUpForm />} />
+          </Route>
           <Route path="/about" element={<AboutUs />} />
         </Routes>
       </ThemeProvider>
