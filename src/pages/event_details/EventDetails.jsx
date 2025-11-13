@@ -1,5 +1,3 @@
-import React from "react";
-import data from "../../data/events.json";
 import {
   ParentContainer,
   ImageContainer,
@@ -8,6 +6,10 @@ import {
 import { useParams, useNavigate } from "react-router-dom";
 import Button from "../../components/button/Button.jsx";
 import { useState } from "react";
+import { getEventByID } from "../../lib/parseService.js";
+import { useEffect } from "react";
+import InputField from "../../components/input_field/InputField.jsx";
+
 
 export default function EventDetails() {
   const [modal, setModal] = useState(false);
@@ -18,9 +20,31 @@ export default function EventDetails() {
 
   const { id } = useParams();
   const navigate = useNavigate();
-  const event = data.find((e) => String(e.id) === String(id));
+  const [event, setEvent] = useState(null);
+  const [loading, setLoading] = useState(true);
 
-  if (!event) return <p>Event not found.</p>;
+  useEffect(() => {
+    async function loadEvent() {
+      try {
+        const data = await getEventByID(id); // <-- await the async call
+        setEvent(data);
+      } catch (error) {
+        console.error(error);
+        navigate("/404");
+      } finally {
+        setLoading(false);
+      }
+    }
+    loadEvent(); // <-- actually call it
+  }, [id, navigate]);
+
+  if (loading) {
+    return (
+      <ParentContainer>
+        <p>Loading event...</p>
+      </ParentContainer>
+    );
+  }
 
   return (
     <ParentContainer>
@@ -28,13 +52,13 @@ export default function EventDetails() {
         Back
       </Button>
       <ImageContainer>
-        <img src={event.cover_image.src} alt={event.cover_image.alt} />
+        <img src={event.picture} />
       </ImageContainer>
 
       <h1 className="event_title">{event.title}</h1>
       <p className="dateOfEvent">Date: {event.date}</p>
-      <p className="organizer">By: {event.organizer}</p>
-      <p className="attendees">Attendees: {event.attendees_count}</p>
+      <p className="organizer">By: {event.host}</p>
+      <p className="attendees">Attendees: {event.attendents}</p>
 
       <p>{event.description}</p>
 
@@ -52,7 +76,8 @@ export default function EventDetails() {
                 ×
               </button>
               <h1>Would you like a reminder on mail?</h1>
-              <input />
+              <InputField
+              ></InputField>
               <Button type="button" onClick={toggleModal}>
                 Get reminder
               </Button>
@@ -65,24 +90,24 @@ export default function EventDetails() {
       <div className="eventDetails">
         <div className="locationContainer">
           <p className="Detail">Location: </p>
-          <p> {event.details.location}</p>
+          <p> {event.location}</p>
         </div>
         <div className="durationContainer">
           <p className="Detail">Duration: </p>
-          <p> {event.details.duration}</p>
+          <p> {event.time}</p>
         </div>
         <div className="priceContainer">
           <p className="Detail">Expected Price:</p>
-          <p> {event.details.price}</p>
+          <p> {event.price}</p>
         </div>
       </div>
 
       <h2>What to Bring:</h2>
-      <ul>
+      {/* <ul>
         {event.checklist.items.map((item, index) => (
           <li key={index}>{item}</li>
         ))}
-      </ul>
+      </ul> */}
     </ParentContainer>
   );
 }

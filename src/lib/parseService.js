@@ -33,6 +33,33 @@ export async function getAllEvents() {
     };
   });
 }
+
+export async function getEventByID(id) {
+  const Parse = await getParse();
+  const query = new Parse.Query("Event");
+
+  // Fetch the object with this objectId
+  const event = await query.get(id);
+
+  const data = event.toJSON();
+  const file = event.get("image");
+
+  return {
+    id: event.id,
+    title: data.title,
+    category: data.type,
+    host: "Unknown",
+    date: data.date,
+    time: data.time,
+    attendents: 0,
+    saved: false,
+    price: data.price,
+    location: data.location,
+    description: data.description,
+    picture: file ? file.url() : "",
+  };
+}
+
 // Authentication - log in existing user
 export async function signInUser({ username, password }) {
   const Parse = await getParse();
@@ -43,6 +70,12 @@ export async function signInUser({ username, password }) {
 export async function signOutUser() {
   const Parse = await getParse();
   return Parse.User.logOut();
+}
+
+// Authentication - get current logged-in user
+export async function getCurrentUser() {
+  const Parse = await getParse();
+  return Parse.User.current();
 }
 
 export async function createEvent(data) {
