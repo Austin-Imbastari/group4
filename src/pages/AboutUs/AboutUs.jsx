@@ -100,8 +100,8 @@ const AboutUs = () => {
         </div>
 
         <CardGrid>
-          {data.values.map((item, index) => (
-            <Card key={index}>
+          {data.values.map((item) => (
+            <Card key={item.title}>
               <div className="icon-wrapper">{iconMap[item.icon]}</div>
               <h3>{item.title}</h3>
               <p>{item.description}</p>
@@ -119,8 +119,8 @@ const AboutUs = () => {
           </Subhead>
 
           <ImageRow>
-            {imagesCommunity.map((img, i) => (
-              <ImageCard key={i}>
+            {imagesCommunity.map((img) => (
+              <ImageCard key={img.src}>
                 <img src={img.src} alt={img.alt || ""} />
               </ImageCard>
             ))}
@@ -141,7 +141,7 @@ const AboutUs = () => {
             <NavLink style={{ textDecoration: "none" }} to="/events">
               <PrimaryButton>Browse Events</PrimaryButton>
             </NavLink>
-            <NavLink style={{ textDecoration: "none" }} to="/createevent">
+            <NavLink style={{ textDecoration: "none" }} to="/create-event">
               <GhostButton>Create an Event</GhostButton>
             </NavLink>
           </Buttons>

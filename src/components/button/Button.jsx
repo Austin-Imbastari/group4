@@ -1,9 +1,12 @@
-import { ButtonSC } from "./ButtonSC";
+import { ButtonSC, BackButtonSC } from "./ButtonSC";
 
-export default function Button({ type = "button", children, ...props }) {
+export default function Button({ children, onClick, type = "button", variant}) {
   return (
-    <ButtonSC type={type} {...props}>
+    variant === "back" ? (<BackButtonSC type={type} onClick={onClick}>
       {children}
-    </ButtonSC>
+    </BackButtonSC>): (
+      <ButtonSC type={type} onClick={onClick}>
+      {children}
+    </ButtonSC>)
   );
 }

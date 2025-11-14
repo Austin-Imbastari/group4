@@ -1,12 +1,25 @@
 import { AuthContainer, AuthPageWrapper } from "./AuthPageSC";
-import SignUp from "./SignUp";
+import SignOutForm from "./SignOutForm";
+import { useAuth } from "../../hooks/useAuth";
+import { Outlet } from "react-router-dom";
 
 export default function AuthPage() {
+  const { user } = useAuth();
+
+  if (user) {
+    return (
+      <AuthPageWrapper>
+        <AuthContainer>
+          <SignOutForm />
+        </AuthContainer>
+      </AuthPageWrapper>
+    );
+  }
+
   return (
     <AuthPageWrapper>
       <AuthContainer>
-        {/* TODO: Render SignIn, SignOut, or SignUp based on auth state */}
-        <SignUp />
+        <Outlet />
       </AuthContainer>
     </AuthPageWrapper>
   );

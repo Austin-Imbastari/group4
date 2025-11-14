@@ -2,44 +2,45 @@ import { useState } from "react";
 import Button from "../../components/button/Button";
 import InputField from "../../components/input_field/InputField";
 import { User, Mail, Lock } from "lucide-react";
-import { getParse } from "../../lib/parseClient";
-import { AuthHeader } from "./AuthPageSC";
+import { useAuth } from "../../hooks/useAuth";
+import { AuthHeader, Message } from "./AuthPageSC";
+import { useNavigate } from "react-router-dom";
 
-export default function SignUp() {
+export default function SignUpForm() {
+  const { signUp } = useAuth();
+  const navigate = useNavigate();
   const [form, setForm] = useState({
     username: "",
     email: "",
     password: "",
   });
+  const [message, setMessage] = useState(null);
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
+  const handleChange = ({ target: { name, value } }) =>
     setForm((prev) => ({ ...prev, [name]: value }));
-  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const { username, email, password } = form;
-
-    if (!username || !email || !password) {
-      console.error("Please fill out all fields.");
+    if (!form.username || !form.email || !form.password) {
+      setMessage({ text: "Please fill out all fields.", type: "error" });
       return;
     }
 
     try {
-      const Parse = await getParse();
+      await signUp({
+        username: form.username,
+        email: form.email,
+        password: form.password,
+      });
 
-      const user = new Parse.User();
-      user.set("username", username);
-      user.set("email", email);
-      user.set("password", password);
-
-      await user.signUp();
       setForm({ username: "", email: "", password: "" });
-      console.log(" User created with userId:", user);
+      setMessage({ text: `Welcome, ${form.username}!`, type: "success" });
     } catch (err) {
-      console.error("Sign up failed:", err?.message || err);
+      setMessage({
+        text: "Sign up failed: " + (err?.message || err),
+        type: "error",
+      });
     }
   };
 
@@ -80,6 +81,10 @@ export default function SignUp() {
         />
         <Button type="submit">Sign Up</Button>
       </form>
+      <Button type="button" onClick={() => navigate("/auth/signin")}>
+        Already have an account? Sign In
+      </Button>
+      {message && <Message type={message.type}>{message.text}</Message>}
     </>
   );
 }
