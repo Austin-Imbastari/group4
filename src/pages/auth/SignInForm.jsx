@@ -2,28 +2,35 @@ import Button from "../../components/button/Button";
 import InputField from "../../components/input_field/InputField";
 import { useNavigate } from "react-router-dom";
 import { User, Lock } from "lucide-react";
-import { useAuth } from "../../hooks/useAuth";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { AuthHeader, Message } from "./AuthPageSC";
+import { signInUser, getCurrentUser } from "../../lib/parseService";
 
 export default function SignInForm() {
-  const { signIn } = useAuth();
   const [form, setForm] = useState({
     username: "",
     password: "",
   });
   const [message, setMessage] = useState(null);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    async function checkUser() {
+      const user = await getCurrentUser();
+      if (user) {
+        navigate("/auth/signout");
+      }
+    }
+    checkUser();
+  }, [navigate]);
+
   const handleChange = ({ target: { name, value } }) =>
     setForm((prev) => ({ ...prev, [name]: value }));
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await signIn({
-        username: form.username,
-        password: form.password,
-      });
+      await signInUser(form);
       navigate("/events");
     } catch (err) {
       setMessage({

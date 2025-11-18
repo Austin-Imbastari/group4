@@ -7,7 +7,36 @@ export async function signUpUser({ username, email, password }) {
   user.set("username", username);
   user.set("email", email);
   user.set("password", password);
-  return user.signUp();
+  const signedUpUser = await user.signUp();
+  return normalizeUser(signedUpUser);
+}
+// Authentication - log in existing user
+export async function signInUser({ username, password }) {
+  const Parse = await getParse();
+  const user = await Parse.User.logIn(username, password);
+  return normalizeUser(user);
+}
+
+// Authentication - log out the current user
+export async function signOutUser() {
+  const Parse = await getParse();
+  return Parse.User.logOut();
+}
+
+// Authentication - get current logged-in user
+export async function getCurrentUser() {
+  const Parse = await getParse();
+  return normalizeUser(Parse.User.current());
+}
+
+// Authentication - helper function to normalize user object
+function normalizeUser(user) {
+  if (!user) return null;
+  return {
+    id: user.id,
+    username: user.get("username"),
+    email: user.get("email"),
+  };
 }
 
 export async function getAllEvents() {
@@ -58,24 +87,6 @@ export async function getEventByID(id) {
     description: data.description,
     picture: file ? file.url() : "",
   };
-}
-
-// Authentication - log in existing user
-export async function signInUser({ username, password }) {
-  const Parse = await getParse();
-  return Parse.User.logIn(username, password);
-}
-
-// Authentication - log out the current user
-export async function signOutUser() {
-  const Parse = await getParse();
-  return Parse.User.logOut();
-}
-
-// Authentication - get current logged-in user
-export async function getCurrentUser() {
-  const Parse = await getParse();
-  return Parse.User.current();
 }
 
 export async function createEvent(data) {
