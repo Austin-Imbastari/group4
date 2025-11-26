@@ -6,7 +6,7 @@ import {
     EventBottomContainer,
 } from "./AllEventSC";
 
-export default function EventCard({ event }) {
+export default function Event({ event }) {
     return (
         <NavLink to={`/events/${event.id}`} style={{ textDecoration: "none" }}>
             <EventContainer>
