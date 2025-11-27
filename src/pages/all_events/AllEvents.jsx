@@ -31,8 +31,6 @@ export default function AllEvents() {
         if (alive)
           setState((prev) => ({ ...prev, error: "Failed to load events" }));
       } finally {
-        // delay 1000ms to show loading spinner
-        await new Promise((r) => setTimeout(r, 1000));
         if (alive) setState((prev) => ({ ...prev, loading: false }));
       }
     })();
