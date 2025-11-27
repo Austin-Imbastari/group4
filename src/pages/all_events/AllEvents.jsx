@@ -1,5 +1,3 @@
-import React from "react";
-import ClipLoader from "react-spinners/ClipLoader";
 import { useState, useEffect, CSSProperties } from "react";
 import { NavLink } from "react-router-dom";
 import Filter from "./Filter";
@@ -8,10 +6,10 @@ import {
   EventCards,
   EventContainer,
   NewEventContainer,
-  LoadingEvents,
 } from "./AllEventSC";
 import { CirclePlus } from "lucide-react";
 import { getAllEvents } from "../../lib/parseService";
+import LoadingSpinner from "../../components/loading/loadingSpinner";
 import Event from "./Event";
 
 export default function AllEvents() {
@@ -32,16 +30,8 @@ export default function AllEvents() {
     })();
   }, []);
 
-  if (loading)
-    return (
-      <LoadingEvents>
-        <ClipLoader />
-        <p>Loading…</p>
-      </LoadingEvents>
-    );
-
+  if (loading) return <LoadingSpinner />;
   if (error) return <div>Error: {error}</div>;
-
 
   function filter(formData) {
     const dayFilter = formData.get("eventDay");

@@ -4,13 +4,15 @@ import { useNavigate } from "react-router-dom";
 import { User, Lock } from "lucide-react";
 import { useState, useEffect } from "react";
 import { AuthHeader, Message } from "./AuthPageSC";
-import { signInUser, getCurrentUser } from "../../lib/parseService";
+import LoadingSpinner from "../../components/loading/loadingSpinner";
+import { AuthContainer } from "./AuthContainerSC";
 
 export default function SignInForm() {
   const [form, setForm] = useState({
     username: "",
     password: "",
   });
+  const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState(null);
   const navigate = useNavigate();
 
@@ -30,7 +32,12 @@ export default function SignInForm() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await signInUser(form);
+      setLoading(true);
+      await signIn({
+        username: form.username,
+        password: form.password,
+      });
+      setLoading(false);
       navigate("/events");
     } catch (err) {
       setMessage({
@@ -40,36 +47,40 @@ export default function SignInForm() {
     }
   };
 
+  if (loading) return <LoadingSpinner />;
+
   return (
     <>
-      <AuthHeader>
-        <h2 className="title">WELCOME BACK</h2>
-        <p className="description">Please enter your credentials</p>
-      </AuthHeader>
-      <form onSubmit={handleSubmit}>
-        <InputField
-          label="Username"
-          name="username"
-          value={form.username}
-          onChange={handleChange}
-          placeholder="Enter your username"
-          icon={User}
-        />
-        <InputField
-          label="Password"
-          name="password"
-          type="password"
-          value={form.password}
-          onChange={handleChange}
-          placeholder="Enter your password"
-          icon={Lock}
-        />
-        <Button type="submit">Sign In</Button>
-        <Button type="button" onClick={() => navigate("/auth/signup")}>
-          Create an account
-        </Button>
-      </form>
-      {message && <Message type={message.type}>{message.text}</Message>}
+      <AuthContainer>
+        <AuthHeader>
+          <h2 className="title">WELCOME BACK</h2>
+          <p className="description">Please enter your credentials</p>
+        </AuthHeader>
+        <form onSubmit={handleSubmit}>
+          <InputField
+            label="Username"
+            name="username"
+            value={form.username}
+            onChange={handleChange}
+            placeholder="Enter your username"
+            icon={User}
+          />
+          <InputField
+            label="Password"
+            name="password"
+            type="password"
+            value={form.password}
+            onChange={handleChange}
+            placeholder="Enter your password"
+            icon={Lock}
+          />
+          <Button type="submit">Sign In</Button>
+          <Button type="button" onClick={() => navigate("/auth/signup")}>
+            Create an account
+          </Button>
+        </form>
+        {message && <Message type={message.type}>{message.text}</Message>}
+      </AuthContainer>
     </>
   );
 }
