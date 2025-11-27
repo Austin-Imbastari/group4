@@ -22,11 +22,21 @@ const NavBar = () => {
           <span>Events</span>
         </NavLink>
       </NavBarCenterContainer>
-      <NavLink to="/auth/signin">
-        <NavBarSignIn>
-          <span>Sign in</span>
-        </NavBarSignIn>
-      </NavLink>
+      {user?.username ? (
+        <NavLink to="/auth">
+          <div style={{ marginTop: 12 }}>
+            <span>
+              <strong >{user.username}</strong>
+            </span>
+          </div>
+        </NavLink>
+      ) : (
+        <NavLink to="/auth">
+          <NavBarSignIn>
+            <span>Sign in</span>
+          </NavBarSignIn>
+        </NavLink>
+      )}
     </NavBarContainer>
   );
 };
