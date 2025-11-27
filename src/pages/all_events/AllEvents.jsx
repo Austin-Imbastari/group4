@@ -78,7 +78,7 @@ export default function AllEvents() {
                 <EventBottomContainer>
                   <span>[ . ] By: {e.host} </span>
                   <span className="span2">
-                    {e.date} {e.time ? `@ ${e.time}` : ""} * {e.attendents}{" "}
+                    {e.date} {e.time ? `@ ${e.time}` : ""} * {e.attendents}
                     Attendants
                   </span>
                 </EventBottomContainer>
