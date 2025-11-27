@@ -3,15 +3,19 @@ import { AuthHeader, Message } from "./AuthPageSC";
 import { useAuth } from "../../hooks/useAuth";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import LoadingSpinner from "../../components/loading/loadingSpinner";
 
 export default function SignOutForm() {
   const { user, signOut } = useAuth();
+  const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState(null);
   const navigate = useNavigate();
 
   const handleSignOut = async () => {
     try {
+      setLoading(true);
       await signOut();
+      setLoading(false);
       navigate("/events");
     } catch (err) {
       setMessage({
@@ -20,6 +24,8 @@ export default function SignOutForm() {
       });
     }
   };
+
+  if (loading) return <LoadingSpinner />;
 
   return (
     <>

@@ -5,6 +5,7 @@ import { User, Lock } from "lucide-react";
 import { useAuth } from "../../hooks/useAuth";
 import { useState } from "react";
 import { AuthHeader, Message } from "./AuthPageSC";
+import LoadingSpinner from "../../components/loading/loadingSpinner";
 
 export default function SignInForm() {
   const { signIn } = useAuth();
@@ -12,6 +13,7 @@ export default function SignInForm() {
     username: "",
     password: "",
   });
+  const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState(null);
   const navigate = useNavigate();
   const handleChange = ({ target: { name, value } }) =>
@@ -20,10 +22,12 @@ export default function SignInForm() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
+      setLoading(true);
       await signIn({
         username: form.username,
         password: form.password,
       });
+      setLoading(false);
       navigate("/events");
     } catch (err) {
       setMessage({
@@ -32,6 +36,8 @@ export default function SignInForm() {
       });
     }
   };
+
+  if (loading) return <LoadingSpinner />;
 
   return (
     <>

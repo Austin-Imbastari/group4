@@ -5,10 +5,12 @@ import { User, Mail, Lock } from "lucide-react";
 import { useAuth } from "../../hooks/useAuth";
 import { AuthHeader, Message } from "./AuthPageSC";
 import { useNavigate } from "react-router-dom";
+import LoadingSpinner from "../../components/loading/loadingSpinner";
 
 export default function SignUpForm() {
   const { signUp } = useAuth();
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
   const [form, setForm] = useState({
     username: "",
     email: "",
@@ -28,21 +30,25 @@ export default function SignUpForm() {
     }
 
     try {
+      setLoading(true);
       await signUp({
         username: form.username,
         email: form.email,
         password: form.password,
       });
-
       setForm({ username: "", email: "", password: "" });
+      setLoading(false);
       setMessage({ text: `Welcome, ${form.username}!`, type: "success" });
     } catch (err) {
+      setLoading(false);
       setMessage({
         text: "Sign up failed: " + (err?.message || err),
         type: "error",
       });
     }
   };
+
+  if (loading) return <LoadingSpinner />;
 
   return (
     <>
