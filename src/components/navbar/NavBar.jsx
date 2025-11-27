@@ -5,11 +5,8 @@ import {
   NavBarCenterContainer,
   NavBarSignIn,
 } from "./NavBarSC";
-import { useAuth } from "../../hooks/useAuth";
 
 const NavBar = () => {
-  const { user } = useAuth();
-
   return (
     <NavBarContainer>
       <NavLink to="/">

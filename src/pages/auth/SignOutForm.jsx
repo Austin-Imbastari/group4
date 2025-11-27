@@ -1,17 +1,25 @@
 import Button from "../../components/button/Button";
 import { AuthHeader, Message } from "./AuthPageSC";
-import { useAuth } from "../../hooks/useAuth";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { signOutUser, getCurrentUser } from "../../lib/parseService";
 import { useNavigate } from "react-router-dom";
 
 export default function SignOutForm() {
-  const { user, signOut } = useAuth();
   const [message, setMessage] = useState(null);
   const navigate = useNavigate();
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    async function load() {
+      const current = await getCurrentUser();
+      setUser(current);
+    }
+    load();
+  }, []);
 
   const handleSignOut = async () => {
     try {
-      await signOut();
+      await signOutUser();
       navigate("/events");
     } catch (err) {
       setMessage({
@@ -21,10 +29,15 @@ export default function SignOutForm() {
     }
   };
 
+  if (!user) {
+    navigate("/auth/signin");
+    return null;
+  }
+
   return (
     <>
       <AuthHeader>
-        <h2 className="title">Hi {user.username}!</h2>
+        <h2 className="title">Hi!</h2>
         <p className="description">Do you want to sign out?</p>
       </AuthHeader>
       <Button onClick={handleSignOut}>Sign Out</Button>

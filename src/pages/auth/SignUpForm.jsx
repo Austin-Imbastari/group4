@@ -2,12 +2,11 @@ import { useState } from "react";
 import Button from "../../components/button/Button";
 import InputField from "../../components/input_field/InputField";
 import { User, Mail, Lock } from "lucide-react";
-import { useAuth } from "../../hooks/useAuth";
 import { AuthHeader, Message } from "./AuthPageSC";
 import { useNavigate } from "react-router-dom";
+import { signUpUser } from "../../lib/parseService";
 
 export default function SignUpForm() {
-  const { signUp } = useAuth();
   const navigate = useNavigate();
   const [form, setForm] = useState({
     username: "",
@@ -28,14 +27,11 @@ export default function SignUpForm() {
     }
 
     try {
-      await signUp({
-        username: form.username,
-        email: form.email,
-        password: form.password,
-      });
-
+      const username = form.username;
+      await signUpUser(form);
       setForm({ username: "", email: "", password: "" });
-      setMessage({ text: `Welcome, ${form.username}!`, type: "success" });
+      setMessage({ text: `Welcome, ${username}!`, type: "success" });
+      navigate("/auth/signin");
     } catch (err) {
       setMessage({
         text: "Sign up failed: " + (err?.message || err),
@@ -55,20 +51,12 @@ export default function SignUpForm() {
 
       <form onSubmit={handleSubmit}>
         <InputField
-          label="Full Name"
+          label="Username"
           name="username"
           value={form.username}
           onChange={handleChange}
-          placeholder="Enter your full name"
+          placeholder="Enter a username"
           icon={User}
-        />
-        <InputField
-          label="Email"
-          name="email"
-          value={form.email}
-          onChange={handleChange}
-          placeholder="Enter your email"
-          icon={Mail}
         />
         <InputField
           label="Password"
@@ -78,6 +66,14 @@ export default function SignUpForm() {
           onChange={handleChange}
           placeholder="Enter your password"
           icon={Lock}
+        />
+        <InputField
+          label="Email"
+          name="email"
+          value={form.email}
+          onChange={handleChange}
+          placeholder="Enter your email"
+          icon={Mail}
         />
         <Button type="submit">Sign Up</Button>
       </form>
