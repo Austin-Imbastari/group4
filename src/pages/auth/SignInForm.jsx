@@ -5,6 +5,7 @@ import { User, Lock } from "lucide-react";
 import { useState, useEffect } from "react";
 import { AuthHeader, Message } from "./AuthPageSC";
 import LoadingSpinner from "../../components/loading/loadingSpinner";
+import { signInUser, getCurrentUser } from "../../lib/parseService";
 import { AuthContainer } from "./AuthContainerSC";
 
 export default function SignInForm() {
@@ -33,7 +34,7 @@ export default function SignInForm() {
     e.preventDefault();
     try {
       setLoading(true);
-      await signIn({
+      await signInUser({
         username: form.username,
         password: form.password,
       });
