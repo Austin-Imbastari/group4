@@ -51,20 +51,12 @@ export default function SignUpForm() {
 
       <form onSubmit={handleSubmit}>
         <InputField
-          label="Full Name"
+          label="Username"
           name="username"
           value={form.username}
           onChange={handleChange}
-          placeholder="Enter your full name"
+          placeholder="Enter a username"
           icon={User}
-        />
-        <InputField
-          label="Email"
-          name="email"
-          value={form.email}
-          onChange={handleChange}
-          placeholder="Enter your email"
-          icon={Mail}
         />
         <InputField
           label="Password"
@@ -74,6 +66,14 @@ export default function SignUpForm() {
           onChange={handleChange}
           placeholder="Enter your password"
           icon={Lock}
+        />
+        <InputField
+          label="Email"
+          name="email"
+          value={form.email}
+          onChange={handleChange}
+          placeholder="Enter your email"
+          icon={Mail}
         />
         <Button type="submit">Sign Up</Button>
       </form>
