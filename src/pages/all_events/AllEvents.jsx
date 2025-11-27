@@ -1,5 +1,3 @@
-import React from "react";
-import ClipLoader from "react-spinners/ClipLoader";
 import { useState, useEffect, CSSProperties } from "react";
 import { NavLink } from "react-router-dom";
 import Filter from "./Filter";
@@ -11,10 +9,10 @@ import {
   EventCenterContainer,
   EventBottomContainer,
   NewEventContainer,
-  LoadingEvents,
 } from "./AllEventSC";
 import { CirclePlus } from "lucide-react";
 import { getAllEvents } from "../../lib/parseService";
+import LoadingSpinner from "../../components/loading/loadingSpinner";
 
 export default function AllEvents() {
   const [state, setState] = useState({
@@ -30,8 +28,11 @@ export default function AllEvents() {
         const data = await getAllEvents();
         if (alive) setState((prev) => ({ ...prev, events: data }));
       } catch (e) {
-        if (alive) setState((prev) => ({ ...prev, error: "Failed to load events" }));
+        if (alive)
+          setState((prev) => ({ ...prev, error: "Failed to load events" }));
       } finally {
+        // delay 1000ms to show loading spinner
+        await new Promise((r) => setTimeout(r, 1000));
         if (alive) setState((prev) => ({ ...prev, loading: false }));
       }
     })();
@@ -40,13 +41,7 @@ export default function AllEvents() {
     };
   }, []);
 
-  if (state.loading)
-    return (
-      <LoadingEvents>
-        <ClipLoader />
-        <p>Loading…</p>
-      </LoadingEvents>
-    );
+  if (state.loading) return <LoadingSpinner />;
   if (state.error) return <div>Error: {state.error}</div>;
 
   function filter(formData) {
@@ -69,7 +64,11 @@ export default function AllEvents() {
         </NavLink>
         {state.events.map((e) => {
           return (
-            <NavLink key={e.id} to={`/events/${e.id}`} style={{ textDecoration: "none" }}>
+            <NavLink
+              key={e.id}
+              to={`/events/${e.id}`}
+              style={{ textDecoration: "none" }}
+            >
               <EventContainer>
                 <EventTopContainer $bg={e.picture}>
                   <span>{e.category}</span>
@@ -81,7 +80,8 @@ export default function AllEvents() {
                 <EventBottomContainer>
                   <span>[ . ] By: {e.host} </span>
                   <span className="span2">
-                    {e.date} {e.time ? `@ ${e.time}` : ""} * {e.attendents} Attendants
+                    {e.date} {e.time ? `@ ${e.time}` : ""} * {e.attendents}{" "}
+                    Attendants
                   </span>
                 </EventBottomContainer>
               </EventContainer>
