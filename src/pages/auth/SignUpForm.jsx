@@ -2,14 +2,12 @@ import { useState } from "react";
 import Button from "../../components/button/Button";
 import InputField from "../../components/input_field/InputField";
 import { User, Mail, Lock } from "lucide-react";
-import { useAuth } from "../../hooks/useAuth";
 import { AuthHeader, Message } from "./AuthPageSC";
 import { useNavigate } from "react-router-dom";
 import LoadingSpinner from "../../components/loading/loadingSpinner";
 import { AuthContainer } from "./AuthContainerSC";
 
 export default function SignUpForm() {
-  const { signUp } = useAuth();
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const [form, setForm] = useState({

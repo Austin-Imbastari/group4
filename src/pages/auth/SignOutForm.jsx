@@ -1,7 +1,7 @@
 import Button from "../../components/button/Button";
 import { AuthHeader, Message } from "./AuthPageSC";
-import { useAuth } from "../../hooks/useAuth";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { signOutUser, getCurrentUser } from "../../lib/parseService";
 import { useNavigate } from "react-router-dom";
 import LoadingSpinner from "../../components/loading/loadingSpinner";
 import { AuthContainer } from "./AuthContainerSC";
@@ -11,6 +11,15 @@ export default function SignOutForm() {
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState(null);
   const navigate = useNavigate();
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    async function load() {
+      const current = await getCurrentUser();
+      setUser(current);
+    }
+    load();
+  }, []);
 
   const handleSignOut = async () => {
     try {

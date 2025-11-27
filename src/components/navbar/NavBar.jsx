@@ -5,11 +5,8 @@ import {
   NavBarCenterContainer,
   NavBarSignIn,
 } from "./NavBarSC";
-import { useAuth } from "../../hooks/useAuth";
 
 const NavBar = () => {
-  const { user } = useAuth();
-
   return (
     <NavBarContainer>
       <NavLink to="/">
@@ -26,11 +23,13 @@ const NavBar = () => {
         </NavLink>
       </NavBarCenterContainer>
       {user?.username ? (
-        <div style={{ marginTop: 12 }}>
-          <span>
-            <strong>{user.username}</strong>
-          </span>
-        </div>
+        <NavLink to="/auth">
+          <div style={{ marginTop: 12 }}>
+            <span>
+              <strong >{user.username}</strong>
+            </span>
+          </div>
+        </NavLink>
       ) : (
         <NavLink to="/auth">
           <NavBarSignIn>

@@ -5,42 +5,33 @@ import {
   AllEventsPageContainer,
   EventCards,
   EventContainer,
-  EventTopContainer,
-  EventCenterContainer,
-  EventBottomContainer,
   NewEventContainer,
 } from "./AllEventSC";
 import { CirclePlus } from "lucide-react";
 import { getAllEvents } from "../../lib/parseService";
 import LoadingSpinner from "../../components/loading/loadingSpinner";
+import Event from "./Event";
 
 export default function AllEvents() {
-  const [state, setState] = useState({
-    events: [],
-    loading: true,
-    error: null,
-  });
+  const [events, setEvents] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
-    let alive = true;
     (async () => {
       try {
         const data = await getAllEvents();
-        if (alive) setState((prev) => ({ ...prev, events: data }));
+        setEvents(data);
       } catch (e) {
-        if (alive)
-          setState((prev) => ({ ...prev, error: "Failed to load events" }));
+        setError("Failed to load events");
       } finally {
-        if (alive) setState((prev) => ({ ...prev, loading: false }));
+        setLoading(false);
       }
     })();
-    return () => {
-      alive = false;
-    };
   }, []);
 
-  if (state.loading) return <LoadingSpinner />;
-  if (state.error) return <div>Error: {state.error}</div>;
+  if (loading) return <LoadingSpinner />;
+  if (error) return <div>Error: {error}</div>;
 
   function filter(formData) {
     const dayFilter = formData.get("eventDay");
@@ -60,32 +51,9 @@ export default function AllEvents() {
             </NewEventContainer>
           </EventContainer>
         </NavLink>
-        {state.events.map((e) => {
-          return (
-            <NavLink
-              key={e.id}
-              to={`/events/${e.id}`}
-              style={{ textDecoration: "none" }}
-            >
-              <EventContainer>
-                <EventTopContainer $bg={e.picture}>
-                  <span>{e.category}</span>
-                  <span>{e.saved ? ":)" : ":("}</span>
-                </EventTopContainer>
-                <EventCenterContainer>
-                  <span>{e.title}</span>
-                </EventCenterContainer>
-                <EventBottomContainer>
-                  <span>[ . ] By: {e.host} </span>
-                  <span className="span2">
-                    {e.date} {e.time ? `@ ${e.time}` : ""} * {e.attendents}
-                    Attendants
-                  </span>
-                </EventBottomContainer>
-              </EventContainer>
-            </NavLink>
-          );
-        })}
+        {events.map(e => (
+          <Event key={e.id} event={e} />
+        ))}
       </EventCards>
     </AllEventsPageContainer>
   );

@@ -1,22 +1,12 @@
-import { AuthPageWrapper } from "./AuthPageSC";
-import SignOutForm from "./SignOutForm";
-import { useAuth } from "../../hooks/useAuth";
+import { AuthContainer, AuthPageWrapper } from "./AuthPageSC";
 import { Outlet } from "react-router-dom";
 
 export default function AuthPage() {
-  const { user } = useAuth();
-
-  if (user) {
-    return (
-      <AuthPageWrapper>
-        <SignOutForm />
-      </AuthPageWrapper>
-    );
-  }
-
   return (
     <AuthPageWrapper>
-      <Outlet />
+      <AuthContainer>
+        <Outlet />
+      </AuthContainer>
     </AuthPageWrapper>
   );
 }
