@@ -22,7 +22,7 @@ const NavBar = () => {
           <span>Events</span>
         </NavLink>
       </NavBarCenterContainer>
-      {user?.username ? (
+      {/* {user?.username ? (
         <NavLink to="/auth">
           <div style={{ marginTop: 12 }}>
             <span>
@@ -36,7 +36,7 @@ const NavBar = () => {
             <span>Sign in</span>
           </NavBarSignIn>
         </NavLink>
-      )}
+      )} */}
     </NavBarContainer>
   );
 };
