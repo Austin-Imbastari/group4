@@ -7,16 +7,16 @@ import LoadingSpinner from "../../components/loading/loadingSpinner";
 import { AuthContainer } from "./AuthContainerSC";
 
 export default function SignOutForm() {
-  // const { user, signOut } = useAuth();
+  const { user: authUser, signOut } = useAuth();
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState(null);
   const navigate = useNavigate();
-  const [user, setUser] = useState(null);
+  const [currentUser, setCurrentUser] = useState(null);
 
   useEffect(() => {
     async function load() {
       const current = await getCurrentUser();
-      setUser(current);
+      setCurrentUser(current);
     }
     load();
   }, []);
@@ -41,7 +41,7 @@ export default function SignOutForm() {
     <>
       <AuthContainer>
         <AuthHeader>
-          <h2 className="title">Hi {user.username}!</h2>
+          <h2 className="title">Hi {(currentUser || authUser)?.username}!</h2>
           <p className="description">Do you want to sign out?</p>
         </AuthHeader>
         <Button onClick={handleSignOut}>Sign Out</Button>
