@@ -5,6 +5,7 @@ import {
 } from "./EventsDetailsSC.js";
 import { useParams, useNavigate } from "react-router-dom";
 import Button from "../../components/button/Button.jsx";
+import BackButton from "../../components/button/BackButton.jsx";
 import { useState } from "react";
 import { getEventByID } from "../../lib/parseService.js";
 import { useEffect } from "react";
@@ -26,7 +27,7 @@ export default function EventDetails() {
   useEffect(() => {
     async function loadEvent() {
       try {
-        const data = await getEventByID(id); // <-- await the async call
+        const data = await getEventByID(id); 
         setEvent(data);
       } catch (error) {
         console.error(error);
@@ -35,7 +36,7 @@ export default function EventDetails() {
         setLoading(false);
       }
     }
-    loadEvent(); // <-- actually call it
+    loadEvent();
   }, [id, navigate]);
 
   if (loading) {
