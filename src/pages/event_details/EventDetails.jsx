@@ -48,9 +48,9 @@ export default function EventDetails() {
 
   return (
     <ParentContainer>
-      <Button variant="back" type="button" onClick={() => navigate(-1)}>
+      <BackButton type="button" onClick={() => navigate(-1)}>
         Back
-      </Button>
+      </BackButton>
       <ImageContainer>
         <img src={event.picture} />
       </ImageContainer>
