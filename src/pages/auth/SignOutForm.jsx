@@ -7,7 +7,7 @@ import LoadingSpinner from "../../components/loading/loadingSpinner";
 import { AuthContainer } from "./AuthContainerSC";
 
 export default function SignOutForm() {
-  const { user, signOut } = useAuth();
+  // const { user, signOut } = useAuth();
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState(null);
   const navigate = useNavigate();

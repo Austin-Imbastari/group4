@@ -1,12 +1,8 @@
-import { ButtonSC, BackButtonSC } from "./ButtonSC";
+import { ButtonSC } from "./ButtonSC";
 
-export default function Button({ children, onClick, type = "button", variant}) {
+export default function Button({ children, onClick, type = "button"}) {
   return (
-    variant === "back" ? (<BackButtonSC type={type} onClick={onClick}>
-      {children}
-    </BackButtonSC>): (
       <ButtonSC type={type} onClick={onClick}>
       {children}
     </ButtonSC>)
-  );
 }
