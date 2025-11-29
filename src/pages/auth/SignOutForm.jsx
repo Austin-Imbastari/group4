@@ -1,30 +1,19 @@
 import Button from "../../components/button/Button";
-import { AuthHeader, Message } from "./AuthPageSC";
-import { useState, useEffect } from "react";
-import { signOutUser, getCurrentUser } from "../../lib/parseService";
+import { useState } from "react";
+import { signOutUser } from "../../lib/parseService";
 import { useNavigate } from "react-router-dom";
 import LoadingSpinner from "../../components/loading/loadingSpinner";
-import { AuthContainer } from "./AuthContainerSC";
+import { AuthContainer, AuthHeader, Message } from "./AuthContainerSC";
 
 export default function SignOutForm() {
-  const { user: authUser, signOut } = useAuth();
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState(null);
   const navigate = useNavigate();
-  const [currentUser, setCurrentUser] = useState(null);
-
-  useEffect(() => {
-    async function load() {
-      const current = await getCurrentUser();
-      setCurrentUser(current);
-    }
-    load();
-  }, []);
 
   const handleSignOut = async () => {
     try {
       setLoading(true);
-      await signOut();
+      await signOutUser();
       setLoading(false);
       navigate("/events");
     } catch (err) {
@@ -41,7 +30,7 @@ export default function SignOutForm() {
     <>
       <AuthContainer>
         <AuthHeader>
-          <h2 className="title">Hi {(currentUser || authUser)?.username}!</h2>
+          <h2 className="title">Hi!</h2>
           <p className="description">Do you want to sign out?</p>
         </AuthHeader>
         <Button onClick={handleSignOut}>Sign Out</Button>
