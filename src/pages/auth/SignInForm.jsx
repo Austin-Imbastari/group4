@@ -3,9 +3,9 @@ import InputField from "../../components/input_field/InputField";
 import { useNavigate } from "react-router-dom";
 import { User, Lock } from "lucide-react";
 import { useState, useEffect } from "react";
-import { AuthHeader, Message } from "./AuthPageSC";
 import LoadingSpinner from "../../components/loading/loadingSpinner";
-import { AuthContainer } from "./AuthContainerSC";
+import { getCurrentUser, signInUser } from "../../lib/parseService";
+import { AuthContainer, AuthHeader, Message } from "./AuthContainerSC";
 
 export default function SignInForm() {
   const [form, setForm] = useState({
@@ -33,7 +33,7 @@ export default function SignInForm() {
     e.preventDefault();
     try {
       setLoading(true);
-      await signIn({
+      await signInUser({
         username: form.username,
         password: form.password,
       });

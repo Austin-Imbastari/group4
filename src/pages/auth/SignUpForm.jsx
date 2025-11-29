@@ -2,10 +2,10 @@ import { useState } from "react";
 import Button from "../../components/button/Button";
 import InputField from "../../components/input_field/InputField";
 import { User, Mail, Lock } from "lucide-react";
-import { AuthHeader, Message } from "./AuthPageSC";
 import { useNavigate } from "react-router-dom";
 import LoadingSpinner from "../../components/loading/loadingSpinner";
-import { AuthContainer } from "./AuthContainerSC";
+import { AuthContainer, AuthHeader, Message } from "./AuthContainerSC";
+import { signUpUser } from "../../lib/parseService";
 
 export default function SignUpForm() {
   const navigate = useNavigate();
@@ -30,7 +30,7 @@ export default function SignUpForm() {
 
     try {
       setLoading(true);
-      await signUp({
+      await signUpUser({
         username: form.username,
         email: form.email,
         password: form.password,
