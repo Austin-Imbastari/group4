@@ -1,0 +1,107 @@
+import { getParse } from "./parseClient.js";
+
+// Authentication - sign up new user
+export async function signUpUser({ username, email, password }) {
+  const Parse = await getParse();
+  const user = new Parse.User();
+  user.set("username", username);
+  user.set("email", email);
+  user.set("password", password);
+  const signedUpUser = await user.signUp();
+  return normalizeUser(signedUpUser);
+}
+// Authentication - log in existing user
+export async function signInUser({ username, password }) {
+  const Parse = await getParse();
+  const user = await Parse.User.logIn(username, password);
+  return normalizeUser(user);
+}
+
+// Authentication - log out the current user
+export async function signOutUser() {
+  const Parse = await getParse();
+  return Parse.User.logOut();
+}
+
+// Authentication - get current logged-in user
+export async function getCurrentUser() {
+  const Parse = await getParse();
+  return normalizeUser(Parse.User.current());
+}
+
+// Authentication - helper function to normalize user object
+function normalizeUser(user) {
+  if (!user) return null;
+  return {
+    id: user.id,
+    username: user.get("username"),
+    email: user.get("email"),
+  };
+}
+
+export async function getAllEvents() {
+  const Parse = await getParse();
+  const results = await new Parse.Query("Event").find();
+
+  return results.map((obj) => {
+    const data = obj.toJSON();
+    const file = obj.get("image");
+    return {
+      id: obj.id,
+      title: data.title,
+      category: data.type,
+      host: "Unknown",
+      date: data.date,
+      time: data.time,
+      attendents: 0,
+      saved: false,
+      price: data.price,
+      location: data.location,
+      description: data.description,
+      picture: file ? file.url() : "",
+    };
+  });
+}
+
+export async function getEventByID(id) {
+  const Parse = await getParse();
+  const query = new Parse.Query("Event");
+
+  // Fetch the object with this objectId
+  const event = await query.get(id);
+
+  const data = event.toJSON();
+  const file = event.get("image");
+
+  return {
+    id: event.id,
+    title: data.title,
+    category: data.type,
+    host: "Unknown",
+    date: data.date,
+    time: data.time,
+    attendents: 0,
+    saved: false,
+    price: data.price,
+    location: data.location,
+    description: data.description,
+    picture: file ? file.url() : "",
+  };
+}
+
+export async function createEvent(data) {
+  const Parse = await getParse();
+  const Event = Parse.Object.extend("Event");
+  const event = new Event();
+
+  for (const [k, v] of Object.entries(data)) {
+    if (k !== "image" && v != null) event.set(k, v);
+  }
+
+  if (data.image instanceof File) {
+    event.set("image", new Parse.File(data.image.name, data.image));
+  }
+
+  const saved = await event.save();
+  return saved;
+}

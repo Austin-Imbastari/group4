@@ -44,16 +44,3 @@ export const NavBarCenterContainer = styled.div`
     }
   }
 `;
-
-export const NavBarSignIn = styled.div`
-  border: 1px solid ${(props) => props.theme.colors.primaryNormal};
-  padding: 5px 20px;
-  border-radius: 5px;
-  color: inherit;
-  span {
-    color: black;
-  }
-  &:hover {
-    background-color: ${(props) => props.theme.colors.primaryNormal};
-  }
-`;
