@@ -40,6 +40,7 @@ export default function SignInForm() {
       setLoading(false);
       navigate("/events");
     } catch (err) {
+      setLoading(false);
       setMessage({
         text: "Sign in failed: " + (err?.message || err),
         type: "error",

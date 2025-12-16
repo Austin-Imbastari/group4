@@ -17,6 +17,7 @@ export default function SignOutForm() {
       setLoading(false);
       navigate("/events");
     } catch (err) {
+      setLoading(false);
       setMessage({
         text: "Sign out failed: " + (err?.message || err),
         type: "error",
