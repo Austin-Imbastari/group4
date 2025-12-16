@@ -3,11 +3,21 @@ import styled from "styled-components";
 export const ProfilePageWrapper = styled.div`
   padding-top: 70px;
   display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+  width: 100%;
+  min-height: 100vh;
+`;
+
+export const EventContainersWrapper = styled.div`
+  display: flex;
+  width: 100%;
   justify-content: center;
   gap: 2rem;
 `;
 
-export const EventsContainer = styled.div`
+export const EventContainer = styled.div`
   width: 100%;
   max-width: 400px;
   background-color: white;

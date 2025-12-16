@@ -20,7 +20,7 @@ export default function SignInForm() {
     async function checkUser() {
       const user = await getCurrentUser();
       if (user) {
-        navigate("/auth/signout");
+        navigate("/profile");
       }
     }
     checkUser();

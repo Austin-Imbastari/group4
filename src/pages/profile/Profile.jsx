@@ -1,8 +1,14 @@
 import { useEffect, useState } from "react";
 import EventListItem from "../../components/event_list_item/EventListItem";
 import { getEventsHostedByCurrentUser } from "../../lib/parseService";
-import { EventsContainer, ProfilePageWrapper } from "./ProfileSC";
+import {
+  EventContainersWrapper,
+  EventContainer,
+  ProfilePageWrapper,
+} from "./ProfileSC";
 import LoadingSpinner from "../../components/loading/loadingSpinner";
+import { NavLink } from "react-router-dom";
+import Button from "../../components/button/Button";
 
 export default function Profile() {
   const [eventsHosting, setEventsHosting] = useState([]);
@@ -28,18 +34,23 @@ export default function Profile() {
 
   return (
     <ProfilePageWrapper>
-      <EventsContainer>
-        <h2>Events You're Hosting</h2>
-        {message && <p>{message}</p>}
-        {eventsHosting.length === 0 && <p>You are not hosting any events.</p>}
-        {eventsHosting.map((event) => (
-          <EventListItem key={event.id} event={event} />
-        ))}
-      </EventsContainer>
-      <EventsContainer>
-        <h2>Events You're Attending</h2>
-        <p>Feature coming soon!</p>
-      </EventsContainer>
+      <NavLink to="/auth/signout">
+        <Button>Sign Out</Button>
+      </NavLink>
+      <EventContainersWrapper>
+        <EventContainer>
+          <h2>Events You're Hosting</h2>
+          {message && <p>{message}</p>}
+          {eventsHosting.length === 0 && <p>You are not hosting any events.</p>}
+          {eventsHosting.map((event) => (
+            <EventListItem key={event.id} event={event} />
+          ))}
+        </EventContainer>
+        <EventContainer>
+          <h2>Events You're Attending</h2>
+          <p>Feature coming soon!</p>
+        </EventContainer>
+      </EventContainersWrapper>
     </ProfilePageWrapper>
   );
 }
