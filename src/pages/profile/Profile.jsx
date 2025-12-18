@@ -63,7 +63,7 @@ export default function Profile() {
       </HeaderContainer>
       <EventContainersWrapper>
         <EventContainer>
-          <h2>Events You're Hosting</h2>
+          <h2>Hosting</h2>
           {message && <p>{message}</p>}
           {eventsHosting.map((event) => (
             <EventListItem key={event.id} event={event} />
@@ -71,7 +71,7 @@ export default function Profile() {
           <CreateEventListItem />
         </EventContainer>
         <EventContainer>
-          <h2>Events You're Attending</h2>
+          <h2>Attending</h2>
           {message && <p>{message}</p>}
           {eventsAttending.map((event) => (
             <EventListItem key={event.id} event={event} />

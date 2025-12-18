@@ -22,7 +22,6 @@ export const HeaderContainer = styled.div`
 
 export const Username = styled.span`
   color: ${(props) => props.theme.colors.primaryNormal};
-  font-weight: 600;
 `;
 
 export const HeaderText = styled.p`
