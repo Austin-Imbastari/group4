@@ -1,4 +1,10 @@
-import { EventListItemContainer, Picture, Title } from "./EventListItemSC";
+import {
+  EventListItemContainer,
+  Picture,
+  TextWrapper,
+  Title,
+  Date,
+} from "./EventListItemSC";
 import { NavLink } from "react-router-dom";
 
 export default function EventListItem({ event }) {
@@ -6,7 +12,10 @@ export default function EventListItem({ event }) {
     <NavLink to={`/events/${event.id}`} style={{ textDecoration: "none" }}>
       <EventListItemContainer>
         <Picture src={event.picture} />
-        <Title>{event.title}</Title>
+        <TextWrapper>
+          <Title>{event.title}</Title>
+          <Date>{event.date}</Date>
+        </TextWrapper>
       </EventListItemContainer>
     </NavLink>
   );

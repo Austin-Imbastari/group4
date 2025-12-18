@@ -22,9 +22,22 @@ export const Picture = styled.img`
   flex-shrink: 0;
 `;
 
+export const TextWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  overflow: hidden;
+`;
+
 export const Title = styled.p`
   margin: 0;
-  font-size: 1rem;
+  font-size: ${(props) => props.theme.fontSizes.medium};
   font-weight: 500;
   color: ${(props) => props.theme.colors.textPrimary};
+`;
+
+export const Date = styled.p`
+  margin: 0;
+  font-size: ${(props) => props.theme.fontSizes.small};
+  color: ${(props) => props.theme.colors.accentDark};
 `;
