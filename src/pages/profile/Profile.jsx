@@ -37,7 +37,7 @@ export default function Profile() {
         setUsername(currentUsername);
         setLoading(false);
       } catch {
-        setMessage("Failed to load hosted events.");
+        setMessage("Failed to load events.");
         setLoading(false);
       }
     }
