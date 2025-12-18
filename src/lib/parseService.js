@@ -113,6 +113,40 @@ export async function createEvent(data) {
   return saved;
 }
 
+// Toggle attendance for the current user on a specific event
+export async function toggleAttendance(eventId) {
+  const Parse = await getParse();
+  return Parse.Cloud.run("toggleAttendance", { eventId });
+}
+
+// Get attendance status for the current user on a specific event
+export async function getAttendanceForCurrentUser(eventId) {
+  const Parse = await getParse();
+  const currentUser = await getCurrentUser();
+  if (!currentUser) return false;
+
+  const Attendance = Parse.Object.extend("attendance");
+  const query = new Parse.Query(Attendance);
+  query.equalTo("user", {
+    __type: "Pointer",
+    className: "_User",
+    objectId: currentUser.id,
+  });
+  query.equalTo("event", {
+    __type: "Pointer",
+    className: "Event",
+    objectId: eventId,
+  });
+  const attendance = await query.first();
+  return attendance ? attendance.get("isAttending") : false;
+}
+
+// Count attendees for a specific event
+export async function countAttendeesForEvent(eventId) {
+  const Parse = await getParse();
+  return await Parse.Cloud.run("countAttendeesForEvent", { eventId });
+}
+
 // Get events hosted by the current user
 export async function getEventsHostedByCurrentUser() {
   const Parse = await getParse();
