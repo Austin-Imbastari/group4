@@ -12,6 +12,7 @@ import {
 import LoadingSpinner from "../../components/loading/loadingSpinner";
 import { NavLink } from "react-router-dom";
 import Button from "../../components/button/Button";
+import CreateEventListItem from "../../components/event_list_item/CreateEventListItem";
 
 export default function Profile() {
   const [eventsHosting, setEventsHosting] = useState([]);
@@ -51,6 +52,7 @@ export default function Profile() {
           {eventsHosting.map((event) => (
             <EventListItem key={event.id} event={event} />
           ))}
+          <CreateEventListItem />
         </EventContainer>
         <EventContainer>
           <h2>Events You're Attending</h2>

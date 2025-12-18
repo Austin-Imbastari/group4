@@ -19,7 +19,7 @@ export const PlusIcon = styled.div`
   height: 48px;
 `;
 
-export const Text = styled.p`
+export const CreateEventText = styled.p`
   margin: 0;
   font-size: ${(props) => props.theme.fontSizes.medium};
   font-weight: 500;

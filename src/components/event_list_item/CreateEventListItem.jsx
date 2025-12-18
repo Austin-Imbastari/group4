@@ -1,5 +1,8 @@
 import { NavLink } from "react-router-dom";
-import { CreateEventListItemContainer } from "./CreateEventListItem";
+import {
+  CreateEventListItemContainer,
+  CreateEventText,
+} from "./CreateEventListItem";
 import { CirclePlus } from "lucide-react";
 
 export default function CreateEventListItem() {
@@ -9,7 +12,7 @@ export default function CreateEventListItem() {
         <PlusIcon>
           <CirclePlus />
         </PlusIcon>
-        <span>Create an Event</span>
+        <CreateEventText>Create an Event</CreateEventText>
       </CreateEventListItemContainer>
     </NavLink>
   );
