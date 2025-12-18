@@ -39,6 +39,12 @@ function normalizeUser(user) {
   };
 }
 
+// Get current user's name
+export async function getCurrentUserName() {
+  const currentUser = await getCurrentUser();
+  return currentUser ? currentUser.username : null;
+}
+
 export async function getAllEvents() {
   const Parse = await getParse();
   const results = await new Parse.Query("Event").find();

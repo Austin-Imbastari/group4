@@ -3,6 +3,7 @@ import EventListItem from "../../components/event_list_item/EventListItem";
 import {
   getEventsHostedByCurrentUser,
   getEventsAttendingByCurrentUser,
+  getCurrentUserName,
 } from "../../lib/parseService";
 import {
   EventContainersWrapper,
@@ -17,8 +18,9 @@ import CreateEventListItem from "../../components/event_list_item/CreateEventLis
 export default function Profile() {
   const [eventsHosting, setEventsHosting] = useState([]);
   const [eventsAttending, setEventsAttending] = useState([]);
+  const [username, setUsername] = useState("");
+  const [message, setMessage] = useState("");
   const [loading, setLoading] = useState(false);
-  const [message, setMessage] = useState(null);
 
   useEffect(() => {
     setLoading(true);
@@ -26,8 +28,10 @@ export default function Profile() {
       try {
         const hosting = await getEventsHostedByCurrentUser();
         const attending = await getEventsAttendingByCurrentUser();
+        const currentUsername = await getCurrentUserName();
         setEventsHosting(hosting);
         setEventsAttending(attending);
+        setUsername(currentUsername);
         setLoading(false);
       } catch {
         setMessage("Failed to load hosted events.");
@@ -41,6 +45,7 @@ export default function Profile() {
 
   return (
     <ProfilePageWrapper>
+      <h1>Welcome, {username}!</h1>
       <NavLink to="/auth/signout">
         <Button>Sign Out</Button>
       </NavLink>
@@ -48,7 +53,6 @@ export default function Profile() {
         <EventContainer>
           <h2>Events You're Hosting</h2>
           {message && <p>{message}</p>}
-          {eventsHosting.length === 0 && <p>You are not hosting any events.</p>}
           {eventsHosting.map((event) => (
             <EventListItem key={event.id} event={event} />
           ))}
@@ -56,9 +60,7 @@ export default function Profile() {
         </EventContainer>
         <EventContainer>
           <h2>Events You're Attending</h2>
-          {eventsAttending.length === 0 && (
-            <p>You are not attending any events.</p>
-          )}
+          {message && <p>{message}</p>}
           {eventsAttending.map((event) => (
             <EventListItem key={event.id} event={event} />
           ))}
