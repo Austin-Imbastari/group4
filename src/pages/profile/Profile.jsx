@@ -1,6 +1,9 @@
 import { useEffect, useState } from "react";
 import EventListItem from "../../components/event_list_item/EventListItem";
-import { getEventsHostedByCurrentUser } from "../../lib/parseService";
+import {
+  getEventsHostedByCurrentUser,
+  getEventsAttendingByCurrentUser,
+} from "../../lib/parseService";
 import {
   EventContainersWrapper,
   EventContainer,
@@ -12,22 +15,25 @@ import Button from "../../components/button/Button";
 
 export default function Profile() {
   const [eventsHosting, setEventsHosting] = useState([]);
+  const [eventsAttending, setEventsAttending] = useState([]);
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState(null);
 
   useEffect(() => {
     setLoading(true);
-    async function loadHostedEvents() {
+    async function loadEvents() {
       try {
-        const events = await getEventsHostedByCurrentUser();
-        setEventsHosting(events);
+        const hosting = await getEventsHostedByCurrentUser();
+        const attending = await getEventsAttendingByCurrentUser();
+        setEventsHosting(hosting);
+        setEventsAttending(attending);
         setLoading(false);
       } catch {
         setMessage("Failed to load hosted events.");
         setLoading(false);
       }
     }
-    loadHostedEvents();
+    loadEvents();
   }, []);
 
   if (loading) return <LoadingSpinner />;
@@ -48,7 +54,12 @@ export default function Profile() {
         </EventContainer>
         <EventContainer>
           <h2>Events You're Attending</h2>
-          <p>Feature coming soon!</p>
+          {eventsAttending.length === 0 && (
+            <p>You are not attending any events.</p>
+          )}
+          {eventsAttending.map((event) => (
+            <EventListItem key={event.id} event={event} />
+          ))}
         </EventContainer>
       </EventContainersWrapper>
     </ProfilePageWrapper>

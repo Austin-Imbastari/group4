@@ -145,3 +145,35 @@ export async function getEventsHostedByCurrentUser() {
     };
   });
 }
+
+// Get events the current user is attending
+export async function getEventsAttendingByCurrentUser() {
+  const Parse = await getParse();
+  const currentUser = await getCurrentUser();
+  if (!currentUser) throw new Error("Not logged in.");
+
+  const Attendance = Parse.Object.extend("attendance");
+  const attendanceQuery = new Parse.Query(Attendance);
+
+  attendanceQuery.equalTo("user", {
+    __type: "Pointer",
+    className: "_User",
+    objectId: currentUser.id,
+  });
+
+  attendanceQuery.equalTo("isAttending", true);
+  attendanceQuery.include("event");
+
+  const attendanceResults = await attendanceQuery.find();
+
+  return attendanceResults
+    .map((record) => record.get("event"))
+    .filter(Boolean)
+    .map((eventObj) => ({
+      id: eventObj.id,
+      title: eventObj.get("title"),
+      date: eventObj.get("date"),
+      location: eventObj.get("location"),
+      picture: eventObj.get("picture"),
+    }));
+}
