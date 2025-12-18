@@ -9,6 +9,9 @@ import {
   EventContainersWrapper,
   EventContainer,
   ProfilePageWrapper,
+  HeaderContainer,
+  Username,
+  HeaderText,
 } from "./ProfileSC";
 import LoadingSpinner from "../../components/loading/loadingSpinner";
 import { NavLink } from "react-router-dom";
@@ -45,10 +48,19 @@ export default function Profile() {
 
   return (
     <ProfilePageWrapper>
-      <h1>Welcome, {username}!</h1>
-      <NavLink to="/auth/signout">
-        <Button>Sign Out</Button>
-      </NavLink>
+      <HeaderContainer>
+        <h1>
+          Welcome, <Username>{username}!</Username>
+        </h1>
+        <HeaderText>
+          This is your profile page. Here you can see the events you’re hosting
+          and the events you’re attending. If you want to sign out, you can
+          click the button below.
+        </HeaderText>
+        <NavLink to="/auth/signout">
+          <Button>Sign Out</Button>
+        </NavLink>
+      </HeaderContainer>
       <EventContainersWrapper>
         <EventContainer>
           <h2>Events You're Hosting</h2>
