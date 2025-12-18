@@ -33,7 +33,7 @@ export const Title = styled.p`
   margin: 0;
   font-size: ${(props) => props.theme.fontSizes.medium};
   font-weight: 500;
-  color: ${(props) => props.theme.colors.textPrimary};
+  color: ${(props) => props.theme.colors.secondaryNormal};
 `;
 
 export const Date = styled.p`
