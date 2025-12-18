@@ -10,6 +10,27 @@ export const ProfilePageWrapper = styled.div`
   min-height: 100vh;
 `;
 
+export const HeaderContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding: 30px;
+  align-items: center;
+  gap: 1rem;
+  background-color: white;
+`;
+
+export const Username = styled.span`
+  color: ${(props) => props.theme.colors.primaryNormal};
+  font-weight: 600;
+`;
+
+export const HeaderText = styled.p`
+  font-size: ${(props) => props.theme.fontSizes};
+  max-width: 600px;
+  text-align: center;
+`;
+
 export const EventContainersWrapper = styled.div`
   display: flex;
   width: 100%;
