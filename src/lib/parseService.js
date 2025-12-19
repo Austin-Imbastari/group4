@@ -89,10 +89,17 @@ export async function getEventByID(id) {
   };
 }
 
+// Create a new event
 export async function createEvent(data) {
   const Parse = await getParse();
   const Event = Parse.Object.extend("Event");
   const event = new Event();
+
+  const currentUser = Parse.User.current();
+  if (!currentUser) {
+    throw new Error("User must be logged in to create an event");
+  }
+  event.set("host", currentUser);
 
   for (const [k, v] of Object.entries(data)) {
     if (k !== "image" && v != null) event.set(k, v);
@@ -104,4 +111,71 @@ export async function createEvent(data) {
 
   const saved = await event.save();
   return saved;
+}
+
+// Get events hosted by the current user
+export async function getEventsHostedByCurrentUser() {
+  const Parse = await getParse();
+
+  const currentUser = Parse.User.current();
+  if (!currentUser) return [];
+
+  const Event = Parse.Object.extend("Event");
+  const query = new Parse.Query(Event);
+
+  query.equalTo("host", currentUser);
+  query.descending("createdAt");
+
+  const results = await query.find();
+
+  return results.map((event) => {
+    const data = event.toJSON();
+    const file = event.get("image");
+
+    return {
+      id: event.id,
+      title: data.title,
+      category: data.type,
+      date: data.date,
+      time: data.time,
+      price: data.price,
+      location: data.location,
+      description: data.description,
+      picture: file ? file.url() : "",
+    };
+  });
+}
+
+// Toggle attendance for the current user on a specific event
+export async function toggleAttendance(eventId) {
+  const Parse = await getParse();
+  return Parse.Cloud.run("toggleAttendance", { eventId });
+}
+
+// Get attendance status for the current user on a specific event
+export async function getAttendanceForCurrentUser(eventId) {
+  const Parse = await getParse();
+  const currentUser = await getCurrentUser();
+  if (!currentUser) return false;
+
+  const Attendance = Parse.Object.extend("attendance");
+  const query = new Parse.Query(Attendance);
+  query.equalTo("user", {
+    __type: "Pointer",
+    className: "_User",
+    objectId: currentUser.id,
+  });
+  query.equalTo("event", {
+    __type: "Pointer",
+    className: "Event",
+    objectId: eventId,
+  });
+  const attendance = await query.first();
+  return attendance ? attendance.get("isAttending") : false;
+}
+
+// Count attendees for a specific event
+export async function countAttendeesForEvent(eventId) {
+  const Parse = await getParse();
+  return await Parse.Cloud.run("countAttendeesForEvent", { eventId });
 }
