@@ -12,6 +12,7 @@ import EventDetails from "./pages/event_details/EventDetails";
 import SignInForm from "./pages/auth/SignInForm";
 import SignUpForm from "./pages/auth/SignUpForm";
 import SignOutForm from "./pages/auth/SignOutForm";
+import Profile from "./pages/profile/Profile";
 
 function App() {
   return (
@@ -29,6 +30,7 @@ function App() {
           <Route path="signout" element={<SignOutForm />} />
         </Route>
         <Route path="/about" element={<AboutUs />} />
+        <Route path="/profile" element={<Profile />} />
       </Routes>
     </ThemeProvider>
   );

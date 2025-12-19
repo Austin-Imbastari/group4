@@ -20,7 +20,7 @@ export default function SignInForm() {
     async function checkUser() {
       const user = await getCurrentUser();
       if (user) {
-        navigate("/auth/signout");
+        navigate("/profile");
       }
     }
     checkUser();
@@ -40,6 +40,7 @@ export default function SignInForm() {
       setLoading(false);
       navigate("/events");
     } catch (err) {
+      setLoading(false);
       setMessage({
         text: "Sign in failed: " + (err?.message || err),
         type: "error",
