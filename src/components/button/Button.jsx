@@ -1,9 +1,8 @@
 import { ButtonSC } from "./ButtonSC";
 
-export default function Button({ type = "button", children, ...props }) {
+export default function Button({ children, onClick, type = "button"}) {
   return (
-    <ButtonSC type={type} {...props}>
+      <ButtonSC type={type} onClick={onClick}>
       {children}
-    </ButtonSC>
-  );
+    </ButtonSC>)
 }
