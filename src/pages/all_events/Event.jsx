@@ -12,7 +12,6 @@ export default function Event({ event }) {
             <EventContainer>
                 <EventTopContainer $bg={event.picture}>
                     <span>{event.category}</span>
-                    <span>{event.saved ? ":)" : ":("}</span>
                 </EventTopContainer>
 
                 <EventCenterContainer>
