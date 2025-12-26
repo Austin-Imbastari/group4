@@ -33,6 +33,7 @@ export const EventTopContainer = styled.div`
     border-radius: 5px;
     padding: 5px 15px;
     color: white;
+    max-height: 35px;
 
     background: rgba(128, 128, 128, 0.5);
   }
@@ -46,6 +47,10 @@ export const EventCenterContainer = styled.div`
   justify-content: left;
   padding: 10px 0px 30px 0px;
   font-size: larger;
+
+  span {
+    font-family: "PT Serif", serif;
+  }
 `;
 
 export const EventBottomContainer = styled.div`
