@@ -20,7 +20,7 @@ export default function Event({ event }) {
                 </EventCenterContainer>
 
                 <EventBottomContainer>
-                    <span>[ . ] By: {event.host}</span>
+                    <span>Hosted by: {event.host}</span>
                     <span className="span2">
                         {event.date} {event.time ? `@ ${event.time}` : ""} * {event.attendents} attendees
                     </span>

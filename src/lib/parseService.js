@@ -47,46 +47,59 @@ export async function getCurrentUserName() {
 
 export async function getAllEvents() {
   const Parse = await getParse();
-  const results = await new Parse.Query("Event").find();
+  const query = new Parse.Query("Event");
+  query.include("host");
+  const results = await query.find();
 
-  return results.map((obj) => {
-    const data = obj.toJSON();
-    const file = obj.get("image");
-    return {
-      id: obj.id,
-      title: data.title,
-      category: data.type,
-      host: "Unknown",
-      date: data.date,
-      time: data.time,
-      attendents: 0,
-      saved: false,
-      price: data.price,
-      location: data.location,
-      description: data.description,
-      picture: file ? file.url() : "",
-    };
-  });
+  return await Promise.all(
+    results.map(async (obj) => {
+      const data = obj.toJSON();
+      const file = obj.get("image");
+
+      const attendeeCount = await Parse.Cloud.run("countAttendeesForEvent", {
+        eventId: obj.id,
+      });
+
+      return {
+        id: obj.id,
+        title: data.title,
+        category: data.type,
+        host: obj.get("host") ? obj.get("host").get("username") : "Unknown",
+        date: data.date,
+        time: data.time,
+        attendents: attendeeCount,
+        saved: false,
+        price: data.price,
+        location: data.location,
+        description: data.description,
+        picture: file ? file.url() : "",
+      };
+    })
+  );
 }
 
 export async function getEventByID(id) {
   const Parse = await getParse();
   const query = new Parse.Query("Event");
+  query.include("host");
 
   // Fetch the object with this objectId
   const event = await query.get(id);
 
   const data = event.toJSON();
   const file = event.get("image");
+  const attendeeCount = await Parse.Cloud.run("countAttendeesForEvent", {
+    eventId: event.id,
+  });
 
   return {
     id: event.id,
     title: data.title,
     category: data.type,
-    host: "Unknown",
+    host: event.get("host") ? event.get("host").get("username") : "Unknown",
     date: data.date,
     time: data.time,
-    attendents: 0,
+    attendents: attendeeCount,
     saved: false,
     price: data.price,
     location: data.location,
@@ -168,24 +181,30 @@ export async function getEventsHostedByCurrentUser() {
 
   const results = await query.find();
 
-  return results.map((event) => {
-    const data = event.toJSON();
-    const file = event.get("image");
+  return await Promise.all(
+    results.map(async (event) => {
+      const data = event.toJSON();
+      const file = event.get("image");
 
-    return {
-      id: event.id,
-      title: data.title,
-      category: data.type,
-      date: data.date,
-      time: data.time,
-      price: data.price,
-      location: data.location,
-      description: data.description,
-      picture: file ? file.url() : "",
-    };
-  });
+      const attendeeCount = await Parse.Cloud.run("countAttendeesForEvent", {
+        eventId: event.id,
+      });
+
+      return {
+        id: event.id,
+        title: data.title,
+        category: data.type,
+        date: data.date,
+        time: data.time,
+        attendents: attendeeCount,
+        price: data.price,
+        location: data.location,
+        description: data.description,
+        picture: file ? file.url() : "",
+      };
+    })
+  );
 }
-
 // Get events the current user is attending
 export async function getEventsAttendingByCurrentUser() {
   const Parse = await getParse();
