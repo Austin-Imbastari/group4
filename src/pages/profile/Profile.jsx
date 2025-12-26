@@ -4,6 +4,7 @@ import {
   getEventsHostedByCurrentUser,
   getEventsAttendingByCurrentUser,
   getCurrentUserName,
+  deleteEvent,
 } from "../../lib/parseService";
 import {
   EventContainersWrapper,
@@ -12,6 +13,7 @@ import {
   HeaderContainer,
   Username,
   HeaderText,
+  ButtonRow,
 } from "./ProfileSC";
 import LoadingSpinner from "../../components/loading/loadingSpinner";
 import { NavLink } from "react-router-dom";
@@ -44,6 +46,16 @@ export default function Profile() {
     loadEvents();
   }, []);
 
+  const handleDelete = async (eventId) => {
+    if (!window.confirm("Are you sure you want to delete this event?")) return;
+
+    await deleteEvent(eventId);
+
+    setEventsHosting((prev) =>
+      prev.filter((event) => event.id !== eventId)
+    );
+  };
+
   if (loading) return <LoadingSpinner />;
 
   return (
@@ -66,7 +78,20 @@ export default function Profile() {
           <h2>Hosting</h2>
           {message && <p>{message}</p>}
           {eventsHosting.map((event) => (
-            <EventListItem key={event.id} event={event} />
+            <div key={event.id}>
+              <EventListItem event={event} />
+
+              <ButtonRow>
+                <NavLink to={`/events/${event.id}/edit`}>
+                  <Button>
+                    Edit
+                  </Button>
+                </NavLink>
+                <Button onClick={() => handleDelete(event.id)}>
+                  Delete
+                </Button>
+              </ButtonRow>
+            </div>
           ))}
           <CreateEventListItem />
         </EventContainer>

@@ -21,7 +21,8 @@ function App() {
       <NavBar />
       <Routes>
         <Route path="/" element={<SplashScreen />} />
-        <Route path="/create-event" element={<CreateEvent />} />
+        <Route path="/create-event" element={<CreateEvent mode="create" />} />
+        <Route path="/events/:id/edit" element={<CreateEvent mode="edit" />} />
         <Route path="/events/:id" element={<EventDetails />} />
         <Route path="/events" element={<AllEvents />} />
         <Route path="auth" element={<AuthPage />}>

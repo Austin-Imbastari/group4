@@ -217,3 +217,33 @@ export async function getEventsAttendingByCurrentUser() {
       picture: eventObj.get("picture"),
     }));
 }
+
+// Updates an existing Event in Parse by ID with new form data and saves the changes.
+export async function updateEvent(eventId, data) {
+  const Parse = await getParse();
+
+  const query = new Parse.Query("Event");
+  const event = await query.get(eventId);
+
+  for (const [key, value] of Object.entries(data)) {
+    if (key !== "image" && value != null) {
+      event.set(key, value);
+    }
+  }
+
+  if (data.image instanceof File) {
+    event.set("image", new Parse.File(data.image.name, data.image));
+  }
+
+  return await event.save();
+}
+
+// Deletes an existing event from Parse by ID
+export async function deleteEvent(eventId) {
+  const Parse = await getParse();
+
+  const query = new Parse.Query("Event");
+  const event = await query.get(eventId);
+
+  return event.destroy();
+}

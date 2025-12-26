@@ -47,4 +47,18 @@ export const EventContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
+  .btn-link {
+    display: inline-flex;
+    width: fit-content;
+    text-decoration: none;
+  }
+`;
+
+export const ButtonRow = styled.div`
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+  & > * {
+    flex: 1;
+  }
 `;
