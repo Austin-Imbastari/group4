@@ -6,8 +6,13 @@ import { useState, useEffect } from "react";
 import LoadingSpinner from "../../components/loading/loadingSpinner";
 import { getCurrentUser, signInUser } from "../../lib/parseService";
 import { AuthContainer, AuthHeader, Message } from "./AuthContainerSC";
+import { useLocation } from "react-router-dom";
 
 export default function SignInForm() {
+
+  const location = useLocation();
+  const showMessage = location.state?.fromCreateEvent;
+
   const [form, setForm] = useState({
     username: "",
     password: "",
@@ -55,6 +60,11 @@ export default function SignInForm() {
       <AuthContainer>
         <AuthHeader>
           <h2 className="title">WELCOME BACK</h2>
+          {showMessage && (
+            <div className="signin-hint">
+              You must be signed in to create an event.
+            </div>
+          )}
           <p className="description">Please enter your credentials</p>
         </AuthHeader>
         <form onSubmit={handleSubmit}>
