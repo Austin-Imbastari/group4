@@ -8,7 +8,7 @@ import {
   NewEventContainer,
 } from "./AllEventSC";
 import { CirclePlus } from "lucide-react";
-import { getAllEvents } from "../../lib/parseService";
+import { getAllEvents, getCurrentUser } from "../../lib/parseService";
 import LoadingSpinner from "../../components/loading/loadingSpinner";
 import Event from "./Event";
 
@@ -16,10 +16,14 @@ export default function AllEvents() {
   const [events, setEvents] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   useEffect(() => {
     (async () => {
       try {
+        const user = await getCurrentUser();
+        setIsLoggedIn(!!user);
+
         const data = await getAllEvents();
         setEvents(data);
       } catch (e) {
@@ -43,7 +47,8 @@ export default function AllEvents() {
     <AllEventsPageContainer>
       <Filter />
       <EventCards>
-        <NavLink to="/create-event">
+        <NavLink to={isLoggedIn ? "/create-event" : "/auth/signin"}
+          state={!isLoggedIn ? { fromCreateEvent: true } : undefined}>
           <EventContainer>
             <NewEventContainer>
               <CirclePlus className="icon-circle" />
