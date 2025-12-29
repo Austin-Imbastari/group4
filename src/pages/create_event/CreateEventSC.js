@@ -66,7 +66,6 @@ export const FormGrid = styled.form`
     "description description"
     "upload    upload"
     "submit    submit";
-
   align-items: start;
 `;
 
