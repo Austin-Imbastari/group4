@@ -24,7 +24,7 @@ import {
   PencilLine,
   Image,
 } from "lucide-react";
-
+import DropdownField from "../../components/dropdown_field/DropdownField";
 import { createEvent, getAllActivityTypes } from "../../lib/parseService";
 
 const initialForm = {
@@ -150,19 +150,22 @@ const CreateEvent = () => {
         </ZipField>
 
         <TypeField>
-          <label htmlFor="activityTypeId">What type of event?</label>
-          <select
-            id="activityTypeId"
-            value={formData.activityTypeId}
-            onChange={handleOnChange}
-          >
-            <option value="">Other</option>
-            {activityTypes.map((type) => (
-              <option key={type.id} value={type.id}>
-                {type.name}
-              </option>
-            ))}
-          </select>
+          <InputContainer>
+            <DropdownField
+              id="activityTypeId"
+              label="What type of event?"
+              icon={MapPin}
+              value={formData.activityTypeId}
+              onChange={handleOnChange}
+            >
+              <option value="">Other</option>
+              {activityTypes.map((type) => (
+                <option key={type.id} value={type.id}>
+                  {type.name}
+                </option>
+              ))}
+            </DropdownField>
+          </InputContainer>
         </TypeField>
 
         <DateField>
