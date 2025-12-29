@@ -176,7 +176,7 @@ function normalizeEvent(event) {
     host: "Unknown",
     date: event.get("date"),
     time: event.get("time"),
-    attendents: 0,
+    attendees: 0,
     saved: false,
     price: event.get("price"),
     location: event.get("location"),
