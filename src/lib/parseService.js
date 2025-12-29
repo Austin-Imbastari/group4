@@ -45,54 +45,24 @@ export async function getCurrentUserName() {
   return currentUser ? currentUser.username : null;
 }
 
+// Get all events
 export async function getAllEvents() {
   const Parse = await getParse();
-  const results = await new Parse.Query("Event").find();
+  const query = new Parse.Query("Event");
+  query.include("activityType");
 
-  return results.map((obj) => {
-    const data = obj.toJSON();
-    const file = obj.get("image");
-    return {
-      id: obj.id,
-      title: data.title,
-      category: data.type,
-      host: "Unknown",
-      date: data.date,
-      time: data.time,
-      attendents: 0,
-      saved: false,
-      price: data.price,
-      location: data.location,
-      description: data.description,
-      picture: file ? file.url() : "",
-    };
-  });
+  const results = await query.find();
+  return results.map(normalizeEvent);
 }
 
+// Get event by ID
 export async function getEventByID(id) {
   const Parse = await getParse();
   const query = new Parse.Query("Event");
+  query.include("activityType");
 
-  // Fetch the object with this objectId
   const event = await query.get(id);
-
-  const data = event.toJSON();
-  const file = event.get("image");
-
-  return {
-    id: event.id,
-    title: data.title,
-    category: data.type,
-    host: "Unknown",
-    date: data.date,
-    time: data.time,
-    attendents: 0,
-    saved: false,
-    price: data.price,
-    location: data.location,
-    description: data.description,
-    picture: file ? file.url() : "",
-  };
+  return normalizeEvent(event);
 }
 
 // Create a new event
@@ -107,16 +77,33 @@ export async function createEvent(data) {
   }
   event.set("host", currentUser);
 
-  for (const [k, v] of Object.entries(data)) {
-    if (k !== "image" && v != null) event.set(k, v);
+  let activityType;
+
+  if (data.activityTypeId) {
+    const ActivityType = Parse.Object.extend("ActivityType");
+    activityType = new ActivityType();
+    activityType.id = data.activityTypeId;
+  } else {
+    const query = new Parse.Query("ActivityType");
+    query.equalTo("name", "Other");
+    activityType = await query.first({ useMasterKey: true });
   }
 
-  if (data.image instanceof File) {
-    event.set("image", new Parse.File(data.image.name, data.image));
-  }
+  event.set("activityType", activityType);
 
-  const saved = await event.save();
-  return saved;
+  const allowedFields = [
+    "title",
+    "date",
+    "time",
+    "price",
+    "location",
+    "description",
+  ];
+  allowedFields.forEach((field) => {
+    if (data[field] != null) event.set(field, data[field]);
+  });
+
+  return await event.save();
 }
 
 // Toggle attendance for the current user on a specific event
@@ -156,34 +143,16 @@ export async function countAttendeesForEvent(eventId) {
 // Get events hosted by the current user
 export async function getEventsHostedByCurrentUser() {
   const Parse = await getParse();
-
   const currentUser = Parse.User.current();
   if (!currentUser) return [];
 
-  const Event = Parse.Object.extend("Event");
-  const query = new Parse.Query(Event);
-
+  const query = new Parse.Query("Event");
   query.equalTo("host", currentUser);
+  query.include("activityType");
   query.descending("createdAt");
 
   const results = await query.find();
-
-  return results.map((event) => {
-    const data = event.toJSON();
-    const file = event.get("image");
-
-    return {
-      id: event.id,
-      title: data.title,
-      category: data.type,
-      date: data.date,
-      time: data.time,
-      price: data.price,
-      location: data.location,
-      description: data.description,
-      picture: file ? file.url() : "",
-    };
-  });
+  return results.map(normalizeEvent);
 }
 
 // Get events the current user is attending
@@ -209,11 +178,39 @@ export async function getEventsAttendingByCurrentUser() {
   return attendanceResults
     .map((record) => record.get("event"))
     .filter(Boolean)
-    .map((eventObj) => ({
-      id: eventObj.id,
-      title: eventObj.get("title"),
-      date: eventObj.get("date"),
-      location: eventObj.get("location"),
-      picture: eventObj.get("picture"),
-    }));
+    .map(normalizeEvent);
+}
+
+// Get all activity types
+export async function getAllActivityTypes() {
+  const Parse = await getParse();
+  const query = new Parse.Query("ActivityType");
+  query.ascending("name");
+
+  const results = await query.find();
+
+  return results.map((type) => ({
+    id: type.id,
+    name: type.get("name"),
+    picture: type.get("picture")?.url() || "",
+  }));
+}
+
+function normalizeEvent(event) {
+  const activityType = event.get("activityType");
+
+  return {
+    id: event.id,
+    title: event.get("title"),
+    category: activityType?.get("name") || "Other Activity",
+    host: "Unknown",
+    date: event.get("date"),
+    time: event.get("time"),
+    attendents: 0,
+    saved: false,
+    price: event.get("price"),
+    location: event.get("location"),
+    description: event.get("description"),
+    picture: activityType?.get("picture")?.url() || "",
+  };
 }
