@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
   Wrapper,
   TitleText,
@@ -16,9 +16,16 @@ import {
 } from "./CreateEventSC";
 import Button from "../../components/button/Button";
 import InputField from "../../components/input_field/InputField";
-import { Handshake, HandCoins, MapPin, SwatchBook, CalendarDays, PencilLine, Image } from "lucide-react";
+import {
+  Handshake,
+  HandCoins,
+  MapPin,
+  CalendarDays,
+  PencilLine,
+  Image,
+} from "lucide-react";
 
-import { createEvent } from "../../lib/parseService";
+import { createEvent, getAllActivityTypes } from "../../lib/parseService";
 
 const initialForm = {
   title: "",
@@ -28,33 +35,43 @@ const initialForm = {
   date: "",
   time: "",
   description: "",
-  image: null,
+  activityTypeId: "",
 };
 
 const CreateEvent = () => {
   const [formData, setFormData] = useState(initialForm);
   const [successMessage, setSuccessMessage] = useState("");
+  const [activityTypes, setActivityTypes] = useState([]);
 
   const handleOnChange = (e) => {
     const { id, value, type, files } = e.target;
+
     setFormData((prev) => ({
       ...prev,
       [id]: type === "file" ? files?.[0] ?? null : value,
     }));
   };
 
+  useEffect(() => {
+    async function loadActivityTypes() {
+      const types = await getAllActivityTypes();
+      setActivityTypes(types);
+    }
+    loadActivityTypes();
+  }, []);
+
   const handleOnSubmit = async (e) => {
     e.preventDefault();
+    console.log("Submitting form data:", formData);
     try {
       const newEvent = await createEvent(formData);
       console.log(newEvent);
       setFormData(initialForm);
       setSuccessMessage("Your event has been created successfully!");
-      setTimeout(() => {
-        setSuccessMessage("");
-      }, 3000);
-    } catch {
-      setSuccessMessage(" Something went wrong. Please try again.");
+      setTimeout(() => setSuccessMessage(""), 3000);
+    } catch (err) {
+      console.error(err);
+      setSuccessMessage("Something went wrong. Please try again.");
     }
   };
 
@@ -109,17 +126,19 @@ const CreateEvent = () => {
         </LocationField>
 
         <TypeField>
-          <label htmlFor="type">What type of event?</label>
-          <InputContainer>
-            <InputField
-              icon={SwatchBook}
-              id="type"
-              type="text"
-              placeholder="Coffee"
-              onChange={handleOnChange}
-              value={formData.type}
-            />
-          </InputContainer>
+          <label htmlFor="activityTypeId">What type of event?</label>
+          <select
+            id="activityTypeId"
+            value={formData.activityTypeId}
+            onChange={handleOnChange}
+          >
+            <option value="">Other</option>
+            {activityTypes.map((type) => (
+              <option key={type.id} value={type.id}>
+                {type.name}
+              </option>
+            ))}
+          </select>
         </TypeField>
 
         <DateField>
@@ -163,20 +182,6 @@ const CreateEvent = () => {
             />
           </InputContainer>
         </DescriptionField>
-
-        <ImageField>
-          <label htmlFor="upload">Upload Image</label>
-          <InputContainer>
-            <InputField
-              icon={Image}
-              id="image"
-              type="file"
-              className="input-file"
-              accept=".png, .jpg, .jpeg"
-              onChange={handleOnChange}
-            />
-          </InputContainer>
-        </ImageField>
       </FormGrid>
       <Button onClick={handleOnSubmit} type="submit">
         Submit

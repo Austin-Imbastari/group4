@@ -68,42 +68,11 @@ export async function getEventByID(id) {
 // Create a new event
 export async function createEvent(data) {
   const Parse = await getParse();
-  const Event = Parse.Object.extend("Event");
-  const event = new Event();
+  const user = Parse.User.current();
+  if (!user) throw new Error("User must be logged in to create an event");
 
-  const currentUser = Parse.User.current();
-  if (!currentUser) {
-    throw new Error("User must be logged in to create an event");
-  }
-  event.set("host", currentUser);
-
-  let activityType;
-
-  if (data.activityTypeId) {
-    const ActivityType = Parse.Object.extend("ActivityType");
-    activityType = new ActivityType();
-    activityType.id = data.activityTypeId;
-  } else {
-    const query = new Parse.Query("ActivityType");
-    query.equalTo("name", "Other");
-    activityType = await query.first({ useMasterKey: true });
-  }
-
-  event.set("activityType", activityType);
-
-  const allowedFields = [
-    "title",
-    "date",
-    "time",
-    "price",
-    "location",
-    "description",
-  ];
-  allowedFields.forEach((field) => {
-    if (data[field] != null) event.set(field, data[field]);
-  });
-
-  return await event.save();
+  const savedEvent = await Parse.Cloud.run("createEvent", { data });
+  return savedEvent;
 }
 
 // Toggle attendance for the current user on a specific event
@@ -203,7 +172,7 @@ function normalizeEvent(event) {
   return {
     id: event.id,
     title: event.get("title"),
-    category: activityType?.get("name") || "Other Activity",
+    category: activityType?.get("name") || "Other",
     host: "Unknown",
     date: event.get("date"),
     time: event.get("time"),
