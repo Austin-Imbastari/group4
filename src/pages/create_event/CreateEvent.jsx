@@ -174,7 +174,7 @@ const CreateEvent = () => {
             <InputField
               icon={CalendarDays}
               id="date"
-              type="text"
+              type="date"
               placeholder="December 20, 2025"
               onChange={handleOnChange}
               value={formData.date}
