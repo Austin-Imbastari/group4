@@ -196,6 +196,7 @@ export async function getAllActivityTypes() {
   }));
 }
 
+// Helper function to normalize event object
 function normalizeEvent(event) {
   const activityType = event.get("activityType");
 
