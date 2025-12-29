@@ -30,8 +30,6 @@ export const Select = styled.select`
   border: 1px solid ${({ theme }) => theme.colors.accentDark};
   border-radius: 12px;
   background-color: ${({ theme }) => theme.colors.secondaryLight};
-  appearance: none;
-  -webkit-appearance: none;
   box-shadow: none;
   width: 100%;
   box-sizing: border-box;
@@ -44,5 +42,6 @@ export const Select = styled.select`
 
   &:hover {
     border-color: ${({ theme }) => theme.colors.primaryNormalHover};
+    cursor: pointer;
   }
 `;
