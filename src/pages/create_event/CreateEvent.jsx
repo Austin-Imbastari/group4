@@ -11,8 +11,8 @@ import {
   DateField,
   TimeField,
   DescriptionField,
-  ImageField,
   SuccessMessage,
+  ZipField,
 } from "./CreateEventSC";
 import Button from "../../components/button/Button";
 import InputField from "../../components/input_field/InputField";
@@ -36,6 +36,7 @@ const initialForm = {
   time: "",
   description: "",
   activityTypeId: "",
+  zip: "",
 };
 
 const CreateEvent = () => {
@@ -62,6 +63,13 @@ const CreateEvent = () => {
 
   const handleOnSubmit = async (e) => {
     e.preventDefault();
+
+    if (!formData.zip || formData.zip < 1000 || formData.zip > 9999) {
+      setSuccessMessage(
+        "Zip code must be a 4-digit number between 1000 and 9999."
+      );
+      return;
+    }
     console.log("Submitting form data:", formData);
     try {
       const newEvent = await createEvent(formData);
@@ -124,6 +132,22 @@ const CreateEvent = () => {
             />
           </InputContainer>
         </LocationField>
+
+        <ZipField>
+          <label htmlFor="zip">Zip Code</label>
+          <InputContainer>
+            <InputField
+              icon={MapPin}
+              id="zip"
+              type="number"
+              placeholder="2200"
+              min={1000}
+              max={9999}
+              onChange={handleOnChange}
+              value={formData.zip}
+            />
+          </InputContainer>
+        </ZipField>
 
         <TypeField>
           <label htmlFor="activityTypeId">What type of event?</label>
