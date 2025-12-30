@@ -55,8 +55,8 @@ export const H1 = styled.h1`
     color: ${({ theme }) => theme.colors.primaryNormal};
   }
   .bottom {
-    background: linear-gradient(90deg, secondaryNormal, primaryNormal);
-    -webkit-background-clip: text;
+    background: ${({ theme }) =>
+      `linear-gradient(90deg, ${theme.colors.secondaryNormal}, ${theme.colors.primaryNormal})`};
     background-clip: text;
     color: ${({ theme }) => theme.colors.secondaryNormal};
   }
