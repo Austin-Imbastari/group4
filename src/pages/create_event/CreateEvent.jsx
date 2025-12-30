@@ -26,7 +26,13 @@ import {
   Image,
 } from "lucide-react";
 import DropdownField from "../../components/dropdown_field/DropdownField";
-import { createEvent, updateEvent, getEventByID, getAllActivityTypes } from "../../lib/parseService";
+import {
+  createEvent,
+  updateEvent,
+  getEventByID,
+  getAllActivityTypes,
+} from "../../lib/parseService";
+import LoadingSpinner from "../../components/loading/loadingSpinner";
 
 const initialForm = {
   title: "",
@@ -44,7 +50,7 @@ const CreateEvent = ({ mode = "create" }) => {
   const { id } = useParams();
   const navigate = useNavigate();
   const isEdit = mode === "edit";
-
+  const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState(initialForm);
   const [successMessage, setSuccessMessage] = useState("");
   const [activityTypes, setActivityTypes] = useState([]);
@@ -93,6 +99,7 @@ const CreateEvent = ({ mode = "create" }) => {
       );
       return;
     }
+    setLoading(true);
     console.log("Submitting form data:", formData);
     try {
       if (isEdit) {
@@ -100,6 +107,7 @@ const CreateEvent = ({ mode = "create" }) => {
         setSuccessMessage("Your event has been updated successfully!");
         setTimeout(() => setSuccessMessage(""), 3000);
         navigate("/profile");
+        setLoading(false);
         return;
       }
 
@@ -108,11 +116,15 @@ const CreateEvent = ({ mode = "create" }) => {
       setFormData(initialForm);
       setSuccessMessage("Your event has been created successfully!");
       setTimeout(() => setSuccessMessage(""), 3000);
+      setLoading(false);
     } catch (err) {
+      setLoading(false);
       console.error(err);
       setSuccessMessage("Something went wrong. Please try again.");
     }
   };
+
+  if (loading) return <LoadingSpinner />;
 
   return (
     <Wrapper>
@@ -245,7 +257,9 @@ const CreateEvent = ({ mode = "create" }) => {
           </InputContainer>
         </DescriptionField>
         <Button type="submit">{isEdit ? "Update" : "Submit"}</Button>
-        <Button type="button" onClick={() => navigate(-1)}>Cancel</Button>
+        <Button type="button" onClick={() => navigate(-1)}>
+          Cancel
+        </Button>
       </FormGrid>
     </Wrapper>
   );
