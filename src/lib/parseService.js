@@ -158,11 +158,13 @@ export async function getAllActivityTypes() {
 
   const results = await query.find();
 
-  return results.map((type) => ({
-    id: type.id,
-    name: type.get("name"),
-    picture: type.get("picture")?.url() || "",
-  }));
+  return results
+    .map((type) => ({
+      id: type.id,
+      name: type.get("name"),
+      picture: type.get("picture")?.url() || "",
+    }))
+    .filter((type) => type.name !== "Other");
 }
 
 // Helper function to normalize event object
@@ -179,6 +181,7 @@ function normalizeEvent(event) {
     attendees: countAttendeesForEvent(event.id),
     saved: false,
     price: event.get("price"),
+    zip: event.get("zip"),
     location: event.get("location"),
     description: event.get("description"),
     picture: activityType?.get("picture")?.url() || "",

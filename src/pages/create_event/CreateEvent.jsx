@@ -67,6 +67,8 @@ const CreateEvent = ({ mode = "create" }) => {
         type: event.category ?? "",
         date: event.date ?? "",
         time: event.time ?? "",
+        activityTypeId: event.activityTypeId ?? "",
+        zip: event.zip ?? "",
         description: event.description ?? "",
         image: null,
       });
