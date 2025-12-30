@@ -4,7 +4,6 @@ import {
   getEventsHostedByCurrentUser,
   getEventsAttendingByCurrentUser,
   getCurrentUserName,
-  deleteEvent,
 } from "../../lib/parseService";
 import {
   EventContainersWrapper,
@@ -70,8 +69,6 @@ export default function Profile() {
           {eventsHosting.map((event) => (
             <div key={event.id}>
               <EventListItem event={event} />
-
-
             </div>
           ))}
           <CreateEventListItem />
