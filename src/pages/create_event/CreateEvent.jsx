@@ -117,6 +117,7 @@ const CreateEvent = ({ mode = "create" }) => {
       setSuccessMessage("Your event has been created successfully!");
       setTimeout(() => setSuccessMessage(""), 3000);
       setLoading(false);
+      navigate("/events");
     } catch (err) {
       setLoading(false);
       console.error(err);
