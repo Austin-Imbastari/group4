@@ -45,89 +45,35 @@ export async function getCurrentUserName() {
   return currentUser ? currentUser.username : null;
 }
 
+// Get all events
 export async function getAllEvents() {
   const Parse = await getParse();
   const query = new Parse.Query("Event");
-  query.include("host");
+  query.include("activityType");
+
   const results = await query.find();
-
-  return await Promise.all(
-    results.map(async (obj) => {
-      const data = obj.toJSON();
-      const file = obj.get("image");
-
-      const attendeeCount = await Parse.Cloud.run("countAttendeesForEvent", {
-        eventId: obj.id,
-      });
-
-      return {
-        id: obj.id,
-        title: data.title,
-        category: data.type,
-        host: obj.get("host") ? obj.get("host").get("username") : "Unknown",
-        date: data.date,
-        time: data.time,
-        attendents: attendeeCount,
-        saved: false,
-        price: data.price,
-        location: data.location,
-        description: data.description,
-        picture: file ? file.url() : "",
-      };
-    })
-  );
+  return results.map(normalizeEvent);
 }
 
+// Get event by ID
 export async function getEventByID(id) {
   const Parse = await getParse();
   const query = new Parse.Query("Event");
+  query.include("activityType");
   query.include("host");
 
-  // Fetch the object with this objectId
   const event = await query.get(id);
-
-  const data = event.toJSON();
-  const file = event.get("image");
-  const attendeeCount = countAttendeesForEvent(id);
-
-  return {
-    id: event.id,
-    title: data.title,
-    category: data.type,
-    host: event.get("host") ? event.get("host").get("username") : "Unknown",
-    date: data.date,
-    time: data.time,
-    attendents: attendeeCount,
-    saved: false,
-    price: data.price,
-    location: data.location,
-    description: data.description,
-    picture: file ? file.url() : "",
-  };
+  return normalizeEvent(event);
 }
 
 // Create a new event
 export async function createEvent(data) {
   const Parse = await getParse();
-  const Event = Parse.Object.extend("Event");
-  const event = new Event();
+  const user = Parse.User.current();
+  if (!user) throw new Error("User must be logged in to create an event");
 
-  const currentUser = Parse.User.current();
-  if (!currentUser) {
-    throw new Error("User must be logged in to create an event");
-  }
-  event.set("host", currentUser);
-
-  for (const [k, v] of Object.entries(data)) {
-    if (k !== "image" && v != null) event.set(k, v);
-  }
-
-  if (data.image instanceof File) {
-    event.set("image", new Parse.File(data.image.name, data.image));
-  }
-
-  const saved = await event.save();
-  return saved;
+  const savedEvent = await Parse.Cloud.run("createEvent", { data });
+  return savedEvent;
 }
 
 // Toggle attendance for the current user on a specific event
@@ -167,41 +113,16 @@ export async function countAttendeesForEvent(eventId) {
 // Get events hosted by the current user
 export async function getEventsHostedByCurrentUser() {
   const Parse = await getParse();
-
   const currentUser = Parse.User.current();
   if (!currentUser) return [];
 
-  const Event = Parse.Object.extend("Event");
-  const query = new Parse.Query(Event);
-
+  const query = new Parse.Query("Event");
   query.equalTo("host", currentUser);
+  query.include("activityType");
   query.descending("createdAt");
 
   const results = await query.find();
-
-  return await Promise.all(
-    results.map(async (event) => {
-      const data = event.toJSON();
-      const file = event.get("image");
-
-      const attendeeCount = await Parse.Cloud.run("countAttendeesForEvent", {
-        eventId: event.id,
-      });
-
-      return {
-        id: event.id,
-        title: data.title,
-        category: data.type,
-        date: data.date,
-        time: data.time,
-        attendents: attendeeCount,
-        price: data.price,
-        location: data.location,
-        description: data.description,
-        picture: file ? file.url() : "",
-      };
-    })
-  );
+  return results.map(normalizeEvent);
 }
 // Get events the current user is attending
 export async function getEventsAttendingByCurrentUser() {
@@ -226,13 +147,42 @@ export async function getEventsAttendingByCurrentUser() {
   return attendanceResults
     .map((record) => record.get("event"))
     .filter(Boolean)
-    .map((eventObj) => ({
-      id: eventObj.id,
-      title: eventObj.get("title"),
-      date: eventObj.get("date"),
-      location: eventObj.get("location"),
-      picture: eventObj.get("picture"),
-    }));
+    .map(normalizeEvent);
+}
+
+// Get all activity types
+export async function getAllActivityTypes() {
+  const Parse = await getParse();
+  const query = new Parse.Query("ActivityType");
+  query.ascending("name");
+
+  const results = await query.find();
+
+  return results.map((type) => ({
+    id: type.id,
+    name: type.get("name"),
+    picture: type.get("picture")?.url() || "",
+  }));
+}
+
+// Helper function to normalize event object
+function normalizeEvent(event) {
+  const activityType = event.get("activityType");
+
+  return {
+    id: event.id,
+    title: event.get("title"),
+    category: activityType?.get("name") || "Other",
+    host: event,get("host") ? event.get("host").get("username") : "Unknown",
+    date: event.get("date"),
+    time: event.get("time"),
+    attendees: countAttendeesForEvent(event.id),
+    saved: false,
+    price: event.get("price"),
+    location: event.get("location"),
+    description: event.get("description"),
+    picture: activityType?.get("picture")?.url() || "",
+  };
 }
 
 // Updates an existing Event in Parse by ID with new form data and saves the changes.

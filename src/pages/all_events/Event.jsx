@@ -1,9 +1,9 @@
 import { NavLink } from "react-router-dom";
 import {
-    EventContainer,
-    EventTopContainer,
-    EventCenterContainer,
-    EventBottomContainer,
+  EventContainer,
+  EventTopContainer,
+  EventCenterContainer,
+  EventBottomContainer,
 } from "./AllEventSC";
 
 export default function Event({ event }) {
@@ -14,14 +14,14 @@ export default function Event({ event }) {
                     <span>{event.category}</span>
                 </EventTopContainer>
 
-                <EventCenterContainer>
-                    <span>{event.title}</span>
-                </EventCenterContainer>
+        <EventCenterContainer>
+          <span>{event.title}</span>
+        </EventCenterContainer>
 
                 <EventBottomContainer>
                     <span>Hosted by: {event.host}</span>
                     <span className="span2">
-                        {event.date} {event.time ? `@ ${event.time}` : ""} * {event.attendents} attendees
+                        {event.date} {event.time ? `@ ${event.time}` : ""} * {event.attendees} attendees
                     </span>
                 </EventBottomContainer>
             </EventContainer>

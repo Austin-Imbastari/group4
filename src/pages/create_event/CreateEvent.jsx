@@ -12,14 +12,21 @@ import {
   DateField,
   TimeField,
   DescriptionField,
-  ImageField,
   SuccessMessage,
+  ZipField,
 } from "./CreateEventSC";
 import Button from "../../components/button/Button";
 import InputField from "../../components/input_field/InputField";
-import { Handshake, HandCoins, MapPin, SwatchBook, CalendarDays, PencilLine, Image } from "lucide-react";
-
-import { createEvent, updateEvent, getEventByID } from "../../lib/parseService";
+import {
+  Handshake,
+  HandCoins,
+  MapPin,
+  CalendarDays,
+  PencilLine,
+  Image,
+} from "lucide-react";
+import DropdownField from "../../components/dropdown_field/DropdownField";
+import { createEvent, updateEvent, getEventByID, getAllActivityTypes } from "../../lib/parseService";
 
 const initialForm = {
   title: "",
@@ -29,7 +36,8 @@ const initialForm = {
   date: "",
   time: "",
   description: "",
-  image: null,
+  activityTypeId: "",
+  zip: "",
 };
 
 const CreateEvent = ({ mode = "create" }) => {
@@ -39,6 +47,7 @@ const CreateEvent = ({ mode = "create" }) => {
 
   const [formData, setFormData] = useState(initialForm);
   const [successMessage, setSuccessMessage] = useState("");
+  const [activityTypes, setActivityTypes] = useState([]);
 
   useEffect(() => {
     if (!isEdit) return;
@@ -60,14 +69,31 @@ const CreateEvent = ({ mode = "create" }) => {
 
   const handleOnChange = (e) => {
     const { id, value, type, files } = e.target;
+
     setFormData((prev) => ({
       ...prev,
       [id]: type === "file" ? files?.[0] ?? null : value,
     }));
   };
 
+  useEffect(() => {
+    async function loadActivityTypes() {
+      const types = await getAllActivityTypes();
+      setActivityTypes(types);
+    }
+    loadActivityTypes();
+  }, []);
+
   const handleOnSubmit = async (e) => {
     e.preventDefault();
+
+    if (!formData.zip || formData.zip < 1000 || formData.zip > 9999) {
+      setSuccessMessage(
+        "Zip code must be a 4-digit number between 1000 and 9999."
+      );
+      return;
+    }
+    console.log("Submitting form data:", formData);
     try {
       if (isEdit) {
         await updateEvent(id, formData);
@@ -81,11 +107,10 @@ const CreateEvent = ({ mode = "create" }) => {
       console.log(newEvent);
       setFormData(initialForm);
       setSuccessMessage("Your event has been created successfully!");
-      setTimeout(() => {
-        setSuccessMessage("");
-      }, 3000);
-    } catch {
-      setSuccessMessage(" Something went wrong. Please try again.");
+      setTimeout(() => setSuccessMessage(""), 3000);
+    } catch (err) {
+      console.error(err);
+      setSuccessMessage("Something went wrong. Please try again.");
     }
   };
 
@@ -143,17 +168,38 @@ const CreateEvent = ({ mode = "create" }) => {
           </InputContainer>
         </LocationField>
 
-        <TypeField>
-          <label htmlFor="type">What type of event?</label>
+        <ZipField>
+          <label htmlFor="zip">Zip Code</label>
           <InputContainer>
             <InputField
-              icon={SwatchBook}
-              id="type"
-              type="text"
-              placeholder="Coffee"
+              icon={MapPin}
+              id="zip"
+              type="number"
+              placeholder="2200"
+              min={1000}
+              max={9999}
               onChange={handleOnChange}
-              value={formData.type}
+              value={formData.zip}
             />
+          </InputContainer>
+        </ZipField>
+
+        <TypeField>
+          <InputContainer>
+            <DropdownField
+              id="activityTypeId"
+              label="What type of event?"
+              icon={MapPin}
+              value={formData.activityTypeId}
+              onChange={handleOnChange}
+            >
+              <option value="">Other</option>
+              {activityTypes.map((type) => (
+                <option key={type.id} value={type.id}>
+                  {type.name}
+                </option>
+              ))}
+            </DropdownField>
           </InputContainer>
         </TypeField>
 
@@ -163,7 +209,7 @@ const CreateEvent = ({ mode = "create" }) => {
             <InputField
               icon={CalendarDays}
               id="date"
-              type="text"
+              type="date"
               placeholder="December 20, 2025"
               onChange={handleOnChange}
               value={formData.date}
@@ -198,21 +244,6 @@ const CreateEvent = ({ mode = "create" }) => {
             />
           </InputContainer>
         </DescriptionField>
-
-        <ImageField>
-          <label htmlFor="upload">Upload Image</label>
-          <InputContainer>
-            <InputField
-              icon={Image}
-              id="image"
-              type="file"
-              className="input-file"
-              accept=".png, .jpg, .jpeg"
-              onChange={handleOnChange}
-            />
-          </InputContainer>
-        </ImageField>
-
         <Button type="submit">{isEdit ? "Update" : "Submit"}</Button>
         <Button type="button" onClick={() => navigate(-1)}>Cancel</Button>
       </FormGrid>
