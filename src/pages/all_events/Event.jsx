@@ -12,7 +12,6 @@ export default function Event({ event }) {
             <EventContainer>
                 <EventTopContainer $bg={event.picture}>
                     <span>{event.category}</span>
-                    <span>{event.saved ? ":)" : ":("}</span>
                 </EventTopContainer>
 
                 <EventCenterContainer>
@@ -20,7 +19,7 @@ export default function Event({ event }) {
                 </EventCenterContainer>
 
                 <EventBottomContainer>
-                    <span>[ . ] By: {event.host}</span>
+                    <span>Hosted by: {event.host}</span>
                     <span className="span2">
                         {event.date} {event.time ? `@ ${event.time}` : ""} * {event.attendents} attendees
                     </span>
