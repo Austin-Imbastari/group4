@@ -118,7 +118,6 @@ export default function EventDetails() {
                 ×
               </button>
               <h1>Would you like a reminder on mail?</h1>
-              <InputField></InputField>
               <Button type="button" onClick={toggleModal}>
                 Get reminder
               </Button>
@@ -142,7 +141,7 @@ export default function EventDetails() {
           <p> {event.price}</p>
         </div>
       </div>¨
-        <h2>What to Bring:</h2>
+      <h2>What to Bring:</h2>
       {/* <ul>
         {event.checklist.items.map((item, index) => (
           <li key={index}>{item}</li>
