@@ -173,7 +173,7 @@ function normalizeEvent(event) {
     id: event.id,
     title: event.get("title"),
     category: activityType?.get("name") || "Other",
-    host: event,get("host") ? event.get("host").get("username") : "Unknown",
+    host: event.get("host") ? event.get("host").get("username") : "Unknown",
     date: event.get("date"),
     time: event.get("time"),
     attendees: countAttendeesForEvent(event.id),
