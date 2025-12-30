@@ -88,9 +88,7 @@ export async function getEventByID(id) {
 
   const data = event.toJSON();
   const file = event.get("image");
-  const attendeeCount = await Parse.Cloud.run("countAttendeesForEvent", {
-    eventId: event.id,
-  });
+  const attendeeCount = countAttendeesForEvent(id);
 
   return {
     id: event.id,

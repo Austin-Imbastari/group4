@@ -46,16 +46,6 @@ export default function Profile() {
     loadEvents();
   }, []);
 
-  const handleDelete = async (eventId) => {
-    if (!window.confirm("Are you sure you want to delete this event?")) return;
-
-    await deleteEvent(eventId);
-
-    setEventsHosting((prev) =>
-      prev.filter((event) => event.id !== eventId)
-    );
-  };
-
   if (loading) return <LoadingSpinner />;
 
   return (
@@ -81,16 +71,7 @@ export default function Profile() {
             <div key={event.id}>
               <EventListItem event={event} />
 
-              <ButtonRow>
-                <NavLink to={`/events/${event.id}/edit`}>
-                  <Button>
-                    Edit
-                  </Button>
-                </NavLink>
-                <Button onClick={() => handleDelete(event.id)}>
-                  Delete
-                </Button>
-              </ButtonRow>
+
             </div>
           ))}
           <CreateEventListItem />

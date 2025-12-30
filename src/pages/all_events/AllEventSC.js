@@ -49,7 +49,7 @@ export const EventCenterContainer = styled.div`
   font-size: larger;
 
   span {
-    font-family: "PT Serif", serif;
+    font-family: ${({ theme }) => theme.fonts.alt};
   }
 `;
 
