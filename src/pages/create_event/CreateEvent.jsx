@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useParams, useNavigate } from "react-router-dom";
 import {
   Wrapper,
   TitleText,
@@ -25,7 +26,7 @@ import {
   Image,
 } from "lucide-react";
 import DropdownField from "../../components/dropdown_field/DropdownField";
-import { createEvent, getAllActivityTypes } from "../../lib/parseService";
+import { createEvent, updateEvent, getEventByID, getAllActivityTypes } from "../../lib/parseService";
 
 const initialForm = {
   title: "",
@@ -39,10 +40,32 @@ const initialForm = {
   zip: "",
 };
 
-const CreateEvent = () => {
+const CreateEvent = ({ mode = "create" }) => {
+  const { id } = useParams();
+  const navigate = useNavigate();
+  const isEdit = mode === "edit";
+
   const [formData, setFormData] = useState(initialForm);
   const [successMessage, setSuccessMessage] = useState("");
   const [activityTypes, setActivityTypes] = useState([]);
+
+  useEffect(() => {
+    if (!isEdit) return;
+
+    (async () => {
+      const event = await getEventByID(id);
+      setFormData({
+        title: event.title ?? "",
+        price: event.price ?? "",
+        location: event.location ?? "",
+        type: event.category ?? "",
+        date: event.date ?? "",
+        time: event.time ?? "",
+        description: event.description ?? "",
+        image: null,
+      });
+    })();
+  }, [isEdit, id]);
 
   const handleOnChange = (e) => {
     const { id, value, type, files } = e.target;
@@ -72,6 +95,14 @@ const CreateEvent = () => {
     }
     console.log("Submitting form data:", formData);
     try {
+      if (isEdit) {
+        await updateEvent(id, formData);
+        setSuccessMessage("Your event has been updated successfully!");
+        setTimeout(() => setSuccessMessage(""), 3000);
+        navigate("/profile");
+        return;
+      }
+
       const newEvent = await createEvent(formData);
       console.log(newEvent);
       setFormData(initialForm);
@@ -86,8 +117,12 @@ const CreateEvent = () => {
   return (
     <Wrapper>
       <TitleText>
-        <h1>Create Event</h1>
-        <p>Please fill in the details about your event</p>
+        <h1>{isEdit ? "Edit Event" : "Create Event"}</h1>
+        <p>
+          {isEdit
+            ? "Update the details about your event"
+            : "Please fill in the details about your event"}
+        </p>
       </TitleText>
       {successMessage && <SuccessMessage>{successMessage}</SuccessMessage>}
       <FormGrid onSubmit={handleOnSubmit}>
@@ -209,10 +244,9 @@ const CreateEvent = () => {
             />
           </InputContainer>
         </DescriptionField>
+        <Button type="submit">{isEdit ? "Update" : "Submit"}</Button>
+        <Button type="button" onClick={() => navigate(-1)}>Cancel</Button>
       </FormGrid>
-      <Button onClick={handleOnSubmit} type="submit">
-        Submit
-      </Button>
     </Wrapper>
   );
 };

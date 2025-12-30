@@ -60,6 +60,7 @@ export async function getEventByID(id) {
   const Parse = await getParse();
   const query = new Parse.Query("Event");
   query.include("activityType");
+  query.include("host");
 
   const event = await query.get(id);
   return normalizeEvent(event);
@@ -123,7 +124,6 @@ export async function getEventsHostedByCurrentUser() {
   const results = await query.find();
   return results.map(normalizeEvent);
 }
-
 // Get events the current user is attending
 export async function getEventsAttendingByCurrentUser() {
   const Parse = await getParse();
@@ -173,14 +173,44 @@ function normalizeEvent(event) {
     id: event.id,
     title: event.get("title"),
     category: activityType?.get("name") || "Other",
-    host: "Unknown",
+    host: event,get("host") ? event.get("host").get("username") : "Unknown",
     date: event.get("date"),
     time: event.get("time"),
-    attendees: 0,
+    attendees: countAttendeesForEvent(event.id),
     saved: false,
     price: event.get("price"),
     location: event.get("location"),
     description: event.get("description"),
     picture: activityType?.get("picture")?.url() || "",
   };
+}
+
+// Updates an existing Event in Parse by ID with new form data and saves the changes.
+export async function updateEvent(eventId, data) {
+  const Parse = await getParse();
+
+  const query = new Parse.Query("Event");
+  const event = await query.get(eventId);
+
+  for (const [key, value] of Object.entries(data)) {
+    if (key !== "image" && value != null) {
+      event.set(key, value);
+    }
+  }
+
+  if (data.image instanceof File) {
+    event.set("image", new Parse.File(data.image.name, data.image));
+  }
+
+  return await event.save();
+}
+
+// Deletes an existing event from Parse by ID
+export async function deleteEvent(eventId) {
+  const Parse = await getParse();
+
+  const query = new Parse.Query("Event");
+  const event = await query.get(eventId);
+
+  return event.destroy();
 }

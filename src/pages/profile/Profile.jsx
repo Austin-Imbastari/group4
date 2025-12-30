@@ -4,6 +4,7 @@ import {
   getEventsHostedByCurrentUser,
   getEventsAttendingByCurrentUser,
   getCurrentUserName,
+  deleteEvent,
 } from "../../lib/parseService";
 import {
   EventContainersWrapper,
@@ -12,6 +13,7 @@ import {
   HeaderContainer,
   Username,
   HeaderText,
+  ButtonRow,
 } from "./ProfileSC";
 import LoadingSpinner from "../../components/loading/loadingSpinner";
 import { NavLink } from "react-router-dom";
@@ -66,7 +68,11 @@ export default function Profile() {
           <h2>Hosting</h2>
           {message && <p>{message}</p>}
           {eventsHosting.map((event) => (
-            <EventListItem key={event.id} event={event} />
+            <div key={event.id}>
+              <EventListItem event={event} />
+
+
+            </div>
           ))}
           <CreateEventListItem />
         </EventContainer>
