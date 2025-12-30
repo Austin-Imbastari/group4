@@ -16,7 +16,6 @@ import {
 import { useEffect } from "react";
 import InputField from "../../components/input_field/InputField.jsx";
 
-
 export default function EventDetails() {
   const [modal, setModal] = useState(false);
   const toggleModal = () => {
@@ -96,18 +95,14 @@ export default function EventDetails() {
           <img src={event.picture} />
         </ImageContainer>
       )}
-
       <h1 className="event_title">{event.title}</h1>
       <p className="dateOfEvent">Date: {event.date}</p>
       <p className="organizer">By: {event.host}</p>
       <p className="attendees">Attendees: {attendeeCount}</p>
-
       <p>{event.description}</p>
-
       <Button type="button" onClick={handleToggleAttendance}>
         {isAttending ? "Cancel Attendance" : "Attend"}
       </Button>
-
       {/* MODAL */}
       {modal && (
         <ModalContainer>
@@ -125,7 +120,6 @@ export default function EventDetails() {
           </div>
         </ModalContainer>
       )}
-
       <h2>Event Details:</h2>
       <div className="eventDetails">
         <div className="locationContainer">
@@ -140,13 +134,8 @@ export default function EventDetails() {
           <p className="Detail">Expected Price:</p>
           <p> {event.price}</p>
         </div>
-      </div>¨
-      <h2>What to Bring:</h2>
-      {/* <ul>
-        {event.checklist.items.map((item, index) => (
-          <li key={index}>{item}</li>
-        ))}
-      </ul> */}
+      </div>
+      ¨<h2>What to Bring:</h2>
     </ParentContainer>
   );
 }
