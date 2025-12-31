@@ -74,7 +74,7 @@ export const CTA = styled.div`
   cursor: pointer;
   font-weight: 700;
   color: ${({ theme }) => theme.colors.primaryNormal};
-  background: linear-gradient(90deg, primaryNormal, primaryNormalHover);
+  background: ${({ theme }) => `linear-gradient(90deg, ${theme.colors.primaryNormal}, ${theme.colors.primaryNormal})`};
   box-shadow: 0 2px 10px rgba(227, 111, 61, 0.25);
   transition: transform 0.15s ease, box-shadow 0.2s ease;
 
