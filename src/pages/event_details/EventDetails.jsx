@@ -135,7 +135,6 @@ export default function EventDetails() {
           <p> {event.price}</p>
         </div>
       </div>
-      ¨<h2>What to Bring:</h2>
     </ParentContainer>
   );
 }
