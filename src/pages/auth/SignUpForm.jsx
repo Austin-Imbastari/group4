@@ -38,6 +38,7 @@ export default function SignUpForm() {
       setForm({ username: "", email: "", password: "" });
       setLoading(false);
       setMessage({ text: `Welcome, ${form.username}!`, type: "success" });
+      navigate("/events");
     } catch (err) {
       setLoading(false);
       setMessage({
