@@ -183,6 +183,8 @@ function normalizeEvent(event) {
     price: event.get("price"),
     zip: event.get("zip"),
     location: event.get("location"),
+    zip: event.get("zip"),
+    activityTypeId: activityType?.id || "",
     description: event.get("description"),
     picture: activityType?.get("picture")?.url() || "",
   };

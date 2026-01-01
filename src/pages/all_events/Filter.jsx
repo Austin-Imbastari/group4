@@ -1,36 +1,51 @@
-import React from "react"
+import React, { useState } from "react"
 import { Search } from 'lucide-react';
 
-export default function Filter() {
+export default function Filter({ activityTypes = [], onFilter }) {
+    const [zip, setZip] = useState("");
+    const [categoryId, setCategoryId] = useState("");
 
-    function filter(FilterData) {
-        const dayFilter = formData.get("eventDay")
-        const distanceFilter = formData.get("eventDistance")
+    function handleChange(nextZip, nextCategory) {
+        onFilter({
+            zip: nextZip,
+            categoryId: nextCategory,
+        });
     }
 
-    const days = ["Any day", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
-    const distances = ["Any", "5km", "10km", "15km", "20km", "25km", "50km", "100km"];
-
-
     return (
-        <form className="navBar" action={filter}>
+        <div className="navBar">
             <Search />
-            <label htmlFor="dayFilter"></label>
-            <select id="eventDay" name="eventDay" defaultValue="" required>
-                {days.map(each => {
-                    return (
-                        <option value={each}>{each}</option>)
-                })}
+            <label htmlFor="zipFilter"></label>
+            <input
+                id="zipFilter"
+                type="number"
+                placeholder="Zip code"
+                min={1000}
+                max={9999}
+                value={zip}
+                onChange={(e) => {
+                    const value = e.target.value;
+                    setZip(value);
+                    handleChange(value, categoryId);
+                }}
+            />
+            <label htmlFor="categoryFilter"></label>
+            <select
+                id="categoryFilter"
+                value={categoryId}
+                onChange={(e) => {
+                    const value = e.target.value;
+                    setCategoryId(value);
+                    handleChange(zip, value);
+                }}
+            >
+                <option value="">All categories</option>
+                {activityTypes.map((type) => (
+                    <option key={type.id} value={type.id}>
+                        {type.name}
+                    </option>
+                ))}
             </select>
-
-            <label htmlFor="distanceFilter"></label>
-            <select id="eventDistance" name="eventDistance" defaultValue="" required>
-                {distances.map(each => {
-                    return (
-                        <option value={each}>{each}</option>)
-                })}
-            </select>
-        </form>
-
-    )
+        </div>
+    );
 }
