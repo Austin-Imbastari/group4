@@ -47,7 +47,7 @@ export default function AllEvents() {
   if (loading) return <LoadingSpinner />;
   if (error) return <div>Error: {error}</div>;
 
-  function handleFilter({ zip, categoryId: categoryName }) {
+  function handleFilter({ zip, categoryName }) {
     setEvents(
       allEvents.filter(
         (e) =>

@@ -38,7 +38,6 @@ const initialForm = {
   title: "",
   price: "",
   location: "",
-  type: "",
   date: "",
   time: "",
   description: "",
@@ -66,13 +65,11 @@ const CreateEvent = ({ mode = "create" }) => {
         title: event.title ?? "",
         price: event.price ?? "",
         location: event.location ?? "",
-        type: event.category ?? "",
         date: event.date ?? "",
         time: event.time ?? "",
-        activityTypeId: event.activityTypeId ?? "",
         zip: event.zip ?? "",
         description: event.description ?? "",
-        image: null,
+        activityTypeId: event.activityType?.objectId ?? "",
       });
     })();
   }, [isEdit, id]);
