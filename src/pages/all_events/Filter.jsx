@@ -8,7 +8,7 @@ export default function Filter({ activityTypes = [], onFilter }) {
   function handleChange(nextZip, nextCategoryName) {
     onFilter({
       zip: nextZip,
-      categoryName: nextCategoryName, // ✅ use categoryName
+      categoryName: nextCategoryName,
     });
   }
 
