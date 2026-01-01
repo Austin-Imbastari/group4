@@ -47,12 +47,12 @@ export default function AllEvents() {
   if (loading) return <LoadingSpinner />;
   if (error) return <div>Error: {error}</div>;
 
-  function handleFilter({ zip, categoryId }) {
+  function handleFilter({ zip, categoryId: categoryName }) {
     setEvents(
       allEvents.filter(
         (e) =>
           (!zip || String(e.zip) === String(zip)) &&
-          (!categoryId || e.category === categoryId)
+          (!categoryName || e.category === categoryName)
       )
     );
   }
