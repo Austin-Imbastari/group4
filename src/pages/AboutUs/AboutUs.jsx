@@ -1,5 +1,6 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
+import Button from "../../components/button/Button.jsx";
 import {
   Section,
   HeaderContainer,
@@ -22,11 +23,7 @@ import {
   CTAHeading,
   CTAText,
   Buttons,
-  PrimaryButton,
-  GhostButton,
 } from "./AboutUsSC.js";
-
-// import Button from "../../components/button/Button.jsx";
 
 import data from "./data.json";
 
@@ -39,8 +36,14 @@ const iconMap = {
 };
 
 const imagesCommunity = [
-  { src: "/images/community-1.png", alt: "Friends cheering at a rooftop table" },
-  { src: "/images/community-2.png", alt: "Colorful wall with person at a window" },
+  {
+    src: "/images/community-1.png",
+    alt: "Friends cheering at a rooftop table",
+  },
+  {
+    src: "/images/community-2.png",
+    alt: "Colorful wall with person at a window",
+  },
   { src: "/images/community-3.png", alt: "Group standing on a balcony" },
 ];
 
@@ -100,8 +103,8 @@ const AboutUs = () => {
         </div>
 
         <CardGrid>
-          {data.values.map((item, index) => (
-            <Card key={index}>
+          {data.values.map((item) => (
+            <Card key={item.title}>
               <div className="icon-wrapper">{iconMap[item.icon]}</div>
               <h3>{item.title}</h3>
               <p>{item.description}</p>
@@ -119,8 +122,8 @@ const AboutUs = () => {
           </Subhead>
 
           <ImageRow>
-            {imagesCommunity.map((img, i) => (
-              <ImageCard key={i}>
+            {imagesCommunity.map((img) => (
+              <ImageCard key={img.src}>
                 <img src={img.src} alt={img.alt || ""} />
               </ImageCard>
             ))}
@@ -136,13 +139,13 @@ const AboutUs = () => {
           <CTAText>
             <p>Join thousands of people who have already found meaningful connections through Ember.</p>
           </CTAText>
-
           <Buttons>
             <NavLink style={{ textDecoration: "none" }} to="/events">
-              <PrimaryButton>Browse Events</PrimaryButton>
+              <Button variant="primary">Browse Events</Button>
             </NavLink>
-            <NavLink style={{ textDecoration: "none" }} to="/createevent">
-              <GhostButton>Create an Event</GhostButton>
+
+            <NavLink style={{ textDecoration: "none" }} to="/create-event">
+              <Button variant="ghost">Create an Event</Button>
             </NavLink>
           </Buttons>
         </InnerContainer>

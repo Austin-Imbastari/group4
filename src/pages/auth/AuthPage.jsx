@@ -1,13 +1,11 @@
-import { AuthContainer, AuthPageWrapper } from "./AuthPageSC";
-import SignUp from "./SignUp";
+import { AuthPageWrapper } from "./AuthPageSC";
+import { AuthContainer } from "./AuthContainerSC";
+import { Outlet } from "react-router-dom";
 
 export default function AuthPage() {
   return (
     <AuthPageWrapper>
-      <AuthContainer>
-        {/* TODO: Render SignIn, SignOut, or SignUp based on auth state */}
-        <SignUp />
-      </AuthContainer>
+      <Outlet />
     </AuthPageWrapper>
   );
 }

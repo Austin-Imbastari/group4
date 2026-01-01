@@ -60,7 +60,8 @@ export const FormGrid = styled.form`
   gap: 1rem;
   grid-template-areas:
     "title     price"
-    "location  type"
+    "location  zip"
+    "type      type"
     "date      time"
     "description description"
     "upload    upload"
@@ -103,6 +104,13 @@ export const LocationField = styled.div`
   gap: 0.5rem;
 `;
 
+export const ZipField = styled.div`
+  grid-area: zip;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+`;
+
 export const TypeField = styled.div`
   grid-area: type;
   display: flex;
@@ -128,6 +136,11 @@ export const DescriptionField = styled.div`
   grid-area: description;
 `;
 
-export const ImageField = styled.div`
-  grid-area: upload;
+export const SuccessMessage = styled.div`
+  background-color: ${({ theme }) => theme.colors.successBg};
+  color: ${({ theme }) => theme.colors.successColor};
+  padding: 10px 16px;
+  border-radius: 8px;
+  margin-bottom: 16px;
+  font-weight: 500;
 `;

@@ -33,6 +33,7 @@ export const EventTopContainer = styled.div`
     border-radius: 5px;
     padding: 5px 15px;
     color: white;
+    max-height: 35px;
 
     background: rgba(128, 128, 128, 0.5);
   }
@@ -46,6 +47,10 @@ export const EventCenterContainer = styled.div`
   justify-content: left;
   padding: 10px 0px 30px 0px;
   font-size: larger;
+
+  span {
+    font-family: ${({ theme }) => theme.fonts.alt};
+  }
 `;
 
 export const EventBottomContainer = styled.div`
@@ -83,6 +88,7 @@ export const NewEventContainer = styled.div`
 `;
 
 export const AllEventsPageContainer = styled.div`
+  margin-top: 70px;
   min-height: 100vh;
 
   background: linear-gradient(135deg, #fcfcfc 0%, #fff5f293 100%);
@@ -102,5 +108,3 @@ export const AllEventsPageContainer = styled.div`
     padding: 5px 10px;
   }
 `;
-
-export const CirclePlus = styled.div``;

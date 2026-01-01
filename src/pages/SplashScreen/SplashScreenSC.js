@@ -52,30 +52,30 @@ export const H1 = styled.h1`
   letter-spacing: -0.02em;
 
   .top {
-    color: #8f2b2b;
+    color: ${({ theme }) => theme.colors.primaryNormal};
   }
-
   .bottom {
-    background: linear-gradient(90deg, #9b2c2c, #e36f3d);
-    -webkit-background-clip: text;
+    background: ${({ theme }) =>
+      `linear-gradient(90deg, ${theme.colors.secondaryNormal}, ${theme.colors.primaryNormal})`};
     background-clip: text;
-    color: transparent;
+    color: ${({ theme }) => theme.colors.secondaryNormal};
   }
 `;
 
-export const CTA = styled.button`
+export const CTA = styled.div`
   width: fit-content;
   display: inline-flex;
   align-items: center;
   gap: 10px;
   padding: 12px 20px;
   border-radius: 10px;
-  border: 0;
+  border: 1px;
+  border-color: ${({ theme }) => theme.colors.primaryNormalHover};
   cursor: pointer;
   font-weight: 700;
-  color: #fff;
-  background: linear-gradient(90deg, #e36f3d, #d85f2c);
-  box-shadow: 0 10px 18px rgba(227, 111, 61, 0.25);
+  color: ${({ theme }) => theme.colors.primaryNormal};
+  background: ${({ theme }) => `linear-gradient(90deg, ${theme.colors.primaryNormal}, ${theme.colors.primaryNormal})`};
+  box-shadow: 0 2px 10px rgba(227, 111, 61, 0.25);
   transition: transform 0.15s ease, box-shadow 0.2s ease;
 
   .arrow {

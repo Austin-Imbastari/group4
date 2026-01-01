@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import Button from "../../components/button/Button";
 
 export const ParentContainer = styled.div`
   max-width: 1000px;
@@ -69,28 +70,6 @@ export const ParentContainer = styled.div`
     margin-bottom: 0.25rem;
     color: ${(props) => props.theme.colors.accentDark};
   }
-
-  .Attend-btn {
-    display: block;
-    width: 100%;
-    background-color: ${(props) => props.theme.colors.primaryNormal};
-    color: white;
-    border: none;
-    border-radius: 8px;
-    padding: 0.75rem;
-    font-size: ${(props) => props.theme.fontSizes.medium};
-    cursor: pointer;
-    margin-top: 1.5rem;
-    transition: background-color 0.2s ease;
-
-    &:hover {
-      background-color: ${(props) => props.theme.colors.primaryNormalHover};
-    }
-
-    &:active {
-      background-color: ${(props) => props.theme.colors.primaryNormalActive};
-    }
-  }
 `;
 
 export const ImageContainer = styled.div`
@@ -98,11 +77,50 @@ export const ImageContainer = styled.div`
   border-radius: 12px;
   overflow: hidden;
   margin-bottom: 1.5rem;
-  
+
   img {
     width: 100%;
     display: block;
     border-radius: 12px;
     object-fit: cover;
   }
+`;
+
+export const ModalContainer = styled.div`
+body.active-modal {
+    overflow-y: hidden;
+}
+
+.modal, .overlay {
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    position: fixed;
+}
+
+.overlay {
+    background: rgba(49,49,49,0.8);
+}
+.modal-content {
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    line-height: 1.4;
+    background: #f1f1f1;
+    padding: 14px 28px;
+    border-radius: 3px;
+    max-width: 600px;
+    min-width: 300px;
+}
+
+.close-modal {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    padding: 5px 7px;
+}
 `;

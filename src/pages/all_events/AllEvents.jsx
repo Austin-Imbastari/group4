@@ -1,54 +1,81 @@
-import eventData from "../../mockData/events"
-import React from "react"
-import Filter from "./Filter"
+import { useState, useEffect, CSSProperties } from "react";
 import { NavLink } from "react-router-dom";
-import { AllEventsPageContainer, EventCards, EventContainer, EventTopContainer, EventCenterContainer, EventBottomContainer, NewEventContainer } from "./AllEventSC";
-import { CirclePlus } from 'lucide-react';
-
-
+import Filter from "./Filter";
+import {
+  AllEventsPageContainer,
+  EventCards,
+  EventContainer,
+  NewEventContainer,
+} from "./AllEventSC";
+import { CirclePlus } from "lucide-react";
+import {
+  getAllEvents,
+  getCurrentUser,
+  getAllActivityTypes,
+} from "../../lib/parseService";
+import LoadingSpinner from "../../components/loading/loadingSpinner";
+import Event from "./Event";
 
 export default function AllEvents() {
+  const [events, setEvents] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [activityTypes, setActivityTypes] = useState([]);
+  const [allEvents, setAllEvents] = useState([]);
 
-    const [event, setEvent] = React.useState(eventData)
+  useEffect(() => {
+    (async () => {
+      try {
+        const user = await getCurrentUser();
+        setIsLoggedIn(!!user);
 
-    function filter(FilterData) {
-        const dayFilter = formData.get("eventDay")
-        const distanceFilter = formData.get("eventDistance")
-    }
+        const data = await getAllEvents();
+        setEvents(data);
+        setAllEvents(data);
 
-    return (
-        <AllEventsPageContainer>
-            <Filter />
-            <EventCards>
-                <NavLink to="/createevent">
-                    <EventContainer>
-                        <NewEventContainer>
-                            <CirclePlus className="icon-circle" />
-                            <span>Create an Event</span>
-                        </NewEventContainer>
-                    </EventContainer>
-                </NavLink>
-                {event.map((e) => {
+        const types = await getAllActivityTypes();
+        setActivityTypes(types);
+      } catch (e) {
+        setError("Failed to load events");
+      } finally {
+        setLoading(false);
+      }
+    })();
+  }, []);
 
-                    return (
-                        <NavLink key={e.id} to={"/events/" + e.id} style={{ textDecoration: "none" }}>
-                            <EventContainer>
-                                <EventTopContainer $bg={e.picture}>
-                                    <span>{e.category}</span>
-                                    <span>{e.saved ? ":)" : ":("}</span>
-                                </EventTopContainer>
-                                <EventCenterContainer>
-                                    <span>{e.title}</span>
-                                </EventCenterContainer>
-                                <EventBottomContainer>
-                                    <span>[ . ] By: {e.host} </span>
-                                    <span className="span2"> {e.date} * {e.attendents} Attendents</span>
-                                </EventBottomContainer>
-                            </EventContainer>
-                        </NavLink>
-                    )
-                })}
-            </EventCards>
-        </AllEventsPageContainer >
-    )
+  if (loading) return <LoadingSpinner />;
+  if (error) return <div>Error: {error}</div>;
+
+  function handleFilter({ zip, categoryName }) {
+    setEvents(
+      allEvents.filter(
+        (e) =>
+          (!zip || String(e.zip) === String(zip)) &&
+          (!categoryName || e.category === categoryName)
+      )
+    );
+  }
+
+  return (
+    <AllEventsPageContainer>
+      <Filter activityTypes={activityTypes} onFilter={handleFilter} />
+      <EventCards>
+        <NavLink
+          to={isLoggedIn ? "/create-event" : "/auth/signin"}
+          state={!isLoggedIn ? { fromCreateEvent: true } : undefined}
+        >
+          <EventContainer>
+            <NewEventContainer>
+              <CirclePlus className="icon-circle" />
+              <span>Create an Event</span>
+            </NewEventContainer>
+          </EventContainer>
+        </NavLink>
+        {events.map((e) => (
+          <Event key={e.id} event={e} />
+        ))}
+      </EventCards>
+    </AllEventsPageContainer>
+  );
 }
