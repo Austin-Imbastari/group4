@@ -8,7 +8,11 @@ import {
   NewEventContainer,
 } from "./AllEventSC";
 import { CirclePlus } from "lucide-react";
-import { getAllEvents, getCurrentUser, getAllActivityTypes } from "../../lib/parseService";
+import {
+  getAllEvents,
+  getCurrentUser,
+  getAllActivityTypes,
+} from "../../lib/parseService";
 import LoadingSpinner from "../../components/loading/loadingSpinner";
 import Event from "./Event";
 
@@ -45,9 +49,10 @@ export default function AllEvents() {
 
   function handleFilter({ zip, categoryId }) {
     setEvents(
-      allEvents.filter(e =>
-        (!zip || String(e.zip) === String(zip)) &&
-        (!categoryId || e.activityTypeId === categoryId)
+      allEvents.filter(
+        (e) =>
+          (!zip || String(e.zip) === String(zip)) &&
+          (!categoryId || e.category === categoryId)
       )
     );
   }
@@ -56,8 +61,10 @@ export default function AllEvents() {
     <AllEventsPageContainer>
       <Filter activityTypes={activityTypes} onFilter={handleFilter} />
       <EventCards>
-        <NavLink to={isLoggedIn ? "/create-event" : "/auth/signin"}
-          state={!isLoggedIn ? { fromCreateEvent: true } : undefined}>
+        <NavLink
+          to={isLoggedIn ? "/create-event" : "/auth/signin"}
+          state={!isLoggedIn ? { fromCreateEvent: true } : undefined}
+        >
           <EventContainer>
             <NewEventContainer>
               <CirclePlus className="icon-circle" />
@@ -65,7 +72,7 @@ export default function AllEvents() {
             </NewEventContainer>
           </EventContainer>
         </NavLink>
-        {events.map(e => (
+        {events.map((e) => (
           <Event key={e.id} event={e} />
         ))}
       </EventCards>

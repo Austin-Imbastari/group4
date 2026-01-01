@@ -4,6 +4,7 @@ import {
   getEventsHostedByCurrentUser,
   getEventsAttendingByCurrentUser,
   getCurrentUserName,
+  deleteEvent,
 } from "../../lib/parseService";
 import {
   EventContainersWrapper,
@@ -50,12 +51,8 @@ export default function Profile() {
 
     await deleteEvent(eventId);
 
-    setEventsHosting((prev) =>
-      prev.filter((event) => event.id !== eventId)
-    );
+    setEventsHosting((prev) => prev.filter((event) => event.id !== eventId));
   };
-
-
 
   if (loading) return <LoadingSpinner />;
 
@@ -82,14 +79,13 @@ export default function Profile() {
             <div key={event.id}>
               <EventListItem event={event} />
               <ButtonRow>
-                <NavLink to={`/events/${event.id}/edit`}><Button>Edit</Button></NavLink>
+                <NavLink to={`/events/${event.id}/edit`}>
+                  <Button>Edit</Button>
+                </NavLink>
 
-                <Button onClick={() => handleDelete(event.id)}>
-                  Delete
-                </Button>
+                <Button onClick={() => handleDelete(event.id)}>Delete</Button>
               </ButtonRow>
             </div>
-
           ))}
           <CreateEventListItem />
         </EventContainer>
