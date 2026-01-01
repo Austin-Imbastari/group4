@@ -180,6 +180,8 @@ function normalizeEvent(event) {
     saved: false,
     price: event.get("price"),
     location: event.get("location"),
+    zip: event.get("zip"),
+    activityTypeId: activityType?.id || "",
     description: event.get("description"),
     picture: activityType?.get("picture")?.url() || "",
   };

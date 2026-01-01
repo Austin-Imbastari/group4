@@ -1,5 +1,5 @@
 import { ClipLoader } from "react-spinners";
-import { LoadingEvents } from "./loadingSpinnerSC";
+import { LoadingEvents } from "./LoadingSpinnerSC";
 
 export default function LoadingSpinner() {
   return (
