@@ -8,8 +8,17 @@ export async function signUpUser({ username, email, password }) {
   user.set("email", email);
   user.set("password", password);
   const signedUpUser = await user.signUp();
+
+  // Set public read ACL so host usernames are visible
+  const acl = new Parse.ACL(signedUpUser);
+  acl.setPublicReadAccess(true);
+  signedUpUser.setACL(acl);
+
+  await signedUpUser.save();
+
   return normalizeUser(signedUpUser);
 }
+
 // Authentication - log in existing user
 export async function signInUser({ username, password }) {
   const Parse = await getParse();
@@ -50,6 +59,7 @@ export async function getAllEvents() {
   const Parse = await getParse();
   const query = new Parse.Query("Event");
   query.include("activityType");
+  query.include("host");
 
   const results = await query.find();
   return results.map(normalizeEvent);
@@ -175,7 +185,7 @@ function normalizeEvent(event) {
     id: event.id,
     title: event.get("title"),
     category: activityType?.get("name") || "Other",
-    host: event.get("host") ? event.get("host").get("username") : "Unknown",
+    host: event.get("host")?.get("username") ?? "Unknown",
     date: event.get("date"),
     time: event.get("time"),
     attendees: countAttendeesForEvent(event.id),
