@@ -4,7 +4,6 @@ import {
   getEventsHostedByCurrentUser,
   getEventsAttendingByCurrentUser,
   getCurrentUserName,
-  deleteEvent,
 } from "../../lib/parseService";
 import {
   EventContainersWrapper,

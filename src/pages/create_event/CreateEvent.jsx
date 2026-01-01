@@ -46,6 +46,8 @@ const initialForm = {
   zip: "",
 };
 
+const SUCCESS_MESSAGE_DURATION_MS = 1000;
+
 const CreateEvent = ({ mode = "create" }) => {
   const { id } = useParams();
   const navigate = useNavigate();
@@ -67,6 +69,8 @@ const CreateEvent = ({ mode = "create" }) => {
         type: event.category ?? "",
         date: event.date ?? "",
         time: event.time ?? "",
+        activityTypeId: event.activityTypeId ?? "",
+        zip: event.zip ?? "",
         description: event.description ?? "",
         zip: event.zip ?? "",
         activityTypeId: event.activityTypeId ?? "",
@@ -107,8 +111,8 @@ const CreateEvent = ({ mode = "create" }) => {
       if (isEdit) {
         await updateEvent(id, formData);
         setSuccessMessage("Your event has been updated successfully!");
-        setTimeout(() => setSuccessMessage(""), 3000);
-        navigate("/profile");
+        setTimeout(() => setSuccessMessage(""), SUCCESS_MESSAGE_DURATION_MS);
+        navigate("/events");
         setLoading(false);
         return;
       }
@@ -117,7 +121,7 @@ const CreateEvent = ({ mode = "create" }) => {
       console.log(newEvent);
       setFormData(initialForm);
       setSuccessMessage("Your event has been created successfully!");
-      setTimeout(() => setSuccessMessage(""), 3000);
+      setTimeout(() => setSuccessMessage(""), SUCCESS_MESSAGE_DURATION_MS);
       setLoading(false);
       navigate("/events");
     } catch (err) {
