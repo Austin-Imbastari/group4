@@ -68,6 +68,8 @@ const CreateEvent = ({ mode = "create" }) => {
         date: event.date ?? "",
         time: event.time ?? "",
         description: event.description ?? "",
+        zip: event.zip ?? "",
+        activityTypeId: event.activityTypeId ?? "",
         image: null,
       });
     })();
