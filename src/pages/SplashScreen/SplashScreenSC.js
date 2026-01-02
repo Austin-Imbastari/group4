@@ -73,7 +73,7 @@ export const CTA = styled.div`
   border-color: ${({ theme }) => theme.colors.primaryNormalHover};
   cursor: pointer;
   font-weight: 700;
-  color: ${({ theme }) => theme.colors.primaryNormal};
+  color: ${({ theme }) => theme.colors.primaryLight};
   background: ${({ theme }) => `linear-gradient(90deg, ${theme.colors.primaryNormal}, ${theme.colors.primaryNormal})`};
   box-shadow: 0 2px 10px rgba(227, 111, 61, 0.25);
   transition: transform 0.15s ease, box-shadow 0.2s ease;
