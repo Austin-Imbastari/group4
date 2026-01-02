@@ -19,8 +19,8 @@ const SplashScreen = () => {
 
           <NavLink to="/events">
             <CTA>
-              Find A Friend
-              <span className="arrow">›</span>
+              Find An Event
+              {/* <span className="arrow">›</span> */}
             </CTA>
           </NavLink>
         </Left>
