@@ -20,7 +20,7 @@ export default function EventDetails() {
   const [modal, setModal] = useState(false);
   const toggleModal = () => {
     console.log("pressed");
-    setModal(!modal);
+    setModal(!modal); 
   };
 
   const { id } = useParams();
