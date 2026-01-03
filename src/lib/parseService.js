@@ -206,16 +206,10 @@ export async function updateEvent(eventId, data) {
   const event = await query.get(eventId);
 
   for (const [key, value] of Object.entries(data)) {
-    if (key !== "image" && value != null) {
-      event.set(key, value);
-    }
+    event.set(key, value);
   }
 
-  if (data.image instanceof File) {
-    event.set("image", new Parse.File(data.image.name, data.image));
-  }
-
-  return await event.save();
+  return event.save();
 }
 
 // Deletes an existing event from Parse by ID
