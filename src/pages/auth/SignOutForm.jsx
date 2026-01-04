@@ -28,15 +28,13 @@ export default function SignOutForm() {
   if (loading) return <LoadingSpinner />;
 
   return (
-    <>
-      <AuthContainer>
-        <AuthHeader>
-          <h2 className="title">Sign Out</h2>
-          <p className="description">Are you sure you want to sign out?</p>
-        </AuthHeader>
-        <Button onClick={handleSignOut}>Sign Out</Button>
-        {message && <Message type={message.type}>{message.text}</Message>}
-      </AuthContainer>
-    </>
+    <AuthContainer>
+      <AuthHeader>
+        <h2 className="title">Sign Out</h2>
+        <p className="description">Are you sure you want to sign out?</p>
+      </AuthHeader>
+      <Button onClick={handleSignOut}>Sign Out</Button>
+      {message && <Message type={message.type}>{message.text}</Message>}
+    </AuthContainer>
   );
 }

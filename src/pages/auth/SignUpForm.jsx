@@ -51,48 +51,46 @@ export default function SignUpForm() {
   if (loading) return <LoadingSpinner />;
 
   return (
-    <>
-      <AuthContainer>
-        <AuthHeader>
-          <h2 className="title">GET STARTED</h2>
-          <p className="description">
-            Please fill in your credentials to create an account
-          </p>
-        </AuthHeader>
+    <AuthContainer>
+      <AuthHeader>
+        <h2 className="title">GET STARTED</h2>
+        <p className="description">
+          Please fill in your credentials to create an account
+        </p>
+      </AuthHeader>
 
-        <form onSubmit={handleSubmit}>
-          <InputField
-            label="Full Name"
-            name="username"
-            value={form.username}
-            onChange={handleChange}
-            placeholder="Enter your full name"
-            icon={User}
-          />
-          <InputField
-            label="Email"
-            name="email"
-            value={form.email}
-            onChange={handleChange}
-            placeholder="Enter your email"
-            icon={Mail}
-          />
-          <InputField
-            label="Password"
-            name="password"
-            type="password"
-            value={form.password}
-            onChange={handleChange}
-            placeholder="Enter your password"
-            icon={Lock}
-          />
-          <Button type="submit">Sign Up</Button>
-        </form>
-        <Button type="button" onClick={() => navigate("/auth/signin")}>
-          Already have an account? Sign In
-        </Button>
-        {message && <Message type={message.type}>{message.text}</Message>}
-      </AuthContainer>
-    </>
+      <form onSubmit={handleSubmit}>
+        <InputField
+          label="Full Name"
+          name="username"
+          value={form.username}
+          onChange={handleChange}
+          placeholder="Enter your full name"
+          icon={User}
+        />
+        <InputField
+          label="Email"
+          name="email"
+          value={form.email}
+          onChange={handleChange}
+          placeholder="Enter your email"
+          icon={Mail}
+        />
+        <InputField
+          label="Password"
+          name="password"
+          type="password"
+          value={form.password}
+          onChange={handleChange}
+          placeholder="Enter your password"
+          icon={Lock}
+        />
+        <Button type="submit">Sign Up</Button>
+      </form>
+      <Button type="button" onClick={() => navigate("/auth/signin")}>
+        Already have an account? Sign In
+      </Button>
+      {message && <Message type={message.type}>{message.text}</Message>}
+    </AuthContainer>
   );
 }
