@@ -9,7 +9,6 @@ import { AuthContainer, AuthHeader, Message } from "./AuthContainerSC";
 import { useLocation } from "react-router-dom";
 
 export default function SignInForm() {
-
   const location = useLocation();
   const showMessage = location.state?.fromCreateEvent;
 
@@ -56,42 +55,40 @@ export default function SignInForm() {
   if (loading) return <LoadingSpinner />;
 
   return (
-    <>
-      <AuthContainer>
-        <AuthHeader>
-          <h2 className="title">WELCOME BACK</h2>
-          {showMessage && (
-            <div className="signin-hint">
-              You must be signed in to create an event.
-            </div>
-          )}
-          <p className="description">Please enter your credentials</p>
-        </AuthHeader>
-        <form onSubmit={handleSubmit}>
-          <InputField
-            label="Username"
-            name="username"
-            value={form.username}
-            onChange={handleChange}
-            placeholder="Enter your username"
-            icon={User}
-          />
-          <InputField
-            label="Password"
-            name="password"
-            type="password"
-            value={form.password}
-            onChange={handleChange}
-            placeholder="Enter your password"
-            icon={Lock}
-          />
-          <Button type="submit">Sign In</Button>
-          <Button type="button" onClick={() => navigate("/auth/signup")}>
-            Create an account
-          </Button>
-        </form>
-        {message && <Message type={message.type}>{message.text}</Message>}
-      </AuthContainer>
-    </>
+    <AuthContainer>
+      <AuthHeader>
+        <h2 className="title">WELCOME BACK</h2>
+        {showMessage && (
+          <div className="signin-hint">
+            You must be signed in to create an event.
+          </div>
+        )}
+        <p className="description">Please enter your credentials</p>
+      </AuthHeader>
+      <form onSubmit={handleSubmit}>
+        <InputField
+          label="Username"
+          name="username"
+          value={form.username}
+          onChange={handleChange}
+          placeholder="Enter your username"
+          icon={User}
+        />
+        <InputField
+          label="Password"
+          name="password"
+          type="password"
+          value={form.password}
+          onChange={handleChange}
+          placeholder="Enter your password"
+          icon={Lock}
+        />
+        <Button type="submit">Sign In</Button>
+        <Button type="button" onClick={() => navigate("/auth/signup")}>
+          Create an account
+        </Button>
+      </form>
+      {message && <Message type={message.type}>{message.text}</Message>}
+    </AuthContainer>
   );
 }
