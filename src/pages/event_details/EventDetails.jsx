@@ -9,26 +9,22 @@ import BackButton from "../../components/button/BackButton.jsx";
 import { useState } from "react";
 import {
   getEventByID,
-  countAttendeesForEvent,
   toggleAttendance,
   getAttendanceForCurrentUser,
 } from "../../lib/parseService.js";
 import { useEffect } from "react";
-import InputField from "../../components/input_field/InputField.jsx";
 
 export default function EventDetails() {
-  const [modal, setModal] = useState(false);
-  const toggleModal = () => {
-    console.log("pressed");
-    setModal(!modal); 
-  };
-
   const { id } = useParams();
   const navigate = useNavigate();
   const [event, setEvent] = useState(null);
-  const [attendeeCount, setAttendeeCount] = useState(0);
   const [isAttending, setIsAttending] = useState(false);
   const [loading, setLoading] = useState(true);
+  const [modal, setModal] = useState(false);
+
+  const toggleModal = () => {
+    setModal(!modal);
+  };
 
   useEffect(() => {
     async function loadEvent() {
@@ -47,19 +43,17 @@ export default function EventDetails() {
   }, [id, navigate]);
 
   useEffect(() => {
-    async function loadCount() {
-      const count = await countAttendeesForEvent(id);
-      setAttendeeCount(count);
+    async function loadAttendance() {
+      const status = await getAttendanceForCurrentUser(id);
+      setIsAttending(status);
     }
-    loadCount();
+    loadAttendance();
   }, [id]);
 
   const handleToggleAttendance = async () => {
     try {
       const result = await toggleAttendance(id);
       setIsAttending(result.isAttending);
-      const count = await countAttendeesForEvent(id);
-      setAttendeeCount(count);
       if (result.isAttending) {
         toggleModal();
       }
@@ -68,14 +62,6 @@ export default function EventDetails() {
       navigate("/auth/signin");
     }
   };
-
-  useEffect(() => {
-    async function loadAttendance() {
-      const status = await getAttendanceForCurrentUser(id);
-      setIsAttending(status);
-    }
-    loadAttendance();
-  }, [id]);
 
   if (loading) {
     return (
@@ -98,9 +84,9 @@ export default function EventDetails() {
       <h1 className="event_title">{event.title}</h1>
       <p className="dateOfEvent">Date: {event.date}</p>
       <p className="organizer">By: {event.host}</p>
-      <p className="attendees">Attendees: {attendeeCount}</p>
+      <p className="attendees">Attendees: {event.attendees}</p>
       <p>{event.description}</p>
-      <Button type="button" onClick={handleToggleAttendance}>
+      <Button onClick={handleToggleAttendance}>
         {isAttending ? "Cancel Attendance" : "Attend"}
       </Button>
       {/* MODAL */}
@@ -113,9 +99,7 @@ export default function EventDetails() {
                 ×
               </button>
               <h1>Would you like a reminder on mail?</h1>
-              <Button type="button" onClick={toggleModal}>
-                Get reminder
-              </Button>
+              <Button onClick={toggleModal}>Get reminder</Button>
             </div>
           </div>
         </ModalContainer>

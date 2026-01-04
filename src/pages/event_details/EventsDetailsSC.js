@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import Button from "../../components/button/Button";
 
 export const ParentContainer = styled.div`
   max-width: 1000px;
@@ -80,6 +79,7 @@ export const ImageContainer = styled.div`
 
   img {
     width: 100%;
+    max-height: 400px;
     display: block;
     border-radius: 12px;
     object-fit: cover;
@@ -87,11 +87,12 @@ export const ImageContainer = styled.div`
 `;
 
 export const ModalContainer = styled.div`
-body.active-modal {
+  body.active-modal {
     overflow-y: hidden;
-}
+  }
 
-.modal, .overlay {
+  .modal,
+  .overlay {
     width: 100vw;
     height: 100vh;
     top: 0;
@@ -99,12 +100,12 @@ body.active-modal {
     right: 0;
     bottom: 0;
     position: fixed;
-}
+  }
 
-.overlay {
-    background: rgba(49,49,49,0.8);
-}
-.modal-content {
+  .overlay {
+    background: rgba(49, 49, 49, 0.8);
+  }
+  .modal-content {
     position: absolute;
     top: 40%;
     left: 50%;
@@ -115,12 +116,12 @@ body.active-modal {
     border-radius: 3px;
     max-width: 600px;
     min-width: 300px;
-}
+  }
 
-.close-modal {
+  .close-modal {
     position: absolute;
     top: 10px;
     right: 10px;
     padding: 5px 7px;
-}
+  }
 `;
