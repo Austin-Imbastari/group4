@@ -18,7 +18,7 @@ export const EventContainer = styled.div`
   }
 `;
 
-export const EventTopContainer = styled.div`
+export const EventPicture = styled.div`
   padding-bottom: 150px;
   border-radius: 16px;
   display: flex;
@@ -42,7 +42,7 @@ export const EventTopContainer = styled.div`
   }
 `;
 
-export const EventCenterContainer = styled.div`
+export const EventTitle = styled.div`
   display: flex;
   justify-content: left;
   padding: 10px 0px 30px 0px;
@@ -53,7 +53,7 @@ export const EventCenterContainer = styled.div`
   }
 `;
 
-export const EventBottomContainer = styled.div`
+export const EventInfoRow = styled.div`
   display: flex;
   justify-content: space-between;
   font-size: small;
@@ -63,7 +63,7 @@ export const EventBottomContainer = styled.div`
   }
 `;
 
-export const EventCards = styled.div`
+export const AllEventsGrid = styled.div`
   margin: 0 auto;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));

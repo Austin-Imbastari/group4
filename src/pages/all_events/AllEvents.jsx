@@ -1,9 +1,9 @@
-import { useState, useEffect, CSSProperties } from "react";
+import { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import Filter from "./Filter";
 import {
   AllEventsPageContainer,
-  EventCards,
+  AllEventsGrid,
   EventContainer,
   NewEventContainer,
 } from "./AllEventSC";
@@ -60,7 +60,7 @@ export default function AllEvents() {
   return (
     <AllEventsPageContainer>
       <Filter activityTypes={activityTypes} onFilter={handleFilter} />
-      <EventCards>
+      <AllEventsGrid>
         <NavLink
           to={isLoggedIn ? "/create-event" : "/auth/signin"}
           state={!isLoggedIn ? { fromCreateEvent: true } : undefined}
@@ -75,7 +75,7 @@ export default function AllEvents() {
         {events.map((e) => (
           <Event key={e.id} event={e} />
         ))}
-      </EventCards>
+      </AllEventsGrid>
     </AllEventsPageContainer>
   );
 }
