@@ -10,8 +10,6 @@ export const ParentContainer = styled.div`
   color: ${(props) => props.theme.colors.secondaryNormal};
 
   h1.event_title {
-    font-family: ${(props) => props.theme.fonts.alt};
-    font-size: 1.8rem;
     color: ${(props) => props.theme.colors.secondaryNormal};
     margin: 1rem 0 0.25rem;
   }
@@ -28,15 +26,10 @@ export const ParentContainer = styled.div`
     font-size: ${(props) => props.theme.fontSizes.small};
     color: ${(props) => props.theme.colors.accentDark};
   }
-
-  .attendees {
-    margin-bottom: 1rem;
-  }
-
   p {
     line-height: 1.6;
     margin-bottom: 1rem;
-    color: black;
+    color: ${(props) => props.theme.colors.backButton};
   }
 
   .eventDetails {
@@ -54,20 +47,6 @@ export const ParentContainer = styled.div`
   h2 {
     margin-top: 2rem;
     margin-bottom: 0.75rem;
-    color: ${(props) => props.theme.colors.secondaryNormal};
-    font-size: ${(props) => props.theme.fontSizes.large};
-  }
-
-  ul {
-    list-style: disc;
-    padding-left: 1.5rem;
-    margin-bottom: 1rem;
-    color: ${(props) => props.theme.colors.secondaryNormal};
-  }
-
-  li {
-    margin-bottom: 0.25rem;
-    color: ${(props) => props.theme.colors.accentDark};
   }
 `;
 
