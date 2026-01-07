@@ -3,16 +3,17 @@ import {
   ImageContainer,
   ModalContainer,
 } from "./EventsDetailsSC.js";
+import LoadingSpinner from "../../components/loading/loadingSpinner";
 import { useParams, useNavigate } from "react-router-dom";
 import Button from "../../components/button/Button.jsx";
 import BackButton from "../../components/button/BackButton.jsx";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
   getEventByID,
   toggleAttendance,
   getAttendanceForCurrentUser,
+  countAttendeesForEvent
 } from "../../lib/parseService.js";
-import { useEffect } from "react";
 
 export default function EventDetails() {
   const { id } = useParams();
@@ -21,9 +22,10 @@ export default function EventDetails() {
   const [isAttending, setIsAttending] = useState(false);
   const [loading, setLoading] = useState(true);
   const [modal, setModal] = useState(false);
+  const [attendeeCount, setAttendeeCount] = useState(0);
 
   const toggleModal = () => {
-    setModal(!modal);
+    setModal(prev => !prev);
   };
 
   useEffect(() => {
@@ -42,6 +44,15 @@ export default function EventDetails() {
     loadEvent();
   }, [id, navigate]);
 
+
+    useEffect(() => {
+    async function loadCount() {
+      const count = await countAttendeesForEvent(id);
+      setAttendeeCount(count);
+    }
+    loadCount();
+  }, [id]);
+
   useEffect(() => {
     async function loadAttendance() {
       const status = await getAttendanceForCurrentUser(id);
@@ -54,6 +65,8 @@ export default function EventDetails() {
     try {
       const result = await toggleAttendance(id);
       setIsAttending(result.isAttending);
+      const count = await countAttendeesForEvent(id);
+      setAttendeeCount(count);
       if (result.isAttending) {
         toggleModal();
       }
@@ -65,15 +78,13 @@ export default function EventDetails() {
 
   if (loading) {
     return (
-      <ParentContainer>
-        <p>Loading event...</p>
-      </ParentContainer>
+      <LoadingSpinner />
     );
   }
 
   return (
     <ParentContainer>
-      <BackButton type="button" onClick={() => navigate(-1)}>
+      <BackButton onClick={() => navigate(-1)}>
         Back
       </BackButton>
       {event.picture && (
@@ -84,12 +95,12 @@ export default function EventDetails() {
       <h1 className="event_title">{event.title}</h1>
       <p className="dateOfEvent">Date: {event.date}</p>
       <p className="organizer">By: {event.host}</p>
-      <p className="attendees">Attendees: {event.attendees}</p>
+      <p className="attendees">Attendees: {attendeeCount}</p>
       <p>{event.description}</p>
       <Button onClick={handleToggleAttendance}>
         {isAttending ? "Cancel Attendance" : "Attend"}
       </Button>
-      {/* MODAL */}
+
       {modal && (
         <ModalContainer>
           <div className="overlay" onClick={toggleModal}></div>
